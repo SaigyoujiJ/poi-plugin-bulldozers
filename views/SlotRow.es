@@ -31,11 +31,11 @@ class SlotRow extends Component {
           style={{
             background: selected
               ? 'var(--bulldozer-bg-selected, #ffe082)'
-              : 'var(--bulldozer-bg-input, #f5f5f5)',
+              : 'var(--bulldozer-bg-input, #ffffff)',
             border: selected
               ? '2px solid var(--bulldozer-border-active, #ff9800)'
-              : '1px solid var(--bulldozer-border, #ccc)',
-            color: 'var(--bulldozer-text-primary, #333)',
+              : '1px solid var(--bulldozer-border, #d3d8de)',
+            color: 'var(--bulldozer-text-primary, #1c2127)',
             padding: '2px 8px',
             cursor: 'pointer',
           }}
