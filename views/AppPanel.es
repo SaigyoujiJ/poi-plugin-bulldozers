@@ -35,28 +35,35 @@ class AppPanel extends Component {
     this.styleEl = style
 
     const pluginBody = doc.body
-    const mainWindow = window.opener || window
-    const syncThemeClass = () => {
-      try {
-        const isDark = mainWindow.document.body.classList.contains('bp6-dark')
-        if (isDark) {
-          pluginBody.classList.add('bp6-dark')
-        } else {
-          pluginBody.classList.remove('bp6-dark')
-        }
-      } catch (e) {
-        // Ignore cross-origin or missing main window
+    const mainWindow = window.opener
+    if (mainWindow && mainWindow.document && mainWindow.document.body) {
+      // Only independent plugin windows need syncing; embedded panels share
+      // the main document body, so observing it would cause a mutation loop.
+      if (pluginBody === mainWindow.document.body) {
+        return
       }
-    }
-    syncThemeClass()
-    try {
-      this.themeObserver = new MutationObserver(syncThemeClass)
-      this.themeObserver.observe(mainWindow.document.body, {
-        attributes: true,
-        attributeFilter: ['class'],
-      })
-    } catch (e) {
-      // Ignore if observer cannot be attached
+      const syncThemeClass = () => {
+        try {
+          const isDark = mainWindow.document.body.classList.contains('bp6-dark')
+          if (isDark) {
+            pluginBody.classList.add('bp6-dark')
+          } else {
+            pluginBody.classList.remove('bp6-dark')
+          }
+        } catch (e) {
+          // Ignore cross-origin or missing main window
+        }
+      }
+      syncThemeClass()
+      try {
+        this.themeObserver = new MutationObserver(syncThemeClass)
+        this.themeObserver.observe(mainWindow.document.body, {
+          attributes: true,
+          attributeFilter: ['class'],
+        })
+      } catch (e) {
+        // Ignore if observer cannot be attached
+      }
     }
   }
 
