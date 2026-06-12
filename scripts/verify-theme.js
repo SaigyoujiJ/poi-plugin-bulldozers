@@ -42,7 +42,8 @@ for (const token of requiredTokens) {
   }
 }
 
-// 2. themeStyle.es must not contain hardcoded old page/panel/input/border/text colors.
+// 2. themeStyle.es must not contain hardcoded old page/panel/input/border/text colors,
+//    and must not use #fff/#ffffff as the page/input background fallback.
 const forbiddenInTheme = [
   '--bulldozer-bg-page: #',
   '--bulldozer-bg-input: #',
@@ -53,6 +54,13 @@ const forbiddenInTheme = [
 for (const pattern of forbiddenInTheme) {
   if (themeStyle.includes(pattern)) {
     errors.push(`views/themeStyle.es still has hardcoded value: ${pattern}`)
+  }
+}
+const bgPageLine = themeStyle.split('\n').find((line) => line.includes('--bulldozer-bg-page:'))
+const bgInputLine = themeStyle.split('\n').find((line) => line.includes('--bulldozer-bg-input:'))
+for (const [name, line] of [['--bulldozer-bg-page', bgPageLine], ['--bulldozer-bg-input', bgInputLine]]) {
+  if (line && /#fff(?:fff)?\b/i.test(line)) {
+    errors.push(`views/themeStyle.es uses white fallback for ${name}: ${line.trim()}`)
   }
 }
 
