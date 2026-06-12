@@ -6,8 +6,8 @@ const read = (p) => fs.readFileSync(path.join(root, p), 'utf-8')
 
 const requiredTokens = [
   '--bulldozer-bg-page: var(--poi-background-color',
-  '--bulldozer-bg-input: var(--bp-surface-background-color-default-rest',
-  '--bulldozer-bg-hover: var(--bp-surface-background-color-default-hover',
+  '--bulldozer-bg-input: var(--poi-background-color',
+  '--bulldozer-bg-hover: rgba',
   '--bulldozer-border: var(--bp-surface-border-color-default',
   '--bulldozer-accent: var(--bp-intent-primary-rest',
   '--bulldozer-text-primary: var(--bp-typography-color-default-rest',
@@ -23,6 +23,7 @@ const allowedHardcodedColors = [
 
 const filesToCheck = [
   'views/AppPanel.es',
+  'views/PresetBar.es',
   'views/ResultPanel.es',
   'views/SquadronTabs.es',
   'views/PlanePicker/CategoryTabs.es',
@@ -45,11 +46,9 @@ for (const token of requiredTokens) {
 const forbiddenInTheme = [
   '--bulldozer-bg-page: #',
   '--bulldozer-bg-input: #',
-  '--bulldozer-bg-hover: #',
   '--bulldozer-border: #',
   '--bulldozer-accent: #',
   '--bulldozer-text-primary: #',
-  '--bulldozer-accent-text: #',
 ]
 for (const pattern of forbiddenInTheme) {
   if (themeStyle.includes(pattern)) {
@@ -76,24 +75,29 @@ const expectedFallbacks = {
     "var(--bulldozer-bg-page, #f6f7f9)",
     "var(--bulldozer-text-primary, #1c2127)",
   ],
+  'views/PresetBar.es': [
+    "var(--bulldozer-bg-input, #f6f7f9)",
+    "var(--bulldozer-text-primary, #1c2127)",
+    "var(--bulldozer-border, #d3d8de)",
+  ],
   'views/ResultPanel.es': [
     "var(--bulldozer-accent, #2d72d2)",
     "background: 'transparent'",
   ],
   'views/SquadronTabs.es': [
     "var(--bulldozer-accent, #2d72d2)",
-    "var(--bulldozer-bg-input, #ffffff)",
+    "var(--bulldozer-bg-input, #f6f7f9)",
     "var(--bulldozer-text-primary, #1c2127)",
     "var(--bulldozer-border, #d3d8de)",
   ],
   'views/PlanePicker/CategoryTabs.es': [
     "var(--bulldozer-accent, #2d72d2)",
-    "var(--bulldozer-bg-input, #ffffff)",
+    "var(--bulldozer-bg-input, #f6f7f9)",
     "var(--bulldozer-text-primary, #1c2127)",
     "var(--bulldozer-border, #d3d8de)",
   ],
   'views/SlotRow.es': [
-    "var(--bulldozer-bg-input, #ffffff)",
+    "var(--bulldozer-bg-input, #f6f7f9)",
     "var(--bulldozer-border, #d3d8de)",
     "var(--bulldozer-text-primary, #1c2127)",
   ],

@@ -31,7 +31,7 @@ class SlotRow extends Component {
           style={{
             background: selected
               ? 'var(--bulldozer-bg-selected, #ffe082)'
-              : 'var(--bulldozer-bg-input, #ffffff)',
+              : 'var(--bulldozer-bg-input, #f6f7f9)',
             border: selected
               ? '2px solid var(--bulldozer-border-active, #ff9800)'
               : '1px solid var(--bulldozer-border, #d3d8de)',
@@ -42,18 +42,42 @@ class SlotRow extends Component {
         >
           {planeName}
         </button>
-        <select value={slot.proficiency} onChange={this.handleProficiencyChange}>
+        <select
+          value={slot.proficiency}
+          onChange={this.handleProficiencyChange}
+          style={{
+            background: 'var(--bulldozer-bg-input, #f6f7f9)',
+            color: 'var(--bulldozer-text-primary, #1c2127)',
+            border: '1px solid var(--bulldozer-border, #d3d8de)',
+          }}
+        >
           {PROFICIENCY.map((p) => (
             <option key={p.level} value={p.level}>{p.label}</option>
           ))}
         </select>
-        <select value={slot.stars} onChange={this.handleStarsChange}>
+        <select
+          value={slot.stars}
+          onChange={this.handleStarsChange}
+          style={{
+            background: 'var(--bulldozer-bg-input, #f6f7f9)',
+            color: 'var(--bulldozer-text-primary, #1c2127)',
+            border: '1px solid var(--bulldozer-border, #d3d8de)',
+          }}
+        >
           {Array.from({ length: 11 }, (_, i) => (
             <option key={i} value={i}>★{i}</option>
           ))}
         </select>
         {slot.aircraftId && (
-          <button onClick={this.handleClear} style={{ cursor: 'pointer' }}>×</button>
+          <button
+            onClick={this.handleClear}
+            style={{
+              background: 'var(--bulldozer-bg-input, #f6f7f9)',
+              color: 'var(--bulldozer-text-primary, #1c2127)',
+              border: '1px solid var(--bulldozer-border, #d3d8de)',
+              cursor: 'pointer',
+            }}
+          >×</button>
         )}
       </div>
     )

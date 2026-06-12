@@ -13,7 +13,7 @@ class SquadronTabs extends Component {
               padding: '4px 12px',
               background: i === activeIndex
                 ? 'var(--bulldozer-accent, #2d72d2)'
-                : 'var(--bulldozer-bg-input, #ffffff)',
+                : 'var(--bulldozer-bg-input, #f6f7f9)',
               color: i === activeIndex
                 ? 'var(--bulldozer-accent-text, #ffffff)'
                 : 'var(--bulldozer-text-primary, #1c2127)',

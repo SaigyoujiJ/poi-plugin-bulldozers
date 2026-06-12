@@ -53,13 +53,37 @@ class PresetBar extends Component {
 
     return (
       <div style={{ marginBottom: 12, display: 'flex', alignItems: 'center', gap: 8 }}>
-        <select value={activePresetId} onChange={this.handlePresetChange}>
+        <select
+          value={activePresetId}
+          onChange={this.handlePresetChange}
+          style={{
+            background: 'var(--bulldozer-bg-input, #f6f7f9)',
+            color: 'var(--bulldozer-text-primary, #1c2127)',
+            border: '1px solid var(--bulldozer-border, #d3d8de)',
+          }}
+        >
           {presetIds.map((id) => (
             <option key={id} value={id}>{presets[id].name}</option>
           ))}
         </select>
-        <button onClick={this.handleSaveClick}>另存</button>
-        <button onClick={this.handleDeleteClick}>删除</button>
+        <button
+          onClick={this.handleSaveClick}
+          style={{
+            background: 'var(--bulldozer-bg-input, #f6f7f9)',
+            color: 'var(--bulldozer-text-primary, #1c2127)',
+            border: '1px solid var(--bulldozer-border, #d3d8de)',
+            cursor: 'pointer',
+          }}
+        >另存</button>
+        <button
+          onClick={this.handleDeleteClick}
+          style={{
+            background: 'var(--bulldozer-bg-input, #f6f7f9)',
+            color: 'var(--bulldozer-text-primary, #1c2127)',
+            border: '1px solid var(--bulldozer-border, #d3d8de)',
+            cursor: 'pointer',
+          }}
+        >删除</button>
         {showSaveDialog && (
           <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
             <input
@@ -68,9 +92,30 @@ class PresetBar extends Component {
               onKeyDown={this.handleKeyDown}
               placeholder="预设名称"
               autoFocus
+              style={{
+                background: 'var(--bulldozer-bg-input, #f6f7f9)',
+                color: 'var(--bulldozer-text-primary, #1c2127)',
+                border: '1px solid var(--bulldozer-border, #d3d8de)',
+              }}
             />
-            <button onClick={this.handleSaveConfirm}>确定</button>
-            <button onClick={() => this.setState({ showSaveDialog: false })}>取消</button>
+            <button
+              onClick={this.handleSaveConfirm}
+              style={{
+                background: 'var(--bulldozer-bg-input, #f6f7f9)',
+                color: 'var(--bulldozer-text-primary, #1c2127)',
+                border: '1px solid var(--bulldozer-border, #d3d8de)',
+                cursor: 'pointer',
+              }}
+            >确定</button>
+            <button
+              onClick={() => this.setState({ showSaveDialog: false })}
+              style={{
+                background: 'var(--bulldozer-bg-input, #f6f7f9)',
+                color: 'var(--bulldozer-text-primary, #1c2127)',
+                border: '1px solid var(--bulldozer-border, #d3d8de)',
+                cursor: 'pointer',
+              }}
+            >取消</button>
           </span>
         )}
       </div>

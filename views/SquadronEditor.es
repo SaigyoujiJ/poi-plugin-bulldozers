@@ -24,6 +24,7 @@ class SquadronEditor extends Component {
               value="sortie"
               checked={squadron.mode === 'sortie'}
               onChange={this.handleModeChange}
+              style={{ accentColor: 'var(--bulldozer-accent, #2d72d2)' }}
             />
             出撃
           </label>
@@ -34,6 +35,7 @@ class SquadronEditor extends Component {
               value="defense"
               checked={squadron.mode === 'defense'}
               onChange={this.handleModeChange}
+              style={{ accentColor: 'var(--bulldozer-accent, #2d72d2)' }}
             />
             防空
           </label>
