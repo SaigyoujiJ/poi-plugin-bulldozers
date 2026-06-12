@@ -12,9 +12,18 @@ export const themeCss = `
 }
 
 body.bp6-dark {
+  --bulldozer-bg-page: var(--poi-background-color, #2f343c);
+  --bulldozer-bg-input: var(--poi-background-color, #2f343c);
   --bulldozer-bg-hover: rgba(255, 255, 255, 0.08);
+  --bulldozer-border: var(--bp-surface-border-color-default, #ffffff33);
+  --bulldozer-text-primary: var(--bp-typography-color-default-rest, #a5aab3);
   --bulldozer-bg-selected: #5c4b1e;
   --bulldozer-border-active: #ffb74d;
+}
+
+body {
+  background: var(--bulldozer-bg-page, #f6f7f9);
+  color: var(--bulldozer-text-primary, #1c2127);
 }
 
 .bulldozer-plane-item:hover {
