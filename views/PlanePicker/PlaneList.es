@@ -10,11 +10,12 @@ class PlaneList extends Component {
         {aircraftList.map((ac) => (
           <div
             key={ac.id}
+            className="bulldozer-plane-item"
             onClick={() => onSelect(ac.id)}
             style={{
               padding: '4px 8px',
               cursor: 'pointer',
-              borderBottom: '1px solid #eee',
+              borderBottom: '1px solid var(--bulldozer-border, #eee)',
             }}
           >
             {ac.name}
