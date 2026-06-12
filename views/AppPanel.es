@@ -33,7 +33,15 @@ class AppPanel extends Component {
     if (!activePreset) return null
 
     return (
-      <div style={{ padding: 16 }}>
+      <div
+        className="bulldozers-app"
+        style={{
+          padding: 16,
+          background: 'var(--bulldozer-bg-page, #fff)',
+          color: 'var(--bulldozer-text-primary, #333)',
+          minHeight: '100%',
+        }}
+      >
         <PresetBar />
         <SquadronTabs
           activeIndex={activeSquadronIndex}
