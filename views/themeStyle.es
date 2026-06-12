@@ -31,13 +31,3 @@ body.bp6-dark {
   background: var(--bulldozer-bg-hover, #f0f0f0);
 }
 `
-
-let injected = false
-
-export const injectThemeCSS = () => {
-  if (injected || typeof document === 'undefined') return
-  injected = true
-  const style = document.createElement('style')
-  style.textContent = themeCss
-  document.head.appendChild(style)
-}

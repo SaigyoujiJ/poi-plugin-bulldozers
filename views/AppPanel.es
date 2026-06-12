@@ -7,6 +7,7 @@ import SquadronEditor from './SquadronEditor'
 import ResultPanel from './ResultPanel'
 import { selectActivePreset, selectSquadrons } from '../redux/selectors'
 import { setSlotAircraft } from '../redux/actions'
+import { themeCss } from './themeStyle'
 
 const selector = extensionSelectorFactory('poi-plugin-bulldozers')
 
@@ -42,6 +43,7 @@ class AppPanel extends Component {
           minHeight: '100%',
         }}
       >
+        <style dangerouslySetInnerHTML={{ __html: themeCss }} />
         <PresetBar />
         <SquadronTabs
           activeIndex={activeSquadronIndex}
