@@ -1,27 +1,25 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { extensionSelectorFactory } from 'views/utils/selectors'
 import AppPanel from './views/AppPanel'
-import { reducer, initializePersistence } from './redux'
+import { reducer } from './redux'
+import { store } from 'views/create-store'
+import { saveState } from './lib/persistence'
 
 const selector = extensionSelectorFactory('poi-plugin-bulldozers')
 
-class PluginBulldozers extends Component {
-  componentDidMount() {
-    const { store } = this.context
-    if (store) {
-      initializePersistence(store)
-    }
+store.subscribe(() => {
+  const state = store.getState()
+  const pluginState = state.ext?.['poi-plugin-bulldozers']?._
+  if (pluginState) {
+    saveState(pluginState)
   }
+})
 
+class PluginBulldozers extends Component {
   render() {
     return <AppPanel />
   }
-}
-
-PluginBulldozers.contextTypes = {
-  store: PropTypes.object,
 }
 
 export const reactClass = connect(selector)(PluginBulldozers)

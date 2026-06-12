@@ -22,14 +22,15 @@ class AppPanel extends Component {
 
   render() {
     const { activeSquadronIndex, selectedSlotIndex, activeCategoryKey } = this.state
-    const { presetsSlice, dispatch } = this.props
-    const activePresetId = presetsSlice.activePresetId
-    const activePreset = selectActivePreset(presetsSlice)
-    const squadrons = selectSquadrons(presetsSlice)
+    const { pluginState, dispatch } = this.props
+    if (!pluginState || !pluginState.presets) return null
+
+    const activePresetId = pluginState.activePresetId
+    const activePreset = selectActivePreset(pluginState)
+    const squadrons = selectSquadrons(pluginState)
+    const squadron = squadrons[activeSquadronIndex]
 
     if (!activePreset) return null
-
-    const squadron = squadrons[activeSquadronIndex]
 
     return (
       <div style={{ padding: 16 }}>
@@ -62,7 +63,7 @@ class AppPanel extends Component {
 
 const mapStateToProps = (state) => {
   const pluginState = selector(state)
-  return { presetsSlice: pluginState }
+  return { pluginState: pluginState || {} }
 }
 
 export default connect(mapStateToProps)(AppPanel)

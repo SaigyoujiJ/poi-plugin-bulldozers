@@ -80,11 +80,12 @@ class PresetBar extends Component {
 
 const mapStateToProps = (state) => {
   const pluginState = selector(state)
-  if (!pluginState || !pluginState.presets) return { activePresetId: 'default', presets: {} }
-  const presetsSlice = pluginState.presets
+  if (!pluginState || !pluginState.presets) {
+    return { activePresetId: 'default', presets: {} }
+  }
   return {
-    activePresetId: presetsSlice.activePresetId,
-    presets: presetsSlice.presets,
+    activePresetId: pluginState.activePresetId,
+    presets: pluginState.presets,
   }
 }
 
