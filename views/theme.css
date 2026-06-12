@@ -1,0 +1,31 @@
+:root {
+  --bulldozer-bg-page: #fff;
+  --bulldozer-bg-panel: #f8fafd;
+  --bulldozer-bg-input: #fff;
+  --bulldozer-bg-selected: #ffe082;
+  --bulldozer-bg-hover: #f0f0f0;
+  --bulldozer-text-primary: #333;
+  --bulldozer-text-secondary: #666;
+  --bulldozer-border: #ccc;
+  --bulldozer-border-active: #ff9800;
+  --bulldozer-accent: #4a90d9;
+  --bulldozer-accent-text: #fff;
+}
+
+body.bp6-dark {
+  --bulldozer-bg-page: #2f343c;
+  --bulldozer-bg-panel: #383f48;
+  --bulldozer-bg-input: #2f343c;
+  --bulldozer-bg-selected: #5c4b1e;
+  --bulldozer-bg-hover: #4a505a;
+  --bulldozer-text-primary: #e0e0e0;
+  --bulldozer-text-secondary: #aaa;
+  --bulldozer-border: #555;
+  --bulldozer-border-active: #ffb74d;
+  --bulldozer-accent: #6aaaf0;
+  --bulldozer-accent-text: #fff;
+}
+
+.bulldozer-plane-item:hover {
+  background: var(--bulldozer-bg-hover, #f0f0f0);
+}
