@@ -1,7 +1,6 @@
 export const themeCss = `
 :root {
   --bulldozer-bg-page: var(--poi-background-color, #f6f7f9);
-  --bulldozer-bg-panel: var(--bp-surface-background-color-default-rest, #ffffff);
   --bulldozer-bg-input: var(--bp-surface-background-color-default-rest, #ffffff);
   --bulldozer-bg-hover: var(--bp-surface-background-color-default-hover, #f6f7f9);
   --bulldozer-border: var(--bp-surface-border-color-default, #d3d8de);

@@ -6,7 +6,6 @@ const read = (p) => fs.readFileSync(path.join(root, p), 'utf-8')
 
 const requiredTokens = [
   '--bulldozer-bg-page: var(--poi-background-color',
-  '--bulldozer-bg-panel: var(--bp-surface-background-color-default-rest',
   '--bulldozer-bg-input: var(--bp-surface-background-color-default-rest',
   '--bulldozer-bg-hover: var(--bp-surface-background-color-default-hover',
   '--bulldozer-border: var(--bp-surface-border-color-default',
@@ -45,7 +44,6 @@ for (const token of requiredTokens) {
 // 2. themeStyle.es must not contain hardcoded old page/panel/input/border/text colors.
 const forbiddenInTheme = [
   '--bulldozer-bg-page: #',
-  '--bulldozer-bg-panel: #',
   '--bulldozer-bg-input: #',
   '--bulldozer-bg-hover: #',
   '--bulldozer-border: #',
@@ -80,7 +78,7 @@ const expectedFallbacks = {
   ],
   'views/ResultPanel.es': [
     "var(--bulldozer-accent, #2d72d2)",
-    "var(--bulldozer-bg-panel, #ffffff)",
+    "background: 'transparent'",
   ],
   'views/SquadronTabs.es': [
     "var(--bulldozer-accent, #2d72d2)",
@@ -104,7 +102,7 @@ const expectedFallbacks = {
   ],
   'views/PlanePicker/index.es': [
     "var(--bulldozer-border, #d3d8de)",
-    "var(--bulldozer-bg-panel, #ffffff)",
+    "background: 'transparent'",
   ],
 }
 for (const [file, fallbacks] of Object.entries(expectedFallbacks)) {

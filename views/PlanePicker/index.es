@@ -11,7 +11,7 @@ class PlanePicker extends Component {
         border: '1px solid var(--bulldozer-border, #d3d8de)',
         padding: 8,
         borderRadius: 4,
-        background: 'var(--bulldozer-bg-panel, #ffffff)',
+        background: 'transparent',
       }}>
         <CategoryTabs
           activeCategoryKey={activeCategoryKey}
