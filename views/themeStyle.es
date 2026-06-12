@@ -1,3 +1,4 @@
+export const themeCss = `
 :root {
   --bulldozer-bg-page: #fff;
   --bulldozer-bg-panel: #f8fafd;
@@ -28,4 +29,15 @@ body.bp6-dark {
 
 .bulldozer-plane-item:hover {
   background: var(--bulldozer-bg-hover, #f0f0f0);
+}
+`
+
+let injected = false
+
+export const injectThemeCSS = () => {
+  if (injected || typeof document === 'undefined') return
+  injected = true
+  const style = document.createElement('style')
+  style.textContent = themeCss
+  document.head.appendChild(style)
 }

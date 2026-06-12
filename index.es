@@ -5,7 +5,9 @@ import AppPanel from './views/AppPanel'
 import { reducer } from './redux'
 import { store } from 'views/create-store'
 import { saveState } from './lib/persistence'
-import './views/theme.css'
+import { injectThemeCSS } from './views/themeStyle'
+
+injectThemeCSS()
 
 const selector = extensionSelectorFactory('poi-plugin-bulldozers')
 
