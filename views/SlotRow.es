@@ -29,8 +29,13 @@ class SlotRow extends Component {
         <button
           onClick={onSelect}
           style={{
-            background: selected ? '#ffe082' : '#f5f5f5',
-            border: selected ? '2px solid #ff9800' : '1px solid #ccc',
+            background: selected
+              ? 'var(--bulldozer-bg-selected, #ffe082)'
+              : 'var(--bulldozer-bg-input, #f5f5f5)',
+            border: selected
+              ? '2px solid var(--bulldozer-border-active, #ff9800)'
+              : '1px solid var(--bulldozer-border, #ccc)',
+            color: 'var(--bulldozer-text-primary, #333)',
             padding: '2px 8px',
             cursor: 'pointer',
           }}
