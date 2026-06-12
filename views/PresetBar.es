@@ -57,9 +57,9 @@ class PresetBar extends Component {
           value={activePresetId}
           onChange={this.handlePresetChange}
           style={{
-            background: 'var(--bulldozer-bg-input, #f6f7f9)',
-            color: 'var(--bulldozer-text-primary, #1c2127)',
-            border: '1px solid var(--bulldozer-border, #d3d8de)',
+            background: 'var(--bulldozer-bg-input, #2f343c)',
+            color: 'var(--bulldozer-text-primary, #a5aab3)',
+            border: '1px solid var(--bulldozer-border, #5f6b7c)',
           }}
         >
           {presetIds.map((id) => (
@@ -69,18 +69,18 @@ class PresetBar extends Component {
         <button
           onClick={this.handleSaveClick}
           style={{
-            background: 'var(--bulldozer-bg-input, #f6f7f9)',
-            color: 'var(--bulldozer-text-primary, #1c2127)',
-            border: '1px solid var(--bulldozer-border, #d3d8de)',
+            background: 'var(--bulldozer-bg-input, #2f343c)',
+            color: 'var(--bulldozer-text-primary, #a5aab3)',
+            border: '1px solid var(--bulldozer-border, #5f6b7c)',
             cursor: 'pointer',
           }}
         >另存</button>
         <button
           onClick={this.handleDeleteClick}
           style={{
-            background: 'var(--bulldozer-bg-input, #f6f7f9)',
-            color: 'var(--bulldozer-text-primary, #1c2127)',
-            border: '1px solid var(--bulldozer-border, #d3d8de)',
+            background: 'var(--bulldozer-bg-input, #2f343c)',
+            color: 'var(--bulldozer-text-primary, #a5aab3)',
+            border: '1px solid var(--bulldozer-border, #5f6b7c)',
             cursor: 'pointer',
           }}
         >删除</button>
@@ -93,26 +93,26 @@ class PresetBar extends Component {
               placeholder="预设名称"
               autoFocus
               style={{
-                background: 'var(--bulldozer-bg-input, #f6f7f9)',
-                color: 'var(--bulldozer-text-primary, #1c2127)',
-                border: '1px solid var(--bulldozer-border, #d3d8de)',
+                background: 'var(--bulldozer-bg-input, #2f343c)',
+                color: 'var(--bulldozer-text-primary, #a5aab3)',
+                border: '1px solid var(--bulldozer-border, #5f6b7c)',
               }}
             />
             <button
               onClick={this.handleSaveConfirm}
               style={{
-                background: 'var(--bulldozer-bg-input, #f6f7f9)',
-                color: 'var(--bulldozer-text-primary, #1c2127)',
-                border: '1px solid var(--bulldozer-border, #d3d8de)',
+                background: 'var(--bulldozer-bg-input, #2f343c)',
+                color: 'var(--bulldozer-text-primary, #a5aab3)',
+                border: '1px solid var(--bulldozer-border, #5f6b7c)',
                 cursor: 'pointer',
               }}
             >确定</button>
             <button
               onClick={() => this.setState({ showSaveDialog: false })}
               style={{
-                background: 'var(--bulldozer-bg-input, #f6f7f9)',
-                color: 'var(--bulldozer-text-primary, #1c2127)',
-                border: '1px solid var(--bulldozer-border, #d3d8de)',
+                background: 'var(--bulldozer-bg-input, #2f343c)',
+                color: 'var(--bulldozer-text-primary, #a5aab3)',
+                border: '1px solid var(--bulldozer-border, #5f6b7c)',
                 cursor: 'pointer',
               }}
             >取消</button>

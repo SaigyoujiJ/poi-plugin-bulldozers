@@ -72,13 +72,13 @@ for (const file of filesToCheck) {
 // 4. View files must use Blueprint-aligned fallbacks.
 const expectedFallbacks = {
   'views/AppPanel.es': [
-    "var(--bulldozer-bg-page, #f6f7f9)",
-    "var(--bulldozer-text-primary, #1c2127)",
+    "var(--bulldozer-bg-page, #2f343c)",
+    "var(--bulldozer-text-primary, #a5aab3)",
   ],
   'views/PresetBar.es': [
-    "var(--bulldozer-bg-input, #f6f7f9)",
-    "var(--bulldozer-text-primary, #1c2127)",
-    "var(--bulldozer-border, #d3d8de)",
+    "var(--bulldozer-bg-input, #2f343c)",
+    "var(--bulldozer-text-primary, #a5aab3)",
+    "var(--bulldozer-border, #5f6b7c)",
   ],
   'views/ResultPanel.es': [
     "var(--bulldozer-accent, #2d72d2)",
@@ -86,26 +86,26 @@ const expectedFallbacks = {
   ],
   'views/SquadronTabs.es': [
     "var(--bulldozer-accent, #2d72d2)",
-    "var(--bulldozer-bg-input, #f6f7f9)",
-    "var(--bulldozer-text-primary, #1c2127)",
-    "var(--bulldozer-border, #d3d8de)",
+    "var(--bulldozer-bg-input, #2f343c)",
+    "var(--bulldozer-text-primary, #a5aab3)",
+    "var(--bulldozer-border, #5f6b7c)",
   ],
   'views/PlanePicker/CategoryTabs.es': [
     "var(--bulldozer-accent, #2d72d2)",
-    "var(--bulldozer-bg-input, #f6f7f9)",
-    "var(--bulldozer-text-primary, #1c2127)",
-    "var(--bulldozer-border, #d3d8de)",
+    "var(--bulldozer-bg-input, #2f343c)",
+    "var(--bulldozer-text-primary, #a5aab3)",
+    "var(--bulldozer-border, #5f6b7c)",
   ],
   'views/SlotRow.es': [
-    "var(--bulldozer-bg-input, #f6f7f9)",
-    "var(--bulldozer-border, #d3d8de)",
-    "var(--bulldozer-text-primary, #1c2127)",
+    "var(--bulldozer-bg-input, #2f343c)",
+    "var(--bulldozer-border, #5f6b7c)",
+    "var(--bulldozer-text-primary, #a5aab3)",
   ],
   'views/PlanePicker/PlaneList.es': [
-    "var(--bulldozer-border, #d3d8de)",
+    "var(--bulldozer-border, #5f6b7c)",
   ],
   'views/PlanePicker/index.es': [
-    "var(--bulldozer-border, #d3d8de)",
+    "var(--bulldozer-border, #5f6b7c)",
     "background: 'transparent'",
   ],
 }
