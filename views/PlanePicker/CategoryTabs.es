@@ -14,12 +14,12 @@ class CategoryTabs extends Component {
             style={{
               padding: '2px 8px',
               background: cat.key === activeCategoryKey
-                ? 'var(--bulldozer-accent, #4a90d9)'
-                : 'var(--bulldozer-bg-input, #eee)',
+                ? 'var(--bulldozer-accent, #2d72d2)'
+                : 'var(--bulldozer-bg-input, #ffffff)',
               color: cat.key === activeCategoryKey
-                ? 'var(--bulldozer-accent-text, #fff)'
-                : 'var(--bulldozer-text-primary, #333)',
-              border: '1px solid var(--bulldozer-border, #999)',
+                ? 'var(--bulldozer-accent-text, #ffffff)'
+                : 'var(--bulldozer-text-primary, #1c2127)',
+              border: '1px solid var(--bulldozer-border, #d3d8de)',
               cursor: 'pointer',
               fontSize: 12,
             }}
