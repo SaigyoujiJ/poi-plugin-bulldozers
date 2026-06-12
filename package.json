@@ -1,0 +1,22 @@
+{
+  "name": "poi-plugin-bulldozers",
+  "version": "0.0.1",
+  "description": "陆航速配 - 舰娘陆航快速配装插件",
+  "main": "index.es",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "kancolle",
+    "poi",
+    "plugin",
+    "陆航"
+  ],
+  "author": "SaigyoujiUUZ",
+  "license": "MIT",
+  "poiPlugin": {
+    "title": "陆航速配",
+    "icon": "plane",
+    "priority": 10
+  }
+}
