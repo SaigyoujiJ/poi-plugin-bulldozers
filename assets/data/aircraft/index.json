@@ -1,0 +1,42 @@
+{
+  "land_attackers": {
+    "file": "land_attackers.json",
+    "display": "陸攻、大型陸上機"
+  },
+  "local_fighters": {
+    "file": "local_fighters.json",
+    "display": "局戦、陸戦"
+  },
+  "land_recon": {
+    "file": "land_recon.json",
+    "display": "陸偵"
+  },
+  "carrier_fighters": {
+    "file": "carrier_fighters.json",
+    "display": "艦戦"
+  },
+  "carrier_torpedo_bombers": {
+    "file": "carrier_torpedo_bombers.json",
+    "display": "艦攻"
+  },
+  "carrier_dive_bombers": {
+    "file": "carrier_dive_bombers.json",
+    "display": "艦爆"
+  },
+  "jet_aircraft": {
+    "file": "jet_aircraft.json",
+    "display": "噴式機"
+  },
+  "seaplanes": {
+    "file": "seaplanes.json",
+    "display": "水爆、水戦"
+  },
+  "rotary_asw": {
+    "file": "rotary_asw.json",
+    "display": "回転翼機、対潜哨戒機"
+  },
+  "recon_flying_boats": {
+    "file": "recon_flying_boats.json",
+    "display": "水偵、艦偵、大型飛行艇"
+  }
+}

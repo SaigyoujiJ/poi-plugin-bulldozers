@@ -4,6 +4,7 @@ AGENTS.md
 
 # Dependencies
 node_modules/
+.venv/
 
 # Logs
 *.log
