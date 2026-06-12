@@ -62,7 +62,7 @@ class AppPanel extends Component {
 
 const mapStateToProps = (state) => {
   const pluginState = selector(state)
-  return { presetsSlice: pluginState.presets }
+  return { presetsSlice: pluginState }
 }
 
 export default connect(mapStateToProps)(AppPanel)

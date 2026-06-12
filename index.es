@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { extensionSelectorFactory } from 'views/utils/selectors'
 import AppPanel from './views/AppPanel'
@@ -20,7 +21,7 @@ class PluginBulldozers extends Component {
 }
 
 PluginBulldozers.contextTypes = {
-  store: React.PropTypes.object,
+  store: PropTypes.object,
 }
 
 export const reactClass = connect(selector)(PluginBulldozers)
