@@ -1,33 +1,23 @@
 export const themeCss = `
 :root {
-  --bulldozer-bg-page: #fff;
-  --bulldozer-bg-panel: #f8fafd;
-  --bulldozer-bg-input: #fff;
+  --bulldozer-bg-page: var(--poi-background-color, #f6f7f9);
+  --bulldozer-bg-panel: var(--bp-surface-background-color-default-rest, #ffffff);
+  --bulldozer-bg-input: var(--bp-surface-background-color-default-rest, #ffffff);
+  --bulldozer-bg-hover: var(--bp-surface-background-color-default-hover, #f6f7f9);
+  --bulldozer-border: var(--bp-surface-border-color-default, #d3d8de);
+  --bulldozer-accent: var(--bp-intent-primary-rest, #2d72d2);
+  --bulldozer-text-primary: var(--bp-typography-color-default-rest, #1c2127);
+  --bulldozer-accent-text: var(--bp-intent-primary-foreground, #ffffff);
   --bulldozer-bg-selected: #ffe082;
-  --bulldozer-bg-hover: #f0f0f0;
-  --bulldozer-text-primary: #333;
-  --bulldozer-text-secondary: #666;
-  --bulldozer-border: #ccc;
   --bulldozer-border-active: #ff9800;
-  --bulldozer-accent: #4a90d9;
-  --bulldozer-accent-text: #fff;
 }
 
 body.bp6-dark {
-  --bulldozer-bg-page: #2f343c;
-  --bulldozer-bg-panel: #383f48;
-  --bulldozer-bg-input: #2f343c;
   --bulldozer-bg-selected: #5c4b1e;
-  --bulldozer-bg-hover: #4a505a;
-  --bulldozer-text-primary: #e0e0e0;
-  --bulldozer-text-secondary: #aaa;
-  --bulldozer-border: #555;
   --bulldozer-border-active: #ffb74d;
-  --bulldozer-accent: #6aaaf0;
-  --bulldozer-accent-text: #fff;
 }
 
 .bulldozer-plane-item:hover {
-  background: var(--bulldozer-bg-hover, #f0f0f0);
+  background: var(--bulldozer-bg-hover, #f6f7f9);
 }
 `
