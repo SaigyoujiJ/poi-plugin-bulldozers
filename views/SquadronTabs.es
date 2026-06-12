@@ -11,9 +11,13 @@ class SquadronTabs extends Component {
             onClick={() => onTabChange(i)}
             style={{
               padding: '4px 12px',
-              background: i === activeIndex ? '#4a90d9' : '#ddd',
-              color: i === activeIndex ? '#fff' : '#333',
-              border: '1px solid #999',
+              background: i === activeIndex
+                ? 'var(--bulldozer-accent, #4a90d9)'
+                : 'var(--bulldozer-bg-input, #ddd)',
+              color: i === activeIndex
+                ? 'var(--bulldozer-accent-text, #fff)'
+                : 'var(--bulldozer-text-primary, #333)',
+              border: '1px solid var(--bulldozer-border, #999)',
               cursor: 'pointer',
             }}
           >
