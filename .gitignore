@@ -1,6 +1,7 @@
 # AI agent session metadata
 AGENTS.md
 .kimi-code/
+docs/superpowers/
 
 # Dependencies
 node_modules/
