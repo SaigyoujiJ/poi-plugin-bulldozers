@@ -6,7 +6,7 @@ class ResultPanel extends Component {
     const { squadron } = this.props
     const results = selectSquadronResults(squadron)
     return (
-      <div style={{ marginTop: 12, padding: 12, border: '1px solid #4a90d9', borderRadius: 4, background: '#f8fafd' }}>
+      <div style={{ marginTop: 12, padding: 12, border: '1px solid var(--bulldozer-accent, #4a90d9)', borderRadius: 4, background: 'var(--bulldozer-bg-panel, #f8fafd)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-around' }}>
           <div style={{ textAlign: 'center' }}>
             <div style={{ fontWeight: 'bold', marginBottom: 4 }}>出击</div>
