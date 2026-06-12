@@ -6,7 +6,13 @@ class PlanePicker extends Component {
   render() {
     const { activeCategoryKey, onCategoryChange, onPlaneSelect } = this.props
     return (
-      <div style={{ marginTop: 8, border: '1px solid #ddd', padding: 8, borderRadius: 4 }}>
+      <div style={{
+        marginTop: 8,
+        border: '1px solid var(--bulldozer-border, #ddd)',
+        padding: 8,
+        borderRadius: 4,
+        background: 'var(--bulldozer-bg-panel, #fff)',
+      }}>
         <CategoryTabs
           activeCategoryKey={activeCategoryKey}
           onCategoryChange={onCategoryChange}
