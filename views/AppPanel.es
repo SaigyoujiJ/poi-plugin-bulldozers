@@ -38,8 +38,8 @@ class AppPanel extends Component {
         className="bulldozers-app"
         style={{
           padding: 16,
-          background: 'var(--bulldozer-bg-page, #fff)',
-          color: 'var(--bulldozer-text-primary, #333)',
+          background: 'var(--bulldozer-bg-page, #f6f7f9)',
+          color: 'var(--bulldozer-text-primary, #1c2127)',
           minHeight: '100%',
         }}
       >
