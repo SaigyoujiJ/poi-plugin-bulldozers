@@ -57,7 +57,7 @@ class PresetBar extends Component {
           value={activePresetId}
           onChange={this.handlePresetChange}
           style={{
-            background: 'var(--bulldozer-bg-input, #f6f7f9)',
+            background: 'var(--poi-background-color)',
             color: 'var(--bulldozer-text-primary, #1c2127)',
             border: '1px solid var(--bulldozer-border, #d3d8de)',
           }}
@@ -69,7 +69,7 @@ class PresetBar extends Component {
         <button
           onClick={this.handleSaveClick}
           style={{
-            background: 'var(--bulldozer-bg-input, #f6f7f9)',
+            background: 'var(--poi-background-color)',
             color: 'var(--bulldozer-text-primary, #1c2127)',
             border: '1px solid var(--bulldozer-border, #d3d8de)',
             cursor: 'pointer',
@@ -78,7 +78,7 @@ class PresetBar extends Component {
         <button
           onClick={this.handleDeleteClick}
           style={{
-            background: 'var(--bulldozer-bg-input, #f6f7f9)',
+            background: 'var(--poi-background-color)',
             color: 'var(--bulldozer-text-primary, #1c2127)',
             border: '1px solid var(--bulldozer-border, #d3d8de)',
             cursor: 'pointer',
@@ -93,7 +93,7 @@ class PresetBar extends Component {
               placeholder="预设名称"
               autoFocus
               style={{
-                background: 'var(--bulldozer-bg-input, #f6f7f9)',
+                background: 'var(--poi-background-color)',
                 color: 'var(--bulldozer-text-primary, #1c2127)',
                 border: '1px solid var(--bulldozer-border, #d3d8de)',
               }}
@@ -101,7 +101,7 @@ class PresetBar extends Component {
             <button
               onClick={this.handleSaveConfirm}
               style={{
-                background: 'var(--bulldozer-bg-input, #f6f7f9)',
+                background: 'var(--poi-background-color)',
                 color: 'var(--bulldozer-text-primary, #1c2127)',
                 border: '1px solid var(--bulldozer-border, #d3d8de)',
                 cursor: 'pointer',
@@ -110,7 +110,7 @@ class PresetBar extends Component {
             <button
               onClick={() => this.setState({ showSaveDialog: false })}
               style={{
-                background: 'var(--bulldozer-bg-input, #f6f7f9)',
+                background: 'var(--poi-background-color)',
                 color: 'var(--bulldozer-text-primary, #1c2127)',
                 border: '1px solid var(--bulldozer-border, #d3d8de)',
                 cursor: 'pointer',

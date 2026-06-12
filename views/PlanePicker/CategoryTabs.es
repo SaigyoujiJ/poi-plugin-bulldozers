@@ -15,7 +15,7 @@ class CategoryTabs extends Component {
               padding: '2px 8px',
               background: cat.key === activeCategoryKey
                 ? 'var(--bulldozer-accent, #2d72d2)'
-                : 'var(--bulldozer-bg-input, #f6f7f9)',
+                : 'var(--poi-background-color)',
               color: cat.key === activeCategoryKey
                 ? 'var(--bulldozer-accent-text, #ffffff)'
                 : 'var(--bulldozer-text-primary, #1c2127)',

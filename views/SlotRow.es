@@ -31,7 +31,7 @@ class SlotRow extends Component {
           style={{
             background: selected
               ? 'var(--bulldozer-bg-selected, #ffe082)'
-              : 'var(--bulldozer-bg-input, #f6f7f9)',
+              : 'var(--poi-background-color)',
             border: selected
               ? '2px solid var(--bulldozer-border-active, #ff9800)'
               : '1px solid var(--bulldozer-border, #d3d8de)',
@@ -46,7 +46,7 @@ class SlotRow extends Component {
           value={slot.proficiency}
           onChange={this.handleProficiencyChange}
           style={{
-            background: 'var(--bulldozer-bg-input, #f6f7f9)',
+            background: 'var(--poi-background-color)',
             color: 'var(--bulldozer-text-primary, #1c2127)',
             border: '1px solid var(--bulldozer-border, #d3d8de)',
           }}
@@ -59,7 +59,7 @@ class SlotRow extends Component {
           value={slot.stars}
           onChange={this.handleStarsChange}
           style={{
-            background: 'var(--bulldozer-bg-input, #f6f7f9)',
+            background: 'var(--poi-background-color)',
             color: 'var(--bulldozer-text-primary, #1c2127)',
             border: '1px solid var(--bulldozer-border, #d3d8de)',
           }}
@@ -72,7 +72,7 @@ class SlotRow extends Component {
           <button
             onClick={this.handleClear}
             style={{
-              background: 'var(--bulldozer-bg-input, #f6f7f9)',
+              background: 'var(--poi-background-color)',
               color: 'var(--bulldozer-text-primary, #1c2127)',
               border: '1px solid var(--bulldozer-border, #d3d8de)',
               cursor: 'pointer',
