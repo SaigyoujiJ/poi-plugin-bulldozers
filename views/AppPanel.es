@@ -21,6 +21,7 @@ class AppPanel extends Component {
     }
     this.rootRef = React.createRef()
     this.styleEl = null
+    this.themeObserver = null
   }
 
   componentDidMount() {
@@ -32,11 +33,39 @@ class AppPanel extends Component {
     style.textContent = themeCss
     doc.head.appendChild(style)
     this.styleEl = style
+
+    const pluginBody = doc.body
+    const mainWindow = window.opener || window
+    const syncThemeClass = () => {
+      try {
+        const isDark = mainWindow.document.body.classList.contains('bp6-dark')
+        if (isDark) {
+          pluginBody.classList.add('bp6-dark')
+        } else {
+          pluginBody.classList.remove('bp6-dark')
+        }
+      } catch (e) {
+        // Ignore cross-origin or missing main window
+      }
+    }
+    syncThemeClass()
+    try {
+      this.themeObserver = new MutationObserver(syncThemeClass)
+      this.themeObserver.observe(mainWindow.document.body, {
+        attributes: true,
+        attributeFilter: ['class'],
+      })
+    } catch (e) {
+      // Ignore if observer cannot be attached
+    }
   }
 
   componentWillUnmount() {
     if (this.styleEl && this.styleEl.parentNode) {
       this.styleEl.parentNode.removeChild(this.styleEl)
+    }
+    if (this.themeObserver) {
+      this.themeObserver.disconnect()
     }
   }
 
@@ -58,8 +87,8 @@ class AppPanel extends Component {
         className="bulldozers-app"
         style={{
           padding: 16,
-          background: 'var(--bulldozer-bg-page, #2f343c)',
-          color: 'var(--bulldozer-text-primary, #a5aab3)',
+          background: 'var(--bulldozer-bg-page, #f6f7f9)',
+          color: 'var(--bulldozer-text-primary, #1c2127)',
           minHeight: '100%',
         }}
       >

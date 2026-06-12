@@ -31,11 +31,11 @@ class SlotRow extends Component {
           style={{
             background: selected
               ? 'var(--bulldozer-bg-selected, #ffe082)'
-              : 'var(--bulldozer-bg-input, #2f343c)',
+              : 'var(--bulldozer-bg-input, #f6f7f9)',
             border: selected
               ? '2px solid var(--bulldozer-border-active, #ff9800)'
-              : '1px solid var(--bulldozer-border, #5f6b7c)',
-            color: 'var(--bulldozer-text-primary, #a5aab3)',
+              : '1px solid var(--bulldozer-border, #d3d8de)',
+            color: 'var(--bulldozer-text-primary, #1c2127)',
             padding: '2px 8px',
             cursor: 'pointer',
           }}
@@ -46,9 +46,9 @@ class SlotRow extends Component {
           value={slot.proficiency}
           onChange={this.handleProficiencyChange}
           style={{
-            background: 'var(--bulldozer-bg-input, #2f343c)',
-            color: 'var(--bulldozer-text-primary, #a5aab3)',
-            border: '1px solid var(--bulldozer-border, #5f6b7c)',
+            background: 'var(--bulldozer-bg-input, #f6f7f9)',
+            color: 'var(--bulldozer-text-primary, #1c2127)',
+            border: '1px solid var(--bulldozer-border, #d3d8de)',
           }}
         >
           {PROFICIENCY.map((p) => (
@@ -59,9 +59,9 @@ class SlotRow extends Component {
           value={slot.stars}
           onChange={this.handleStarsChange}
           style={{
-            background: 'var(--bulldozer-bg-input, #2f343c)',
-            color: 'var(--bulldozer-text-primary, #a5aab3)',
-            border: '1px solid var(--bulldozer-border, #5f6b7c)',
+            background: 'var(--bulldozer-bg-input, #f6f7f9)',
+            color: 'var(--bulldozer-text-primary, #1c2127)',
+            border: '1px solid var(--bulldozer-border, #d3d8de)',
           }}
         >
           {Array.from({ length: 11 }, (_, i) => (
@@ -72,9 +72,9 @@ class SlotRow extends Component {
           <button
             onClick={this.handleClear}
             style={{
-              background: 'var(--bulldozer-bg-input, #2f343c)',
-              color: 'var(--bulldozer-text-primary, #a5aab3)',
-              border: '1px solid var(--bulldozer-border, #5f6b7c)',
+              background: 'var(--bulldozer-bg-input, #f6f7f9)',
+              color: 'var(--bulldozer-text-primary, #1c2127)',
+              border: '1px solid var(--bulldozer-border, #d3d8de)',
               cursor: 'pointer',
             }}
           >×</button>

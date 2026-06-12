@@ -8,7 +8,7 @@ class PlanePicker extends Component {
     return (
       <div style={{
         marginTop: 8,
-        border: '1px solid var(--bulldozer-border, #5f6b7c)',
+        border: '1px solid var(--bulldozer-border, #d3d8de)',
         padding: 8,
         borderRadius: 4,
         background: 'transparent',
