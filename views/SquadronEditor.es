@@ -50,11 +50,13 @@ class SquadronEditor extends Component {
             dispatch={dispatch}
           />
         ))}
-        <PlanePicker
-          activeCategoryKey={activeCategoryKey}
-          onCategoryChange={onCategoryChange}
-          onPlaneSelect={onPlaneSelect}
-        />
+        {selectedSlotIndex != null && (
+          <PlanePicker
+            activeCategoryKey={activeCategoryKey}
+            onCategoryChange={onCategoryChange}
+            onPlaneSelect={onPlaneSelect}
+          />
+        )}
       </div>
     )
   }
