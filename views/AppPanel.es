@@ -19,6 +19,25 @@ class AppPanel extends Component {
       selectedSlotIndex: null,
       activeCategoryKey: 'land_attackers',
     }
+    this.rootRef = React.createRef()
+    this.styleEl = null
+  }
+
+  componentDidMount() {
+    const node = this.rootRef.current
+    if (!node) return
+    const doc = node.ownerDocument
+    if (!doc || !doc.head) return
+    const style = doc.createElement('style')
+    style.textContent = themeCss
+    doc.head.appendChild(style)
+    this.styleEl = style
+  }
+
+  componentWillUnmount() {
+    if (this.styleEl && this.styleEl.parentNode) {
+      this.styleEl.parentNode.removeChild(this.styleEl)
+    }
   }
 
   render() {
@@ -35,6 +54,7 @@ class AppPanel extends Component {
 
     return (
       <div
+        ref={this.rootRef}
         className="bulldozers-app"
         style={{
           padding: 16,
@@ -43,7 +63,6 @@ class AppPanel extends Component {
           minHeight: '100%',
         }}
       >
-        <style dangerouslySetInnerHTML={{ __html: themeCss }} />
         <PresetBar />
         <SquadronTabs
           activeIndex={activeSquadronIndex}
