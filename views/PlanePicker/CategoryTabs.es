@@ -13,9 +13,13 @@ class CategoryTabs extends Component {
             onClick={() => onCategoryChange(cat.key)}
             style={{
               padding: '2px 8px',
-              background: cat.key === activeCategoryKey ? '#4a90d9' : '#eee',
-              color: cat.key === activeCategoryKey ? '#fff' : '#333',
-              border: '1px solid #999',
+              background: cat.key === activeCategoryKey
+                ? 'var(--bulldozer-accent, #4a90d9)'
+                : 'var(--bulldozer-bg-input, #eee)',
+              color: cat.key === activeCategoryKey
+                ? 'var(--bulldozer-accent-text, #fff)'
+                : 'var(--bulldozer-text-primary, #333)',
+              border: '1px solid var(--bulldozer-border, #999)',
               cursor: 'pointer',
               fontSize: 12,
             }}
