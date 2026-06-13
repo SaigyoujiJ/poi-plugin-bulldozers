@@ -101,7 +101,12 @@ export default function presetsReducer(state = initialState, action) {
 
     case SAVE_PRESET: {
       const { id, name } = action
-      const newPreset = createDefaultPreset(id, name)
+      const currentPreset = state.presets[state.activePresetId]
+      const newPreset = {
+        ...currentPreset,
+        id,
+        name,
+      }
       return {
         ...state,
         activePresetId: id,
