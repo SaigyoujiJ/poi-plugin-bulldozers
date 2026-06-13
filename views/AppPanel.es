@@ -47,6 +47,21 @@ class AppPanel extends Component {
     const doc = node.ownerDocument
     const body = doc.body
     const isDark = window.isDarkTheme || (body ? body.classList.contains('bp6-dark') : false)
+
+    if (isDark) {
+      node.style.setProperty('--bulldozer-text-primary', '#ffffff')
+      node.style.setProperty('--bulldozer-text-secondary', '#b0b5bd')
+      node.style.setProperty('--bulldozer-card-bg', 'rgba(255, 255, 255, 0.04)')
+      node.style.setProperty('--bulldozer-bg-input', 'rgba(0, 0, 0, 0.2)')
+      node.style.setProperty('--bulldozer-bg-surface', 'transparent')
+    } else {
+      node.style.setProperty('--bulldozer-text-primary', '#1c2127')
+      node.style.setProperty('--bulldozer-text-secondary', '#5f6b7a')
+      node.style.setProperty('--bulldozer-card-bg', '#f5f5f5')
+      node.style.setProperty('--bulldozer-bg-input', 'var(--poi-background-color)')
+      node.style.setProperty('--bulldozer-bg-surface', 'transparent')
+    }
+
     this.setState({ isDark })
   }
 
@@ -97,7 +112,7 @@ class AppPanel extends Component {
         className={'bulldozers-app' + (isDark ? ' bp6-dark' : '')}
         style={{
           padding: 12,
-          color: isDark ? '#ff0000' : '#1c2127',
+          color: 'var(--bulldozer-text-primary, #1c2127)',
           backgroundColor: isDark ? '#00ff00' : '#ffffff',
           minHeight: '100%',
         }}
