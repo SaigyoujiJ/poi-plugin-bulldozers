@@ -46,7 +46,7 @@ class AppPanel extends Component {
     if (!node) return
     const doc = node.ownerDocument
     const body = doc.body
-    const isDark = body ? body.classList.contains('bp6-dark') : false
+    const isDark = window.isDarkTheme || (body ? body.classList.contains('bp6-dark') : false)
     this.setState({ isDark })
   }
 
@@ -100,7 +100,6 @@ class AppPanel extends Component {
           color: isDark ? '#ff0000' : '#1c2127',
           backgroundColor: isDark ? '#00ff00' : '#ffffff',
           minHeight: '100%',
-          ...(isDark ? DARK_VARS : LIGHT_VARS),
         }}
       >
         <PresetBar />
