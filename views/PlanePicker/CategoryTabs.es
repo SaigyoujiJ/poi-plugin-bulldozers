@@ -20,8 +20,9 @@ class CategoryTabs extends Component {
                 ? 'var(--bulldozer-accent-text, #ffffff)'
                 : 'var(--bulldozer-text-primary, #1c2127)',
               border: '1px solid var(--bulldozer-border, #d3d8de)',
+              borderRadius: 'var(--bulldozer-radius-sm, 4px)',
               cursor: 'pointer',
-              fontSize: 12,
+              fontSize: 11,
             }}
           >
             {cat.display}

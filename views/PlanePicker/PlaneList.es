@@ -15,7 +15,8 @@ class PlaneList extends Component {
             style={{
               padding: '4px 8px',
               cursor: 'pointer',
-              borderBottom: '1px solid var(--bulldozer-border, #d3d8de)',
+              borderRadius: 'var(--bulldozer-radius-sm, 4px)',
+              marginBottom: 3,
             }}
           >
             {ac.name}
