@@ -35,7 +35,7 @@ class SlotRow extends Component {
   render() {
     const { slot, selected, onSelect, dispatch } = this.props
     const planeInfo = slot.aircraftId ? lookupAircraft(slot.aircraftId) : null
-    const planeName = planeInfo ? planeInfo.aircraft.name : '未配置'
+    const planeName = planeInfo ? planeInfo.aircraft.name : __('SlotRow.Empty')
 
     return (
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
@@ -78,7 +78,7 @@ class SlotRow extends Component {
           }}
         >
           {Array.from({ length: 11 }, (_, i) => (
-            <option key={i} value={i}>★{i}</option>
+            <option key={i} value={i}>{__('SlotRow.ProficiencyStar', { level: i })}</option>
           ))}
         </select>
         {slot.aircraftId && (
