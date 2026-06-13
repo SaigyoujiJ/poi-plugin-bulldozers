@@ -84,7 +84,7 @@ class SlotRow extends Component {
           }}
         >
           {Array.from({ length: 11 }, (_, i) => (
-            <option key={i} value={i}>{__('SlotRow.ProficiencyStar', { level: i })}</option>
+            <option key={i} value={i}>★{i}</option>
           ))}
         </select>
         {isConfigured && (
