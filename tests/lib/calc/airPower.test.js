@@ -50,19 +50,19 @@ describe('sortie air power', () => {
 
 describe('defense air power', () => {
   test('雷電 18機 熟練度>> 防空制空 = 114', () => {
-    // calcSlotDefenseBasePower floors (aa + intercept + 2*antiBomb) * sqrt(slotCount):
-    //   floor((9 + 2 + 2*5) * sqrt(18)) = floor(89.09...) = 89
+    // calcSlotDefenseBasePower returns (aa + intercept + 2*antiBomb) * sqrt(slotCount) (no floor):
+    //   (9 + 2 + 2*5) * sqrt(18) = 89.09...
     // calcSlotDefensePower floors (base + internal) and adds display bonus:
-    //   floor(89 + sqrt(120/10)) + 22 = floor(92.46...) + 22 = 114
+    //   floor(89.09... + sqrt(120/10)) + 22 = floor(92.46...) + 22 = 114
     const slots = [{ aircraftId: 175, proficiency: 7, stars: 0 }]
     expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(114)
   })
 
   test('三式戦 飛燕 18機 熟練度>> 防空制空 includes intercept + anti-bomb', () => {
-    // calcSlotDefenseBasePower floors (aa + intercept + 2*antiBomb) * sqrt(slotCount):
-    //   floor((12.5 + 3 + 2*1) * sqrt(18)) = floor(74.24...) = 74
+    // calcSlotDefenseBasePower returns (aa + intercept + 2*antiBomb) * sqrt(slotCount) (no floor):
+    //   (12.5 + 3 + 2*1) * sqrt(18) = 74.24...
     // calcSlotDefensePower floors (base + internal) and adds display bonus:
-    //   floor(74 + sqrt(120/10)) + 22 = floor(77.46...) + 22 = 99
+    //   floor(74.24... + sqrt(120/10)) + 22 = floor(77.46...) + 22 = 99
     const slots = [{ aircraftId: 176, proficiency: 7, stars: 0 }]
     expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(99)
   })
@@ -172,7 +172,7 @@ describe('recon multipliers', () => {
 describe('improvement bonus', () => {
   test('fighter improvement 0.2 per star is multiplied inside sqrt', () => {
     // 三式戦 飛燕 aa=12.5, intercept=3, stars=10 -> +2 fighter improvement
-    // sortie base = floor((12.5 + 2 + 4.5) * sqrt(18) + sqrt(120/10)) + 22
+    // slot power = floor((12.5 + 2 + 4.5) * sqrt(18) + sqrt(120/10)) + 22
     const slots = [{ aircraftId: 176, proficiency: 7, stars: 10 }]
     expect(calcSortieAirPower(slots, aircraftLookup)).toBe(
       Math.floor(Math.floor((12.5 + 2 + 4.5) * Math.sqrt(18) + Math.sqrt(120 / 10))) + 22
