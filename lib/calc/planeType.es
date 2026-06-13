@@ -75,8 +75,8 @@ export function isFighterBomber(aircraft, categoryKey) {
 }
 
 /**
- * 计算基地航空隊飞机的改修加成。
- * 本函数为即将到来的 airPower 重构（Task 7）预先引入，届时将替换其中内联的加成逻辑。
+ * 计算基地航空隊飞机按机种分类的改修对空加成。
+ * 该加成用于 LBAS 制空值计算。
  */
 export function getImprovementBonus(aircraft, categoryKey, stars) {
   if (stars <= 0) return 0
