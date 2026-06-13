@@ -53,6 +53,11 @@ function calcSlotHeavyBomberDefense(aircraft, slotCount, proficiencyLevel) {
 // 大型飛行艇 ID：二式大艇 (138)、PBY-5A Catalina (178)
 const FLYING_BOAT_IDS = new Set([138, 178])
 
+// 艦偵 ID：彩雲 (54)、二式艦上偵察機 (61)、試製景雲(艦偵型) (151)、
+// 彩雲(東カロリン空) (212)、彩雲(偵四) (273)
+// recon_flying_boats.json 中除此集合与 FLYING_BOAT_IDS 之外的条目均为水偵。
+const CARRIER_RECON_IDS = new Set([54, 61, 151, 212, 273])
+
 function getSortieReconMultiplier(slots, aircraftData) {
   let multiplier = 1
   for (const slot of slots) {
@@ -75,7 +80,7 @@ function getDefenseReconMultiplier(slots, aircraftData) {
     if (!slot.aircraftId) continue
     const { aircraft, categoryKey } = aircraftData.lookup(slot.aircraftId)
     const los = aircraft.los ?? 0
-    if (categoryKey === 'seaplanes' || (categoryKey === 'recon_flying_boats' && FLYING_BOAT_IDS.has(aircraft.id))) {
+    if (categoryKey === 'recon_flying_boats' && !CARRIER_RECON_IDS.has(aircraft.id)) {
       // 水偵 / 大型飛行艇
       if (los >= 9) multiplier = Math.max(multiplier, 1.16)
       else if (los >= 8) multiplier = Math.max(multiplier, 1.13)

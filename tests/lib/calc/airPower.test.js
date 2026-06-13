@@ -145,4 +145,28 @@ describe('recon multipliers', () => {
     ]
     expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(139)
   })
+
+  test('seaplane bomber from seaplanes category does not get defense recon multiplier', () => {
+    // 瑞雲 id 26: aa=2, los=6, category seaplanes, slot=18, prof=0
+    // base = floor(2 * sqrt(18)) = 8, internal = sqrt(9/10), slot power = floor(8 + 0.948...) = 8
+    // seaplanes are not recon, so multiplier stays 1
+    // total = floor((114 + 8) * 1) = 122
+    const slots = [
+      { aircraftId: 175, proficiency: 7, stars: 0 },
+      { aircraftId: 26, proficiency: 0, stars: 0 },
+    ]
+    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(122)
+  })
+
+  test('seaplane recon from recon_flying_boats gets water recon defense multiplier 1.10', () => {
+    // 零式水上偵察機 id 25: aa=2, los=5, category recon_flying_boats, slot=4, prof=0
+    // base = floor(2 * sqrt(4)) = 4, internal = sqrt(9/10), slot power = floor(4 + 0.948...) = 4
+    // los <= 7 gives water recon multiplier 1.10
+    // total = floor((114 + 4) * 1.10) = floor(118 * 1.10) = 129
+    const slots = [
+      { aircraftId: 175, proficiency: 7, stars: 0 },
+      { aircraftId: 25, proficiency: 0, stars: 0 },
+    ]
+    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(129)
+  })
 })
