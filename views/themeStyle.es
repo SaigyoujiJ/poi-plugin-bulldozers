@@ -22,11 +22,11 @@ export const themeCss = `
 .bp6-dark {
   --bulldozer-bg-hover: rgba(255, 255, 255, 0.06);
   --bulldozer-border: var(--bp-surface-border-color-default, #ffffff33);
-  --bulldozer-text-primary: var(--bp-typography-color-default-rest, #f5f8fa);
+  --bulldozer-text-primary: #ffffff;
   --bulldozer-bg-selected: #5c4b1e;
   --bulldozer-border-active: #ffb74d;
   --bulldozer-defense-accent: #ffb74d;
-  --bulldozer-text-secondary: #c1c7cd;
+  --bulldozer-text-secondary: #b0b5bd;
   --bulldozer-card-bg: rgba(255, 255, 255, 0.04);
   --bulldozer-bg-surface: transparent;
   --bulldozer-bg-input: rgba(0, 0, 0, 0.2);
