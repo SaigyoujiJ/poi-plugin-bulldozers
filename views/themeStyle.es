@@ -10,7 +10,9 @@ export const themeCss = `
   --bulldozer-defense-accent: #ff9800;
   --bulldozer-text-secondary: #5f6b7a;
   --bulldozer-card-bg: #f5f5f5;
-  --bulldozer-muted-opacity: 0.35;
+  --bulldozer-bg-surface: transparent;
+  --bulldozer-bg-input: var(--poi-background-color);
+  --bulldozer-muted-opacity: 0.55;
   --bulldozer-radius-sm: 4px;
   --bulldozer-radius-md: 8px;
   --bulldozer-radius-lg: 10px;
@@ -18,14 +20,16 @@ export const themeCss = `
 }
 
 .bp6-dark {
-  --bulldozer-bg-hover: rgba(255, 255, 255, 0.08);
+  --bulldozer-bg-hover: rgba(255, 255, 255, 0.06);
   --bulldozer-border: var(--bp-surface-border-color-default, #ffffff33);
-  --bulldozer-text-primary: var(--bp-typography-color-default-rest, #a5aab3);
+  --bulldozer-text-primary: var(--bp-typography-color-default-rest, #e1e8ed);
   --bulldozer-bg-selected: #5c4b1e;
   --bulldozer-border-active: #ffb74d;
   --bulldozer-defense-accent: #ffb74d;
-  --bulldozer-text-secondary: #888888;
-  --bulldozer-card-bg: #383b45;
+  --bulldozer-text-secondary: #a5aab3;
+  --bulldozer-card-bg: rgba(255, 255, 255, 0.04);
+  --bulldozer-bg-surface: transparent;
+  --bulldozer-bg-input: rgba(0, 0, 0, 0.2);
   color-scheme: dark;
 }
 

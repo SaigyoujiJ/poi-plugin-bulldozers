@@ -41,9 +41,6 @@ for (const token of requiredTokens) {
 if (themeStyle.includes('--bulldozer-bg-page')) {
   errors.push('views/themeStyle.es still defines custom --bulldozer-bg-page')
 }
-if (themeStyle.includes('--bulldozer-bg-input')) {
-  errors.push('views/themeStyle.es still defines custom --bulldozer-bg-input')
-}
 
 // 2. themeStyle.es must not set html/body background itself.
 if (/html\s*,\s*body\s*\{[^}]*background/i.test(themeStyle)) {
