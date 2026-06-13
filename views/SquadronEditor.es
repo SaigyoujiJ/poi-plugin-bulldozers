@@ -24,7 +24,7 @@ class SquadronEditor extends Component {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: 4,
+                gap: 6,
                 cursor: 'pointer',
                 opacity: active ? 1 : 0.75,
                 color: active ? 'var(--bulldozer-text-primary, #1c2127)' : 'var(--bulldozer-text-secondary, #5f6b7a)',
@@ -36,7 +36,19 @@ class SquadronEditor extends Component {
                 value={m}
                 checked={active}
                 onChange={this.handleModeChange}
-                style={{ accentColor: mColors.accent }}
+                style={{ position: 'absolute', opacity: 0, width: 0, height: 0 }}
+              />
+              <span
+                style={{
+                  display: 'inline-block',
+                  width: 14,
+                  height: 14,
+                  borderRadius: '50%',
+                  border: '2px solid ' + mColors.accent,
+                  background: active ? mColors.accent : 'transparent',
+                  boxSizing: 'border-box',
+                  flexShrink: 0,
+                }}
               />
               {m === 'sortie' ? __('SquadronEditor.Sortie') : __('SquadronEditor.Defense')}
             </label>
