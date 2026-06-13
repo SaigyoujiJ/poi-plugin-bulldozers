@@ -57,7 +57,7 @@ class AppPanel extends Component {
         ref={this.rootRef}
         className="bulldozers-app"
         style={{
-          padding: 16,
+          padding: 12,
           color: 'var(--bulldozer-text-primary, #1c2127)',
           minHeight: '100%',
         }}

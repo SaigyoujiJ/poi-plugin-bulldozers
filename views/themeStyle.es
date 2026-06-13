@@ -7,6 +7,13 @@ export const themeCss = `
   --bulldozer-accent-text: var(--bp-intent-primary-foreground, #ffffff);
   --bulldozer-bg-selected: #ffe082;
   --bulldozer-border-active: #ff9800;
+  --bulldozer-defense-accent: #ff9800;
+  --bulldozer-text-secondary: #5f6b7a;
+  --bulldozer-card-bg: #f5f5f5;
+  --bulldozer-muted-opacity: 0.35;
+  --bulldozer-radius-sm: 4px;
+  --bulldozer-radius-md: 8px;
+  --bulldozer-radius-lg: 10px;
   color-scheme: light;
 }
 
@@ -16,6 +23,9 @@ export const themeCss = `
   --bulldozer-text-primary: var(--bp-typography-color-default-rest, #a5aab3);
   --bulldozer-bg-selected: #5c4b1e;
   --bulldozer-border-active: #ffb74d;
+  --bulldozer-defense-accent: #ffb74d;
+  --bulldozer-text-secondary: #888888;
+  --bulldozer-card-bg: #383b45;
   color-scheme: dark;
 }
 
