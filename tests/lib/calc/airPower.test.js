@@ -2,11 +2,11 @@ import { calcSortieAirPower, calcDefenseAirPower } from '../../../lib/calc/airPo
 import { aircraftLookup } from '../../../lib/calc/aircraftData'
 
 describe('sortie air power', () => {
-  test('雷電 18機 熟練度>> 出击制空 = 75', () => {
-    // base = floor((9 + 1.5*2) * sqrt(18)) = 50
-    // floor(base + sqrt(120/10)) + 22(display) = floor(53.464...) + 22 = 75
+  test('雷電 18機 熟練度>> 出击制空 = 76', () => {
+    // slot power = floor((9 + 1.5*2) * sqrt(18) + sqrt(120/10)) + 22(display)
+    //            = floor(54.375...) + 22 = 76
     const slots = [{ aircraftId: 175, proficiency: 7, stars: 0 }]
-    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(75)
+    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(76)
   })
 
   test('三式戦 飛燕 18機 熟練度>> 出击制空 = 97', () => {
@@ -18,17 +18,16 @@ describe('sortie air power', () => {
 
   test('三式戦 飛燕 18機 熟練度>> ★10 出击制空', () => {
     // improvement = 0.2 * 10 = 2
-    // base = floor((12.5 + 2 + 1.5*3) * sqrt(18)) = 80
-    // floor(base + sqrt(120/10)) + 22(display) = floor(83.464...) + 22 = 105
+    // slot power = floor((12.5 + 2 + 1.5*3) * sqrt(18) + sqrt(120/10)) + 22(display)
+    //            = floor(84.074...) + 22 = 106
     const slots = [{ aircraftId: 176, proficiency: 7, stars: 10 }]
-    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(105)
+    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(106)
   })
 
   test('九六式陸攻 18機 出击制空（intercept = 0）', () => {
-    // base = floor(1 * sqrt(18)) = 4
-    // floor(base + sqrt(9/10)) + 0(display) = floor(4.948...) = 4
+    // slot power = floor(1 * sqrt(18) + sqrt(9/10)) + 0(display) = floor(5.191...) = 5
     const slots = [{ aircraftId: 168 }]
-    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(4)
+    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(5)
   })
 
   test('多槽位求和', () => {
@@ -36,7 +35,7 @@ describe('sortie air power', () => {
       { aircraftId: 175, proficiency: 7, stars: 0 },
       { aircraftId: 176, proficiency: 7, stars: 0 },
     ]
-    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(75 + 97)
+    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(76 + 97)
   })
 
   test('空槽位 / 无 aircraftId 被跳过', () => {
@@ -45,7 +44,7 @@ describe('sortie air power', () => {
       { aircraftId: 175, proficiency: 7, stars: 0 },
       { aircraftId: null },
     ]
-    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(75)
+    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(76)
   })
 })
 
@@ -70,10 +69,10 @@ describe('defense air power', () => {
 
   test('雷電 18機 熟練度>> ★10 防空制空 applies improvement bonus', () => {
     // improvement = 0.2 * 10 = 2
-    // calcSlotDefenseBasePower: floor((9 + 2 + 2*5 + 2) * sqrt(18)) = floor(97.58...) = 97
-    // calcSlotDefensePower: floor(97 + sqrt(120/10)) + 22 = floor(100.46...) + 22 = 122
+    // calcSlotDefensePower: floor((9 + 2 + 2*5 + 2) * sqrt(18) + sqrt(120/10)) + 22
+    //                  = floor(101.044...) + 22 = 123
     const slots = [{ aircraftId: 175, proficiency: 7, stars: 10 }]
-    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(122)
+    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(123)
   })
 
   test('空槽位 / 无 aircraftId 在防空计算中被跳过', () => {
@@ -86,32 +85,31 @@ describe('defense air power', () => {
   })
 
   test('九六式陸攻 18機 防空制空（非战斗机，intercept=0, anti_bomb=0）', () => {
-    // calcSlotDefenseBasePower: floor((1 + 0 + 2*0) * sqrt(18)) = floor(4.24...) = 4
-    // calcSlotDefensePower: floor(4 + sqrt(9/10)) + 0 = floor(4.94...) = 4
+    // calcSlotDefensePower: floor((1 + 0 + 2*0) * sqrt(18) + sqrt(9/10)) + 0
+    //                  = floor(5.191...) = 5
     const slots = [{ aircraftId: 168 }]
-    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(4)
+    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(5)
   })
 })
 
 describe('recon multipliers', () => {
   test('二式陸偵 contributes its own AA and gives sortie multiplier 1.15', () => {
-    // 二式陸偵 aa=3, slot=4, prof=0 => base = floor(3 * sqrt(4)) = 6, internal = sqrt(9/10)
-    // slot power = floor(6 + 0.948...) = 6
-    // total = floor((75 + 6) * 1.15) = floor(81 * 1.15) = 93
+    // 二式陸偵 aa=3, slot=4, prof=0 => slot power = floor(3 * sqrt(4) + sqrt(9/10)) = 6
+    // total = floor((76 + 6) * 1.15) = floor(94.3) = 94
     const slots = [
       { aircraftId: 175, proficiency: 7, stars: 0 }, // 雷電
       { aircraftId: 311, proficiency: 0, stars: 0 }, // 二式陸偵 LOS 8
     ]
-    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(93)
+    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(94)
   })
 
   test('二式陸偵(熟練) contributes its own AA and gives sortie multiplier 1.18', () => {
-    // total = floor((75 + 6) * 1.18) = floor(81 * 1.18) = 95
+    // total = floor((76 + 6) * 1.18) = floor(96.76) = 96
     const slots = [
       { aircraftId: 175, proficiency: 7, stars: 0 },
       { aircraftId: 312, proficiency: 0, stars: 0 }, // 二式陸偵(熟練) LOS 9
     ]
-    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(95)
+    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(96)
   })
 
   test('大型飛行艇 gives defense multiplier 1.16 for LOS >= 9', () => {
@@ -126,13 +124,13 @@ describe('recon multipliers', () => {
 
   test('multiple recon planes use the highest multiplier', () => {
     // 二式陸偵 LOS 8 => 1.15, 二式陸偵(熟練) LOS 9 => 1.18, highest = 1.18
-    // each contributes 6, total = floor((75 + 6 + 6) * 1.18) = floor(87 * 1.18) = 102
+    // each contributes 6, total = floor((76 + 6 + 6) * 1.18) = floor(103.84) = 103
     const slots = [
       { aircraftId: 175, proficiency: 7, stars: 0 },
       { aircraftId: 311, proficiency: 0, stars: 0 },
       { aircraftId: 312, proficiency: 0, stars: 0 },
     ]
-    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(102)
+    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(103)
   })
 
   test('carrier recon LOS <= 7 gives defense multiplier 1.20', () => {
@@ -148,14 +146,14 @@ describe('recon multipliers', () => {
 
   test('seaplane bomber from seaplanes category does not get defense recon multiplier', () => {
     // 瑞雲 id 26: aa=2, los=6, category seaplanes, slot=18, prof=0
-    // base = floor(2 * sqrt(18)) = 8, internal = sqrt(9/10), slot power = floor(8 + 0.948...) = 8
+    // slot power = floor(2 * sqrt(18) + sqrt(9/10)) = floor(9.434...) = 9
     // seaplanes are not recon, so multiplier stays 1
-    // total = floor((114 + 8) * 1) = 122
+    // total = floor((114 + 9) * 1) = 123
     const slots = [
       { aircraftId: 175, proficiency: 7, stars: 0 },
       { aircraftId: 26, proficiency: 0, stars: 0 },
     ]
-    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(122)
+    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(123)
   })
 
   test('seaplane recon from recon_flying_boats gets water recon defense multiplier 1.10', () => {
@@ -168,5 +166,32 @@ describe('recon multipliers', () => {
       { aircraftId: 25, proficiency: 0, stars: 0 },
     ]
     expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(129)
+  })
+})
+
+describe('improvement bonus', () => {
+  test('fighter improvement 0.2 per star is multiplied inside sqrt', () => {
+    // 三式戦 飛燕 aa=12.5, intercept=3, stars=10 -> +2 fighter improvement
+    // sortie base = floor((12.5 + 2 + 4.5) * sqrt(18) + sqrt(120/10)) + 22
+    const slots = [{ aircraftId: 176, proficiency: 7, stars: 10 }]
+    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(
+      Math.floor(Math.floor((12.5 + 2 + 4.5) * Math.sqrt(18) + Math.sqrt(120 / 10))) + 22
+    )
+  })
+
+  test('fighter-bomber improvement 0.25 per star', () => {
+    // 橘花改 aa=12, intercept=0, stars=10 -> +2.5 fighter-bomber improvement
+    const slots = [{ aircraftId: 200, proficiency: 0, stars: 10 }]
+    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(
+      Math.floor(Math.floor((12 + 2.5) * Math.sqrt(18) + Math.sqrt(9 / 10)))
+    )
+  })
+
+  test('land attacker improvement 0.5 * sqrt(stars)', () => {
+    // 九六式陸攻 aa=1, intercept=0, stars=9 -> +1.5 land attacker improvement
+    const slots = [{ aircraftId: 168, proficiency: 0, stars: 9 }]
+    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(
+      Math.floor(Math.floor((1 + 1.5) * Math.sqrt(18) + Math.sqrt(9 / 10)))
+    )
   })
 })

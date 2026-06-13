@@ -8,7 +8,7 @@ function calcSlotSortieBasePower(aircraft, categoryKey, slotCount, stars) {
   const intercept = aircraft.interception ?? 0
   const improvement = getImprovementBonus(aircraft, categoryKey, stars)
   const base = aa + improvement + 1.5 * intercept
-  return Math.floor(base * Math.sqrt(slotCount))
+  return base * Math.sqrt(slotCount)
 }
 
 function calcSlotProficiencyBonus(aircraft, categoryKey, proficiencyLevel) {
@@ -33,7 +33,7 @@ function calcSlotDefenseBasePower(aircraft, categoryKey, slotCount, stars) {
   const antiBomb = aircraft.anti_bomb ?? 0
   const improvement = getImprovementBonus(aircraft, categoryKey, stars)
   const base = aa + improvement + intercept + 2 * antiBomb
-  return Math.floor(base * Math.sqrt(slotCount))
+  return base * Math.sqrt(slotCount)
 }
 
 function calcSlotDefensePower(aircraft, categoryKey, slotCount, proficiencyLevel, stars) {
