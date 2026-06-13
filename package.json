@@ -16,7 +16,8 @@
   "author": "SaigyoujiUUZ",
   "license": "MIT",
   "poiPlugin": {
-    "title": "陆航速配",
+    "title": "Plugin.Title",
+    "description": "Plugin.Desc",
     "icon": "plane",
     "priority": 10
   },
