@@ -17,7 +17,7 @@ class ResultPanel extends Component {
           </div>
           <div style={{ textAlign: 'center' }}>
             <div style={{ fontWeight: 'bold', marginBottom: 4 }}>{__('ResultPanel.Defense')}</div>
-            <div>{__('ResultPanel.AirPower')}: {results.defense}</div>
+            <div>{__('ResultPanel.DefenseAirPower')}: {results.defense}</div>
             <div>{__('ResultPanel.LandAttackerStrike')}: {results.landAttackerStrike}</div>
           </div>
         </div>

@@ -14,6 +14,7 @@
     "Sortie": "출격",
     "Defense": "방공",
     "AirPower": "제공권",
+    "DefenseAirPower": "방공 제공권 수치",
     "Radius": "행동반경",
     "LandAttackerStrike": "육공 개막 위력"
   },
@@ -44,15 +45,15 @@
     "Level7": ">>"
   },
   "AircraftCategory": {
-    "LandAttackers": "육상공격기、대형육상기",
-    "LocalFighters": "국지전투기、육전",
+    "LandAttackers": "육상공격기, 대형육상기",
+    "LocalFighters": "국지전투기, 육전",
     "LandRecon": "육상정찰기",
     "CarrierFighters": "함상전투기",
     "CarrierTorpedoBombers": "함상어뢰폭격기",
     "CarrierDiveBombers": "함상급강폭격기",
     "JetAircraft": "제트기",
-    "Seaplanes": "수상폭격기、수상전투기",
-    "RotaryASW": "회전익기、대잠초계기",
-    "ReconFlyingBoats": "수상정찰기、함상정찰기、대형비행정"
+    "Seaplanes": "수상폭격기, 수상전투기",
+    "RotaryASW": "회전익기, 대잠초계기",
+    "ReconFlyingBoats": "수상정찰기, 함상정찰기, 대형비행정"
   }
 }

@@ -14,6 +14,7 @@
     "Sortie": "出擊",
     "Defense": "防空",
     "AirPower": "制空值",
+    "DefenseAirPower": "防空值",
     "Radius": "行動半徑",
     "LandAttackerStrike": "陸攻開幕威力"
   },
