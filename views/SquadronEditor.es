@@ -70,7 +70,7 @@ class SquadronEditor extends Component {
                 dispatch={dispatch}
               />
               {selectedSlotIndex === i && (
-                <div style={{ marginLeft: 12, marginBottom: 8, border: '1px solid ' + colors.accent, borderRadius: 'var(--bulldozer-radius-md, 8px)', padding: 10, background: 'var(--poi-background-color)' }}>
+                <div style={{ marginLeft: 12, marginBottom: 8, border: '1px solid ' + colors.accent, borderRadius: 'var(--bulldozer-radius-md, 8px)', padding: 10, background: 'var(--bulldozer-bg-surface, transparent)' }}>
                   <PlanePicker
                     activeCategoryKey={activeCategoryKey}
                     onCategoryChange={onCategoryChange}
