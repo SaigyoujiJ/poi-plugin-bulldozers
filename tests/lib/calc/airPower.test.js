@@ -1,4 +1,4 @@
-import { calcSortieAirPower } from '../../../lib/calc/airPower'
+import { calcSortieAirPower, calcDefenseAirPower } from '../../../lib/calc/airPower'
 import { aircraftLookup } from '../../../lib/calc/aircraftData'
 
 describe('sortie air power', () => {
@@ -46,5 +46,19 @@ describe('sortie air power', () => {
       { aircraftId: null },
     ]
     expect(calcSortieAirPower(slots, aircraftLookup)).toBe(75)
+  })
+})
+
+describe('defense air power', () => {
+  test('雷電 18機 熟練度>> 防空制空 = 114', () => {
+    // floor((9 + 2 + 2*5) * sqrt(18) + sqrt(120/10)) + 22 = floor(89.09+3.464)+22 = 114
+    const slots = [{ aircraftId: 175, proficiency: 7, stars: 0 }]
+    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(114)
+  })
+
+  test('三式戦 飛燕 18機 熟練度>> 防空制空 includes intercept + anti-bomb', () => {
+    // aa=12.5, intercept=3, anti_bomb=1 => floor((12.5+3+2)*sqrt(18)+sqrt(12)) + 22 = floor(74.19+3.464)+22 = 99
+    const slots = [{ aircraftId: 176, proficiency: 7, stars: 0 }]
+    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(99)
   })
 })

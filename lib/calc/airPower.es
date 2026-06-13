@@ -27,16 +27,19 @@ function calcSlotSortiePower(aircraft, categoryKey, slotCount, proficiencyLevel,
   return Math.floor(base + internal) + display
 }
 
+function calcSlotDefenseBasePower(aircraft, categoryKey, slotCount, stars) {
+  const aa = aircraft.aa ?? 0
+  const intercept = aircraft.interception ?? 0
+  const antiBomb = aircraft.anti_bomb ?? 0
+  const improvement = getImprovementBonus(aircraft, categoryKey, stars)
+  const base = aa + improvement + intercept + 2 * antiBomb
+  return Math.floor(base * Math.sqrt(slotCount))
+}
+
 function calcSlotDefensePower(aircraft, categoryKey, slotCount, proficiencyLevel, stars) {
-  const aa = aircraft.aa_air_defense ?? aircraft.aa ?? 0
-  const slotPower = Math.floor(aa * Math.sqrt(slotCount))
-  const internal = getProficiencyData(proficiencyLevel)
-  const internalBonus = internal ? getInternalProficiencyBonus(internal.internalMax) : 0
-  const fighter = isFighterType(aircraft, categoryKey)
-  const seaplaneBomber = isSeaplaneBomber(aircraft, categoryKey)
-  const profBonus = getProficiencyAirBonus(proficiencyLevel, fighter, seaplaneBomber)
-  const upgradeBonus = fighter ? Math.floor(stars * 0.2) : 0
-  return slotPower + internalBonus + profBonus + upgradeBonus
+  const base = calcSlotDefenseBasePower(aircraft, categoryKey, slotCount, stars)
+  const { internal, display } = calcSlotProficiencyBonus(aircraft, categoryKey, proficiencyLevel)
+  return Math.floor(base + internal) + display
 }
 
 function calcSlotHeavyBomberDefense(aircraft, slotCount, proficiencyLevel) {
