@@ -26,8 +26,8 @@ class SquadronEditor extends Component {
                 alignItems: 'center',
                 gap: 4,
                 cursor: 'pointer',
-                opacity: active ? 1 : 0.5,
-                color: active ? 'var(--bulldozer-text-primary, #1c2127)' : 'var(--bulldozer-text-secondary, #888)',
+                opacity: active ? 1 : 0.75,
+                color: active ? 'var(--bulldozer-text-primary, #1c2127)' : 'var(--bulldozer-text-secondary, #5f6b7a)',
               }}
             >
               <input
