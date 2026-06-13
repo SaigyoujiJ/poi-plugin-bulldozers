@@ -121,6 +121,7 @@ class AppPanel extends Component {
         }}
       >
         <PresetBar />
+        <ResultPanel squadron={squadron} />
         <SquadronTabs
           activeIndex={activeSquadronIndex}
           squadrons={squadrons}
@@ -141,7 +142,6 @@ class AppPanel extends Component {
           onCategoryChange={(key) => this.setState({ activeCategoryKey: key })}
           dispatch={dispatch}
         />
-        <ResultPanel squadron={squadron} />
       </div>
     )
   }

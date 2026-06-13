@@ -1,4 +1,4 @@
-import { calcSortieAirPower, calcDefenseAirPower, calcLandAttackerStrikePower } from '../lib/calc/airPower'
+import { calcSortieAirPower, calcDefenseAirPower, calcLandAttackerStrikePower, calcHeavyBomberDefensePower } from '../lib/calc/airPower'
 import { calcCombatRadius } from '../lib/calc/radius'
 import { aircraftLookup } from '../lib/calc/aircraftData'
 
@@ -13,12 +13,13 @@ export function selectSquadrons(state) {
 }
 
 export function selectSquadronResults(squadron) {
-  if (!squadron) return { sortie: 0, defense: 0, landAttackerStrike: 0, radius: 0 }
+  if (!squadron) return { sortie: 0, defense: 0, landAttackerStrike: 0, heavyBomberDefense: 0, radius: 0 }
   const { slots } = squadron
   return {
     sortie: calcSortieAirPower(slots, aircraftLookup),
     defense: calcDefenseAirPower(slots, aircraftLookup),
     landAttackerStrike: calcLandAttackerStrikePower(slots, aircraftLookup),
+    heavyBomberDefense: calcHeavyBomberDefensePower(slots, aircraftLookup),
     radius: calcCombatRadius(slots, aircraftLookup),
   }
 }

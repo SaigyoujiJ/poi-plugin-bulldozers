@@ -127,6 +127,28 @@ export function calcDefenseAirPower(slots, aircraftData) {
   return Math.floor(total * getDefenseReconMultiplier(slots, aircraftData))
 }
 
+const ROCKET_FIGHTER_IDS = new Set([350, 351, 352])
+
+function getRocketMultiplier(count) {
+  if (count >= 3) return 1.2
+  if (count === 2) return 1.1
+  if (count === 1) return 0.8
+  return 0.5
+}
+
+export function calcHeavyBomberDefensePower(slots, aircraftData) {
+  const baseDefense = calcDefenseAirPower(slots, aircraftData)
+  let rocketCount = 0
+  for (const slot of slots) {
+    if (!slot.aircraftId) continue
+    const { aircraft } = aircraftData.lookup(slot.aircraftId)
+    if (ROCKET_FIGHTER_IDS.has(aircraft.id)) {
+      rocketCount++
+    }
+  }
+  return Math.floor(baseDefense * getRocketMultiplier(rocketCount))
+}
+
 export function calcLandAttackerStrikePower(slots, aircraftData) {
   let total = 0
   for (const slot of slots) {

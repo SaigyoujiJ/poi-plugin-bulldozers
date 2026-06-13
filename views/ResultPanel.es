@@ -29,15 +29,11 @@ class ResultPanel extends Component {
           [
             this.renderMetric(__('ResultPanel.AirPower'), results.sortie, true, mode),
             this.renderMetric(__('ResultPanel.Radius'), results.radius, true, mode),
-            this.renderMetric(__('ResultPanel.LandAttackerStrike'), results.landAttackerStrike, false, mode),
-            this.renderMetric(__('ResultPanel.DefenseAirPower'), results.defense, false, mode),
           ]
         ) : (
           [
-            this.renderMetric(__('ResultPanel.LandAttackerStrike'), results.landAttackerStrike, true, mode),
+            this.renderMetric(__('ResultPanel.HeavyBomberDefense'), results.heavyBomberDefense, true, mode),
             this.renderMetric(__('ResultPanel.DefenseAirPower'), results.defense, true, mode),
-            this.renderMetric(__('ResultPanel.AirPower'), results.sortie, false, mode),
-            this.renderMetric(__('ResultPanel.Radius'), results.radius, false, mode),
           ]
         )}
       </div>

@@ -15,6 +15,7 @@
     "Defense": "방공",
     "AirPower": "제공권",
     "DefenseAirPower": "방공 제공권 수치",
+    "HeavyBomberDefense": "중폭공기 방공 수치",
     "Radius": "행동반경",
     "LandAttackerStrike": "육공 개막 위력"
   },
