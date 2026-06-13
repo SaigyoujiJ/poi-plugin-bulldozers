@@ -1,0 +1,58 @@
+{
+  "Plugin": {
+    "Title": "LBAS Planner",
+    "Desc": "Quick land-based air squadron setup plugin for KanColle"
+  },
+  "PresetBar": {
+    "SaveAs": "Save As",
+    "Delete": "Delete",
+    "NamePlaceholder": "Preset name",
+    "Confirm": "OK",
+    "Cancel": "Cancel"
+  },
+  "ResultPanel": {
+    "Sortie": "Sortie",
+    "Defense": "Defense",
+    "AirPower": "Air Power",
+    "Radius": "Radius",
+    "LandAttackerStrike": "LBAS Strike"
+  },
+  "SlotRow": {
+    "Empty": "Empty",
+    "ProficiencyStar": "★{{level}}"
+  },
+  "SquadronEditor": {
+    "Sortie": "Sortie",
+    "Defense": "Defense"
+  },
+  "Preset": {
+    "DefaultName": "Preset {{number}}"
+  },
+  "Squadron": {
+    "First": "1st Air Squadron",
+    "Second": "2nd Air Squadron",
+    "Third": "3rd Air Squadron"
+  },
+  "Proficiency": {
+    "None": "None",
+    "Level1": "|",
+    "Level2": "||",
+    "Level3": "|||",
+    "Level4": "/",
+    "Level5": "//",
+    "Level6": "///",
+    "Level7": ">>"
+  },
+  "AircraftCategory": {
+    "LandAttackers": "Land Attackers",
+    "LocalFighters": "Interceptors",
+    "LandRecon": "Land Recons",
+    "CarrierFighters": "Carrier Fighters",
+    "CarrierTorpedoBombers": "Torpedo Bombers",
+    "CarrierDiveBombers": "Dive Bombers",
+    "JetAircraft": "Jets",
+    "Seaplanes": "Seaplanes",
+    "RotaryASW": "Rotary / ASW",
+    "ReconFlyingBoats": "Recons / Flying Boats"
+  }
+}

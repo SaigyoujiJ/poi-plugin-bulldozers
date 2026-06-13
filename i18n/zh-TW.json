@@ -1,20 +1,20 @@
 {
   "Plugin": {
     "Title": "陸航速配",
-    "Desc": "艦これの陸上航空隊を素早く編成するプラグイン"
+    "Desc": "陸航速配 - 艦娘陸航快速配裝插件"
   },
   "PresetBar": {
-    "SaveAs": "別名保存",
-    "Delete": "削除",
-    "NamePlaceholder": "プリセット名",
+    "SaveAs": "另存",
+    "Delete": "刪除",
+    "NamePlaceholder": "預設名稱",
     "Confirm": "確定",
     "Cancel": "取消"
   },
   "ResultPanel": {
-    "Sortie": "出撃",
+    "Sortie": "出擊",
     "Defense": "防空",
-    "AirPower": "制空値",
-    "Radius": "行動半径",
+    "AirPower": "制空值",
+    "Radius": "行動半徑",
     "LandAttackerStrike": "陸攻開幕威力"
   },
   "SlotRow": {
@@ -22,11 +22,11 @@
     "ProficiencyStar": "★{{level}}"
   },
   "SquadronEditor": {
-    "Sortie": "出撃",
+    "Sortie": "出擊",
     "Defense": "防空"
   },
   "Preset": {
-    "DefaultName": "プリセット {{number}}"
+    "DefaultName": "預設 {{number}}"
   },
   "Squadron": {
     "First": "第一航空隊",
@@ -45,14 +45,14 @@
   },
   "AircraftCategory": {
     "LandAttackers": "陸攻、大型陸上機",
-    "LocalFighters": "局戦、陸戦",
+    "LocalFighters": "局戰、陸戰",
     "LandRecon": "陸偵",
-    "CarrierFighters": "艦戦",
+    "CarrierFighters": "艦戰",
     "CarrierTorpedoBombers": "艦攻",
     "CarrierDiveBombers": "艦爆",
-    "JetAircraft": "噴式機",
-    "Seaplanes": "水爆、水戦",
-    "RotaryASW": "回転翼機、対潜哨戒機",
+    "JetAircraft": "噴氣式機",
+    "Seaplanes": "水爆、水戰",
+    "RotaryASW": "迴轉翼機、對潛哨戒機",
     "ReconFlyingBoats": "水偵、艦偵、大型飛行艇"
   }
 }

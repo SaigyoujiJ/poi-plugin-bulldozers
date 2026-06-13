@@ -1,0 +1,58 @@
+{
+  "Plugin": {
+    "Title": "육상항공대 플래너",
+    "Desc": "함대 컬렉션 육상항공대 빠른 편성 플러그인"
+  },
+  "PresetBar": {
+    "SaveAs": "다른 이름으로 저장",
+    "Delete": "삭제",
+    "NamePlaceholder": "프리셋 이름",
+    "Confirm": "확인",
+    "Cancel": "취소"
+  },
+  "ResultPanel": {
+    "Sortie": "출격",
+    "Defense": "방공",
+    "AirPower": "제공권",
+    "Radius": "행동반경",
+    "LandAttackerStrike": "육공 개막 위력"
+  },
+  "SlotRow": {
+    "Empty": "미배치",
+    "ProficiencyStar": "★{{level}}"
+  },
+  "SquadronEditor": {
+    "Sortie": "출격",
+    "Defense": "방공"
+  },
+  "Preset": {
+    "DefaultName": "프리셋 {{number}}"
+  },
+  "Squadron": {
+    "First": "제1항공대",
+    "Second": "제2항공대",
+    "Third": "제3항공대"
+  },
+  "Proficiency": {
+    "None": "없음",
+    "Level1": "|",
+    "Level2": "||",
+    "Level3": "|||",
+    "Level4": "/",
+    "Level5": "//",
+    "Level6": "///",
+    "Level7": ">>"
+  },
+  "AircraftCategory": {
+    "LandAttackers": "육상공격기、대형육상기",
+    "LocalFighters": "국지전투기、육전",
+    "LandRecon": "육상정찰기",
+    "CarrierFighters": "함상전투기",
+    "CarrierTorpedoBombers": "함상어뢰폭격기",
+    "CarrierDiveBombers": "함상급강폭격기",
+    "JetAircraft": "제트기",
+    "Seaplanes": "수상폭격기、수상전투기",
+    "RotaryASW": "회전익기、대잠초계기",
+    "ReconFlyingBoats": "수상정찰기、함상정찰기、대형비행정"
+  }
+}

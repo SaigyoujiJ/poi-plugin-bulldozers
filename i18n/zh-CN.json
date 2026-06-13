@@ -13,7 +13,7 @@
   "ResultPanel": {
     "Sortie": "出击",
     "Defense": "防空",
-    "AirPower": "制空値",
+    "AirPower": "制空值",
     "Radius": "行动半径",
     "LandAttackerStrike": "陆攻开幕威力"
   },
@@ -22,16 +22,16 @@
     "ProficiencyStar": "★{{level}}"
   },
   "SquadronEditor": {
-    "Sortie": "出撃",
+    "Sortie": "出击",
     "Defense": "防空"
   },
   "Preset": {
     "DefaultName": "预设 {{number}}"
   },
   "Squadron": {
-    "First": "第一航空隊",
-    "Second": "第二航空隊",
-    "Third": "第三航空隊"
+    "First": "第一航空队",
+    "Second": "第二航空队",
+    "Third": "第三航空队"
   },
   "Proficiency": {
     "None": "无",
@@ -44,15 +44,15 @@
     "Level7": ">>"
   },
   "AircraftCategory": {
-    "LandAttackers": "陸攻、大型陸上機",
-    "LocalFighters": "局戦、陸戦",
-    "LandRecon": "陸偵",
-    "CarrierFighters": "艦戦",
-    "CarrierTorpedoBombers": "艦攻",
-    "CarrierDiveBombers": "艦爆",
-    "JetAircraft": "噴式機",
-    "Seaplanes": "水爆、水戦",
-    "RotaryASW": "回転翼機、対潜哨戒機",
-    "ReconFlyingBoats": "水偵、艦偵、大型飛行艇"
+    "LandAttackers": "陆攻、大型陆基机",
+    "LocalFighters": "局战、陆战",
+    "LandRecon": "陆侦",
+    "CarrierFighters": "舰战",
+    "CarrierTorpedoBombers": "舰攻",
+    "CarrierDiveBombers": "舰爆",
+    "JetAircraft": "喷气式机",
+    "Seaplanes": "水爆、水战",
+    "RotaryASW": "旋翼机、反潜巡逻机",
+    "ReconFlyingBoats": "水侦、舰侦、大型飞行艇"
   }
 }
