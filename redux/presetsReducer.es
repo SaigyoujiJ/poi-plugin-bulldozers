@@ -10,16 +10,18 @@ import {
   CLEAR_SLOT,
 } from './actions'
 
+const { __ } = window.i18n['poi-plugin-bulldozers']
+
 export const DEFAULT_PRESET_ID = 'default'
 
-export function createDefaultPreset(id = DEFAULT_PRESET_ID, name = '预设 1') {
+export function createDefaultPreset(id = DEFAULT_PRESET_ID, name = __('Preset.DefaultName', { number: 1 })) {
   return {
     id,
     name,
     squadrons: [
       {
         id: 1,
-        name: '第一航空隊',
+        name: __('Squadron.First'),
         mode: 'sortie',
         slots: [
           { aircraftId: null, proficiency: 0, stars: 0 },
@@ -30,7 +32,7 @@ export function createDefaultPreset(id = DEFAULT_PRESET_ID, name = '预设 1') {
       },
       {
         id: 2,
-        name: '第二航空隊',
+        name: __('Squadron.Second'),
         mode: 'sortie',
         slots: [
           { aircraftId: null, proficiency: 0, stars: 0 },
@@ -41,7 +43,7 @@ export function createDefaultPreset(id = DEFAULT_PRESET_ID, name = '预设 1') {
       },
       {
         id: 3,
-        name: '第三航空隊',
+        name: __('Squadron.Third'),
         mode: 'sortie',
         slots: [
           { aircraftId: null, proficiency: 0, stars: 0 },

@@ -11,7 +11,7 @@ describe('presetsReducer', () => {
           squadrons: [
             {
               id: 1,
-              name: '第一航空隊',
+              name: 'Squadron.First',
               mode: 'sortie',
               slots: [
                 { aircraftId: 175, proficiency: 7, stars: 0 },
@@ -20,8 +20,8 @@ describe('presetsReducer', () => {
                 { aircraftId: null, proficiency: 0, stars: 0 },
               ],
             },
-            { id: 2, name: '第二航空隊', mode: 'sortie', slots: [{ aircraftId: null, proficiency: 0, stars: 0 }, { aircraftId: null, proficiency: 0, stars: 0 }, { aircraftId: null, proficiency: 0, stars: 0 }, { aircraftId: null, proficiency: 0, stars: 0 }] },
-            { id: 3, name: '第三航空隊', mode: 'sortie', slots: [{ aircraftId: null, proficiency: 0, stars: 0 }, { aircraftId: null, proficiency: 0, stars: 0 }, { aircraftId: null, proficiency: 0, stars: 0 }, { aircraftId: null, proficiency: 0, stars: 0 }] },
+            { id: 2, name: 'Squadron.Second', mode: 'sortie', slots: [{ aircraftId: null, proficiency: 0, stars: 0 }, { aircraftId: null, proficiency: 0, stars: 0 }, { aircraftId: null, proficiency: 0, stars: 0 }, { aircraftId: null, proficiency: 0, stars: 0 }] },
+            { id: 3, name: 'Squadron.Third', mode: 'sortie', slots: [{ aircraftId: null, proficiency: 0, stars: 0 }, { aircraftId: null, proficiency: 0, stars: 0 }, { aircraftId: null, proficiency: 0, stars: 0 }, { aircraftId: null, proficiency: 0, stars: 0 }] },
           ],
         },
       },
