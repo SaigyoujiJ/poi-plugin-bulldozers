@@ -1,0 +1,58 @@
+{
+  "Plugin": {
+    "Title": "陆航速配",
+    "Desc": "陆航速配 - 舰娘陆航快速配装插件"
+  },
+  "PresetBar": {
+    "SaveAs": "另存",
+    "Delete": "删除",
+    "NamePlaceholder": "预设名称",
+    "Confirm": "确定",
+    "Cancel": "取消"
+  },
+  "ResultPanel": {
+    "Sortie": "出击",
+    "Defense": "防空",
+    "AirPower": "制空値",
+    "Radius": "行动半径",
+    "LandAttackerStrike": "陆攻开幕威力"
+  },
+  "SlotRow": {
+    "Empty": "未配置",
+    "ProficiencyStar": "★{{level}}"
+  },
+  "SquadronEditor": {
+    "Sortie": "出撃",
+    "Defense": "防空"
+  },
+  "Preset": {
+    "DefaultName": "预设 {{number}}"
+  },
+  "Squadron": {
+    "First": "第一航空隊",
+    "Second": "第二航空隊",
+    "Third": "第三航空隊"
+  },
+  "Proficiency": {
+    "None": "无",
+    "Level1": "|",
+    "Level2": "||",
+    "Level3": "|||",
+    "Level4": "/",
+    "Level5": "//",
+    "Level6": "///",
+    "Level7": ">>"
+  },
+  "AircraftCategory": {
+    "LandAttackers": "陸攻、大型陸上機",
+    "LocalFighters": "局戦、陸戦",
+    "LandRecon": "陸偵",
+    "CarrierFighters": "艦戦",
+    "CarrierTorpedoBombers": "艦攻",
+    "CarrierDiveBombers": "艦爆",
+    "JetAircraft": "噴式機",
+    "Seaplanes": "水爆、水戦",
+    "RotaryASW": "回転翼機、対潜哨戒機",
+    "ReconFlyingBoats": "水偵、艦偵、大型飛行艇"
+  }
+}
