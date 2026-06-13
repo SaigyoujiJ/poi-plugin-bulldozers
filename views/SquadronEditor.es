@@ -3,6 +3,8 @@ import SlotRow from './SlotRow'
 import PlanePicker from './PlanePicker'
 import { setSquadronMode } from '../redux/actions'
 
+const { __ } = window.i18n['poi-plugin-bulldozers']
+
 class SquadronEditor extends Component {
   handleModeChange = (e) => {
     const { dispatch, presetId, squadronIndex } = this.props
@@ -26,7 +28,7 @@ class SquadronEditor extends Component {
               onChange={this.handleModeChange}
               style={{ accentColor: 'var(--bulldozer-accent, #2d72d2)' }}
             />
-            出撃
+            {__('SquadronEditor.Sortie')}
           </label>
           <label style={{ marginLeft: 8 }}>
             <input
@@ -37,7 +39,7 @@ class SquadronEditor extends Component {
               onChange={this.handleModeChange}
               style={{ accentColor: 'var(--bulldozer-accent, #2d72d2)' }}
             />
-            防空
+            {__('SquadronEditor.Defense')}
           </label>
         </div>
         {squadron.slots.map((slot, i) => (
