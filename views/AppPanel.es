@@ -97,7 +97,8 @@ class AppPanel extends Component {
         className={'bulldozers-app' + (isDark ? ' bp6-dark' : '')}
         style={{
           padding: 12,
-          color: 'var(--bulldozer-text-primary, #1c2127)',
+          color: isDark ? '#ff0000' : '#1c2127',
+          backgroundColor: isDark ? '#00ff00' : '#ffffff',
           minHeight: '100%',
           ...(isDark ? DARK_VARS : LIGHT_VARS),
         }}
