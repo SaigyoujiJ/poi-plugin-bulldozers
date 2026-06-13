@@ -70,4 +70,32 @@ describe('planeType', () => {
     const aircraft = { id: 168, aa: 1, bombing: 10, torpedo: 8 }
     expect(getImprovementBonus(aircraft, 'land_attackers', 9)).toBe(1.5)
   })
+
+  test('land recon is recon type', () => {
+    expect(isReconType('land_recon')).toBe(true)
+  })
+
+  test('local fighters are not recon type', () => {
+    expect(isReconType('local_fighters')).toBe(false)
+  })
+
+  test('improvement bonus is 0 for zero stars', () => {
+    const aircraft = { id: 176, aa: 12, bombing: null, torpedo: null }
+    expect(getImprovementBonus(aircraft, 'local_fighters', 0)).toBe(0)
+  })
+
+  test('improvement bonus is 0 for non-fighter non-land-attacker', () => {
+    const aircraft = { id: 311 }
+    expect(getImprovementBonus(aircraft, 'land_recon', 10)).toBe(0)
+  })
+
+  test('slot count defaults to 18 for unknown category', () => {
+    const aircraft = { id: 1 }
+    expect(getSlotCount(aircraft, 'unknown_category')).toBe(18)
+  })
+
+  test('jet aircraft with no anti-air is not fighter type', () => {
+    const aircraft = { id: 561, aa: 0, bombing: null, torpedo: null }
+    expect(isFighterType(aircraft, 'jet_aircraft')).toBe(false)
+  })
 })

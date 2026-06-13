@@ -11,7 +11,6 @@ const SLOT_COUNTS = {
   rotary_asw: 18,
   recon_flying_boats: 4,
   seaplanes: 18,
-  land_attackers: 18,
 }
 
 // 基础战斗机分类；jet/rotary 需要进一步判断是否有轰炸/雷击
@@ -45,6 +44,8 @@ export function isFighterType(aircraft, categoryKey) {
       return !hasStrike(aircraft) && aircraft.aa != null && aircraft.aa > 0
     }
     // 联络/对潜机里，只有带对空的（一式战隼系列）才按战斗机算
+    // 注：带对空且有雷装/爆装的 一式戦 隼系列同时命中 isFighterType 与 isFighterBomber，
+    // 这是游戏机制——熟练度按战斗机显示，改修加成按战斗轰炸机计算
     if (categoryKey === 'rotary_asw') {
       return aircraft.aa != null && aircraft.aa > 0
     }
@@ -66,12 +67,17 @@ export function isFighterBomber(aircraft, categoryKey) {
   if (categoryKey === 'jet_aircraft') {
     return hasStrike(aircraft) && aircraft.aa != null && aircraft.aa > 0
   }
+  // 联络/对潜机中带对空且有打击装备的 一式戦 隼系列按战斗轰炸机处理
   if (categoryKey === 'rotary_asw') {
     return aircraft.aa != null && aircraft.aa > 0 && hasStrike(aircraft)
   }
   return false
 }
 
+/**
+ * 计算基地航空隊飞机的改修加成。
+ * 本函数为即将到来的 airPower 重构（Task 7）预先引入，届时将替换其中内联的加成逻辑。
+ */
 export function getImprovementBonus(aircraft, categoryKey, stars) {
   if (stars <= 0) return 0
   if (categoryKey === 'land_attackers') {
