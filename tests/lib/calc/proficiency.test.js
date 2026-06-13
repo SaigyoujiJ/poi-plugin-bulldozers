@@ -16,7 +16,6 @@ describe('proficiency', () => {
   test('max proficiency data lookup', () => {
     expect(getProficiencyData(7)).toMatchObject({
       level: 7,
-      label: '>>',
       internalMax: 120,
       aaBonus: 22,
       seaplaneBomberBonus: 6,

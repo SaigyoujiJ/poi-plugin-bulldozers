@@ -1,12 +1,12 @@
 export const PROFICIENCY = [
-  { level: 0, label: '无', internalMax: 9,   aaBonus: 0,  seaplaneBomberBonus: 0 },
-  { level: 1, label: '|',  internalMax: 24,  aaBonus: 0,  seaplaneBomberBonus: 0 },
-  { level: 2, label: '||', internalMax: 39,  aaBonus: 2,  seaplaneBomberBonus: 1 },
-  { level: 3, label: '|||', internalMax: 54,  aaBonus: 5,  seaplaneBomberBonus: 1 },
-  { level: 4, label: '/',  internalMax: 69,  aaBonus: 9,  seaplaneBomberBonus: 1 },
-  { level: 5, label: '//', internalMax: 84,  aaBonus: 14, seaplaneBomberBonus: 3 },
-  { level: 6, label: '///', internalMax: 99,  aaBonus: 14, seaplaneBomberBonus: 3 },
-  { level: 7, label: '>>', internalMax: 120, aaBonus: 22, seaplaneBomberBonus: 6 },
+  { level: 0, internalMax: 9,   aaBonus: 0,  seaplaneBomberBonus: 0 },
+  { level: 1, internalMax: 24,  aaBonus: 0,  seaplaneBomberBonus: 0 },
+  { level: 2, internalMax: 39,  aaBonus: 2,  seaplaneBomberBonus: 1 },
+  { level: 3, internalMax: 54,  aaBonus: 5,  seaplaneBomberBonus: 1 },
+  { level: 4, internalMax: 69,  aaBonus: 9,  seaplaneBomberBonus: 1 },
+  { level: 5, internalMax: 84,  aaBonus: 14, seaplaneBomberBonus: 3 },
+  { level: 6, internalMax: 99,  aaBonus: 14, seaplaneBomberBonus: 3 },
+  { level: 7, internalMax: 120, aaBonus: 22, seaplaneBomberBonus: 6 },
 ]
 
 export function getProficiencyData(level) {

@@ -3,6 +3,19 @@ import { PROFICIENCY } from '../lib/calc/proficiency'
 import { lookupAircraft } from '../lib/calc/aircraftData'
 import { setSlotProficiency, setSlotStars, clearSlot } from '../redux/actions'
 
+const { __ } = window.i18n['poi-plugin-bulldozers']
+
+const PROFICIENCY_LABELS = [
+  'Proficiency.None',
+  'Proficiency.Level1',
+  'Proficiency.Level2',
+  'Proficiency.Level3',
+  'Proficiency.Level4',
+  'Proficiency.Level5',
+  'Proficiency.Level6',
+  'Proficiency.Level7',
+]
+
 class SlotRow extends Component {
   handleProficiencyChange = (e) => {
     const { dispatch, presetId, squadronIndex, slotIndex } = this.props
@@ -52,7 +65,7 @@ class SlotRow extends Component {
           }}
         >
           {PROFICIENCY.map((p) => (
-            <option key={p.level} value={p.level}>{p.label}</option>
+            <option key={p.level} value={p.level}>{__(PROFICIENCY_LABELS[p.level])}</option>
           ))}
         </select>
         <select
