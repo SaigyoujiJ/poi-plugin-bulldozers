@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { getCategoryList } from '../../lib/calc/aircraftData'
 
+const { __ } = window.i18n['poi-plugin-bulldozers']
+
 class CategoryTabs extends Component {
   render() {
     const { activeCategoryKey, onCategoryChange } = this.props
@@ -24,7 +26,7 @@ class CategoryTabs extends Component {
               fontSize: 12,
             }}
           >
-            {cat.display}
+            {__(cat.display)}
           </button>
         ))}
       </div>
