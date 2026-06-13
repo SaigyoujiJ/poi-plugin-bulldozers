@@ -25,6 +25,18 @@ const DARK_VARS = {
   '--bulldozer-bg-surface': 'transparent',
 }
 
+const setThemeVars = (node, vars) => {
+  Object.entries(vars).forEach(([key, value]) => {
+    node.style.setProperty(key, value)
+  })
+}
+
+const clearThemeVars = (node) => {
+  Object.keys(DARK_VARS).forEach((key) => {
+    node.style.removeProperty(key)
+  })
+}
+
 const selector = extensionSelectorFactory('poi-plugin-bulldozers')
 
 class AppPanel extends Component {
@@ -49,17 +61,9 @@ class AppPanel extends Component {
     const isDark = window.isDarkTheme || (body ? body.classList.contains('bp6-dark') : false)
 
     if (isDark) {
-      node.style.setProperty('--bulldozer-text-primary', '#ffffff')
-      node.style.setProperty('--bulldozer-text-secondary', '#b0b5bd')
-      node.style.setProperty('--bulldozer-card-bg', 'rgba(255, 255, 255, 0.04)')
-      node.style.setProperty('--bulldozer-bg-input', 'rgba(0, 0, 0, 0.2)')
-      node.style.setProperty('--bulldozer-bg-surface', 'transparent')
+      setThemeVars(node, DARK_VARS)
     } else {
-      node.style.setProperty('--bulldozer-text-primary', '#1c2127')
-      node.style.setProperty('--bulldozer-text-secondary', '#5f6b7a')
-      node.style.setProperty('--bulldozer-card-bg', '#f5f5f5')
-      node.style.setProperty('--bulldozer-bg-input', 'var(--poi-background-color)')
-      node.style.setProperty('--bulldozer-bg-surface', 'transparent')
+      setThemeVars(node, LIGHT_VARS)
     }
 
     this.setState({ isDark })
@@ -113,7 +117,6 @@ class AppPanel extends Component {
         style={{
           padding: 12,
           color: 'var(--bulldozer-text-primary, #1c2127)',
-          backgroundColor: isDark ? '#00ff00' : '#ffffff',
           minHeight: '100%',
         }}
       >
