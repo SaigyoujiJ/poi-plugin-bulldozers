@@ -52,75 +52,61 @@ class PresetBar extends Component {
     const presetIds = Object.keys(presets)
 
     return (
-      <div style={{ marginBottom: 12, display: 'flex', alignItems: 'center', gap: 8 }}>
-        <select
-          value={activePresetId}
-          onChange={this.handlePresetChange}
-          style={{
-            background: 'var(--poi-background-color)',
-            color: 'var(--bulldozer-text-primary, #1c2127)',
-            border: '1px solid var(--bulldozer-border, #d3d8de)',
-          }}
-        >
-          {presetIds.map((id) => (
-            <option key={id} value={id}>{presets[id].name}</option>
-          ))}
-        </select>
-        <button
-          onClick={this.handleSaveClick}
-          style={{
-            background: 'var(--poi-background-color)',
-            color: 'var(--bulldozer-text-primary, #1c2127)',
-            border: '1px solid var(--bulldozer-border, #d3d8de)',
-            cursor: 'pointer',
-          }}
-        >另存</button>
-        <button
-          onClick={this.handleDeleteClick}
-          style={{
-            background: 'var(--poi-background-color)',
-            color: 'var(--bulldozer-text-primary, #1c2127)',
-            border: '1px solid var(--bulldozer-border, #d3d8de)',
-            cursor: 'pointer',
-          }}
-        >删除</button>
-        {showSaveDialog && (
-          <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-            <input
-              value={newPresetName}
-              onChange={this.handleNameChange}
-              onKeyDown={this.handleKeyDown}
-              placeholder="预设名称"
-              autoFocus
-              style={{
-                background: 'var(--poi-background-color)',
-                color: 'var(--bulldozer-text-primary, #1c2127)',
-                border: '1px solid var(--bulldozer-border, #d3d8de)',
-              }}
-            />
-            <button
-              onClick={this.handleSaveConfirm}
-              style={{
-                background: 'var(--poi-background-color)',
-                color: 'var(--bulldozer-text-primary, #1c2127)',
-                border: '1px solid var(--bulldozer-border, #d3d8de)',
-                cursor: 'pointer',
-              }}
-            >确定</button>
-            <button
-              onClick={() => this.setState({ showSaveDialog: false })}
-              style={{
-                background: 'var(--poi-background-color)',
-                color: 'var(--bulldozer-text-primary, #1c2127)',
-                border: '1px solid var(--bulldozer-border, #d3d8de)',
-                cursor: 'pointer',
-              }}
-            >取消</button>
-          </span>
-        )}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+        <div style={{ fontWeight: 600, color: 'var(--bulldozer-text-primary, #1c2127)', fontSize: 14 }}>
+          {presets[activePresetId] ? presets[activePresetId].name : '预设'}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <select
+            value={activePresetId}
+            onChange={this.handlePresetChange}
+            style={selectStyle}
+          >
+            {presetIds.map((id) => (
+              <option key={id} value={id}>{presets[id].name}</option>
+            ))}
+          </select>
+          <button onClick={this.handleSaveClick} style={outlineButtonStyle}>另存</button>
+          <button onClick={this.handleDeleteClick} style={outlineButtonStyle}>删除</button>
+          {showSaveDialog && (
+            <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+              <input value={newPresetName} onChange={this.handleNameChange} onKeyDown={this.handleKeyDown} placeholder="预设名称" autoFocus style={inputStyle} />
+              <button onClick={this.handleSaveConfirm} style={outlineButtonStyle}>确定</button>
+              <button onClick={() => this.setState({ showSaveDialog: false })} style={outlineButtonStyle}>取消</button>
+            </span>
+          )}
+        </div>
       </div>
     )
   }
+}
+
+const outlineButtonStyle = {
+  background: 'transparent',
+  color: 'var(--bulldozer-text-primary, #1c2127)',
+  border: '1px solid var(--bulldozer-border, #d3d8de)',
+  borderRadius: 'var(--bulldozer-radius-sm, 4px)',
+  padding: '4px 10px',
+  cursor: 'pointer',
+  fontSize: 12,
+}
+
+const selectStyle = {
+  background: 'var(--poi-background-color)',
+  color: 'var(--bulldozer-text-primary, #1c2127)',
+  border: '1px solid var(--bulldozer-border, #d3d8de)',
+  borderRadius: 'var(--bulldozer-radius-sm, 4px)',
+  padding: '4px 8px',
+  fontSize: 12,
+}
+
+const inputStyle = {
+  background: 'var(--poi-background-color)',
+  color: 'var(--bulldozer-text-primary, #1c2127)',
+  border: '1px solid var(--bulldozer-border, #d3d8de)',
+  borderRadius: 'var(--bulldozer-radius-sm, 4px)',
+  padding: '4px 8px',
+  fontSize: 12,
 }
 
 const mapStateToProps = (state) => {
