@@ -9,6 +9,22 @@ import { selectActivePreset, selectSquadrons } from '../redux/selectors'
 import { setSlotAircraft } from '../redux/actions'
 import { themeCss } from './themeStyle'
 
+const LIGHT_VARS = {
+  '--bulldozer-text-primary': '#1c2127',
+  '--bulldozer-text-secondary': '#5f6b7a',
+  '--bulldozer-card-bg': '#f5f5f5',
+  '--bulldozer-bg-input': 'var(--poi-background-color)',
+  '--bulldozer-bg-surface': 'transparent',
+}
+
+const DARK_VARS = {
+  '--bulldozer-text-primary': '#ffffff',
+  '--bulldozer-text-secondary': '#b0b5bd',
+  '--bulldozer-card-bg': 'rgba(255, 255, 255, 0.04)',
+  '--bulldozer-bg-input': 'rgba(0, 0, 0, 0.2)',
+  '--bulldozer-bg-surface': 'transparent',
+}
+
 const selector = extensionSelectorFactory('poi-plugin-bulldozers')
 
 class AppPanel extends Component {
@@ -83,6 +99,7 @@ class AppPanel extends Component {
           padding: 12,
           color: 'var(--bulldozer-text-primary, #1c2127)',
           minHeight: '100%',
+          ...(isDark ? DARK_VARS : LIGHT_VARS),
         }}
       >
         <PresetBar />
