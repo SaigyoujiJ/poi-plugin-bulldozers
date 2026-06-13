@@ -1,16 +1,30 @@
-import { getSlotCount, isFighterType, isSeaplaneBomber } from './planeType'
+import { getSlotCount, isFighterType, isSeaplaneBomber, getImprovementBonus } from './planeType'
 import { getProficiencyData, getInternalProficiencyBonus, getProficiencyAirBonus } from './proficiency'
 
-function calcSlotSortiePower(aircraft, categoryKey, slotCount, proficiencyLevel, stars) {
-  const aa = aircraft.aa_sortie ?? aircraft.aa ?? 0
-  const slotPower = Math.floor(aa * Math.sqrt(slotCount))
-  const internal = getProficiencyData(proficiencyLevel)
-  const internalBonus = internal ? getInternalProficiencyBonus(internal.internalMax) : 0
+function calcSlotSortieBasePower(aircraft, categoryKey, slotCount, stars) {
+  // LBAS 出击制空公式使用原始对空值 `aa`，配合 `interception`/`anti_bomb` 计算，
+  // 而不是使用 wiki 上预计算好的 `aa_sortie` / `aa_air_defense` 列。
+  const aa = aircraft.aa ?? 0
+  const intercept = aircraft.interception ?? 0
+  const improvement = getImprovementBonus(aircraft, categoryKey, stars)
+  const base = aa + improvement + 1.5 * intercept
+  return Math.floor(base * Math.sqrt(slotCount))
+}
+
+function calcSlotProficiencyBonus(aircraft, categoryKey, proficiencyLevel) {
+  const data = getProficiencyData(proficiencyLevel)
+  if (!data) return { internal: 0, display: 0 }
+  const internal = Math.sqrt(data.internalMax / 10)
   const fighter = isFighterType(aircraft, categoryKey)
   const seaplaneBomber = isSeaplaneBomber(aircraft, categoryKey)
-  const profBonus = getProficiencyAirBonus(proficiencyLevel, fighter, seaplaneBomber)
-  const upgradeBonus = fighter ? Math.floor(stars * 0.2) : 0
-  return slotPower + internalBonus + profBonus + upgradeBonus
+  const display = getProficiencyAirBonus(proficiencyLevel, fighter, seaplaneBomber)
+  return { internal, display }
+}
+
+function calcSlotSortiePower(aircraft, categoryKey, slotCount, proficiencyLevel, stars) {
+  const base = calcSlotSortieBasePower(aircraft, categoryKey, slotCount, stars)
+  const { internal, display } = calcSlotProficiencyBonus(aircraft, categoryKey, proficiencyLevel)
+  return Math.floor(base + internal) + display
 }
 
 function calcSlotDefensePower(aircraft, categoryKey, slotCount, proficiencyLevel, stars) {
