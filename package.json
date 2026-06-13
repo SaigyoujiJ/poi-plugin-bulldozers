@@ -4,7 +4,8 @@
   "description": "陆航速配 - 舰娘陆航快速配装插件",
   "main": "index.es",
   "scripts": {
-    "test": "node scripts/verify-theme.js"
+    "test": "jest",
+    "verify-theme": "node scripts/verify-theme.js"
   },
   "keywords": [
     "kancolle",
@@ -18,5 +19,11 @@
     "title": "陆航速配",
     "icon": "plane",
     "priority": 10
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.0",
+    "@babel/preset-env": "^7.24.0",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0"
   }
 }
