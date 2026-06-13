@@ -1,5 +1,5 @@
 import { getSlotCount, isFighterType, isSeaplaneBomber, getImprovementBonus } from './planeType'
-import { getProficiencyData, getInternalProficiencyBonus, getProficiencyAirBonus } from './proficiency'
+import { getProficiencyData, getProficiencyAirBonus } from './proficiency'
 
 function calcSlotSortieBasePower(aircraft, categoryKey, slotCount, stars) {
   // LBAS 出击制空公式使用原始对空值 `aa`，配合 `interception`/`anti_bomb` 计算，

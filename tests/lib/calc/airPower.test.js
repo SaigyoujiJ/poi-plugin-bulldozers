@@ -51,14 +51,44 @@ describe('sortie air power', () => {
 
 describe('defense air power', () => {
   test('雷電 18機 熟練度>> 防空制空 = 114', () => {
-    // floor((9 + 2 + 2*5) * sqrt(18) + sqrt(120/10)) + 22 = floor(89.09+3.464)+22 = 114
+    // calcSlotDefenseBasePower floors (aa + intercept + 2*antiBomb) * sqrt(slotCount):
+    //   floor((9 + 2 + 2*5) * sqrt(18)) = floor(89.09...) = 89
+    // calcSlotDefensePower floors (base + internal) and adds display bonus:
+    //   floor(89 + sqrt(120/10)) + 22 = floor(92.46...) + 22 = 114
     const slots = [{ aircraftId: 175, proficiency: 7, stars: 0 }]
     expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(114)
   })
 
   test('三式戦 飛燕 18機 熟練度>> 防空制空 includes intercept + anti-bomb', () => {
-    // aa=12.5, intercept=3, anti_bomb=1 => floor((12.5+3+2)*sqrt(18)+sqrt(12)) + 22 = floor(74.19+3.464)+22 = 99
+    // calcSlotDefenseBasePower floors (aa + intercept + 2*antiBomb) * sqrt(slotCount):
+    //   floor((12.5 + 3 + 2*1) * sqrt(18)) = floor(74.24...) = 74
+    // calcSlotDefensePower floors (base + internal) and adds display bonus:
+    //   floor(74 + sqrt(120/10)) + 22 = floor(77.46...) + 22 = 99
     const slots = [{ aircraftId: 176, proficiency: 7, stars: 0 }]
     expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(99)
+  })
+
+  test('雷電 18機 熟練度>> ★10 防空制空 applies improvement bonus', () => {
+    // improvement = 0.2 * 10 = 2
+    // calcSlotDefenseBasePower: floor((9 + 2 + 2*5 + 2) * sqrt(18)) = floor(97.58...) = 97
+    // calcSlotDefensePower: floor(97 + sqrt(120/10)) + 22 = floor(100.46...) + 22 = 122
+    const slots = [{ aircraftId: 175, proficiency: 7, stars: 10 }]
+    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(122)
+  })
+
+  test('空槽位 / 无 aircraftId 在防空计算中被跳过', () => {
+    const slots = [
+      {},
+      { aircraftId: 175, proficiency: 7, stars: 0 },
+      { aircraftId: null },
+    ]
+    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(114)
+  })
+
+  test('九六式陸攻 18機 防空制空（非战斗机，intercept=0, anti_bomb=0）', () => {
+    // calcSlotDefenseBasePower: floor((1 + 0 + 2*0) * sqrt(18)) = floor(4.24...) = 4
+    // calcSlotDefensePower: floor(4 + sqrt(9/10)) + 0 = floor(4.94...) = 4
+    const slots = [{ aircraftId: 168 }]
+    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(4)
   })
 })
