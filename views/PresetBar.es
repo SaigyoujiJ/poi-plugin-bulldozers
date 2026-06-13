@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { extensionSelectorFactory } from 'views/utils/selectors'
 import { switchPreset, savePreset, deletePreset } from '../redux/actions'
 
+const { __ } = window.i18n['poi-plugin-bulldozers']
+
 const selector = extensionSelectorFactory('poi-plugin-bulldozers')
 
 class PresetBar extends Component {
@@ -74,7 +76,7 @@ class PresetBar extends Component {
             border: '1px solid var(--bulldozer-border, #d3d8de)',
             cursor: 'pointer',
           }}
-        >另存</button>
+        >{__('PresetBar.SaveAs')}</button>
         <button
           onClick={this.handleDeleteClick}
           style={{
@@ -83,14 +85,14 @@ class PresetBar extends Component {
             border: '1px solid var(--bulldozer-border, #d3d8de)',
             cursor: 'pointer',
           }}
-        >删除</button>
+        >{__('PresetBar.Delete')}</button>
         {showSaveDialog && (
           <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
             <input
               value={newPresetName}
               onChange={this.handleNameChange}
               onKeyDown={this.handleKeyDown}
-              placeholder="预设名称"
+              placeholder={__('PresetBar.NamePlaceholder')}
               autoFocus
               style={{
                 background: 'var(--poi-background-color)',
@@ -106,7 +108,7 @@ class PresetBar extends Component {
                 border: '1px solid var(--bulldozer-border, #d3d8de)',
                 cursor: 'pointer',
               }}
-            >确定</button>
+            >{__('PresetBar.Confirm')}</button>
             <button
               onClick={() => this.setState({ showSaveDialog: false })}
               style={{
@@ -115,7 +117,7 @@ class PresetBar extends Component {
                 border: '1px solid var(--bulldozer-border, #d3d8de)',
                 cursor: 'pointer',
               }}
-            >取消</button>
+            >{__('PresetBar.Cancel')}</button>
           </span>
         )}
       </div>
