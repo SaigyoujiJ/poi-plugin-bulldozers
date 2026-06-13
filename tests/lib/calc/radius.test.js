@@ -61,4 +61,38 @@ describe('radius', () => {
     // extension = round(sqrt(8 - 2)) = round(2.449) = 2
     expect(calcCombatRadius(slots, aircraftLookup)).toBe(4)
   })
+
+  test('empty and all-null slots return 0', () => {
+    expect(calcCombatRadius([], aircraftLookup)).toBe(0)
+    expect(calcCombatRadius(
+      [{ proficiency: 0, stars: 0 }, { aircraftId: null, proficiency: 0, stars: 0 }],
+      aircraftLookup
+    )).toBe(0)
+  })
+
+  test('Hayabusa rotary aircraft does not disable extension', () => {
+    const slots = [
+      { aircraftId: 175, proficiency: 0, stars: 0 }, // 雷電 radius 2
+      { aircraftId: 138, proficiency: 0, stars: 0 }, // 二式大艇 radius 20
+      { aircraftId: 489, proficiency: 0, stars: 0 }, // 一式戦 隼II型改(20戦隊)
+    ]
+    // extension = round(sqrt(20 - 2)) = round(4.243) = 4 capped to 3
+    expect(calcCombatRadius(slots, aircraftLookup)).toBe(5)
+  })
+
+  test('recon with radius equal to min radius does not extend', () => {
+    const slots = [
+      { aircraftId: 168, proficiency: 0, stars: 0 }, // 九六式陸攻 radius 8
+      { aircraftId: 311, proficiency: 0, stars: 0 }, // 二式陸偵 radius 8
+    ]
+    expect(calcCombatRadius(slots, aircraftLookup)).toBe(8)
+  })
+
+  test('carrier recon does not extend range', () => {
+    const slots = [
+      { aircraftId: 175, proficiency: 0, stars: 0 }, // 雷電 radius 2
+      { aircraftId: 54, proficiency: 0, stars: 0 }, // 彩雲 radius 8
+    ]
+    expect(calcCombatRadius(slots, aircraftLookup)).toBe(2)
+  })
 })

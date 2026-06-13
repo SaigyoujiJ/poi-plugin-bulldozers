@@ -1,5 +1,3 @@
-import { isReconType } from './planeType'
-
 // 一式戦 隼 series (rotary ASW fighters) do not disable range extension
 const HAYABUSA_ROTARY_IDS = new Set([489, 491])
 // 大型飛行艇 IDs
@@ -10,6 +8,9 @@ function isNonHayabusaRotary(aircraft, categoryKey) {
   return !HAYABUSA_ROTARY_IDS.has(aircraft.id)
 }
 
+// For LBAS, only 陸偵 (land_recon) and 大型飛行艇 (large flying boats)
+// extend range. Carrier recon (艦偵) and seaplane recon (水偵) are stored in
+// recon_flying_boats.json but are not equippable to LBAS for range extension.
 function isRadiusExtendingRecon(aircraft, categoryKey) {
   if (categoryKey === 'land_recon') return true
   if (categoryKey === 'recon_flying_boats' && FLYING_BOAT_IDS.has(aircraft.id)) return true
