@@ -44,7 +44,7 @@ describe('radius', () => {
     expect(calcCombatRadius(withRotary, aircraftLookup)).toBe(1)
   })
 
-  test('radius extends with land recon', () => {
+  test('land recon of equal radius does not extend', () => {
     const slots = [
       { aircraftId: 168, proficiency: 0, stars: 0 }, // 九六式陸攻 radius 8
       { aircraftId: 311, proficiency: 0, stars: 0 }, // 二式陸偵 radius 8
@@ -88,11 +88,21 @@ describe('radius', () => {
     expect(calcCombatRadius(slots, aircraftLookup)).toBe(8)
   })
 
-  test('carrier recon does not extend range', () => {
+  test('carrier recon extends range', () => {
     const slots = [
       { aircraftId: 175, proficiency: 0, stars: 0 }, // 雷電 radius 2
       { aircraftId: 54, proficiency: 0, stars: 0 }, // 彩雲 radius 8
     ]
-    expect(calcCombatRadius(slots, aircraftLookup)).toBe(2)
+    // extension = round(sqrt(8 - 2)) = round(2.449) = 2
+    expect(calcCombatRadius(slots, aircraftLookup)).toBe(4)
+  })
+
+  test('seaplane recon extends range', () => {
+    const slots = [
+      { aircraftId: 175, proficiency: 0, stars: 0 }, // 雷電 radius 2
+      { aircraftId: 25, proficiency: 0, stars: 0 }, // 零式水上偵察機 radius 7
+    ]
+    // extension = round(sqrt(7 - 2)) = round(2.236) = 2
+    expect(calcCombatRadius(slots, aircraftLookup)).toBe(4)
   })
 })
