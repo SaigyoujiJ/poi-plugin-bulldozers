@@ -1,4 +1,4 @@
-import { getSlotCount, isFighterType, isSeaplaneBomber, isReconType, getImprovementBonus } from './planeType'
+import { getSlotCount, isFighterType, isSeaplaneBomber, getImprovementBonus } from './planeType'
 import { getProficiencyData, getProficiencyAirBonus } from './proficiency'
 
 function calcSlotSortieBasePower(aircraft, categoryKey, slotCount, stars) {
@@ -50,6 +50,7 @@ function calcSlotHeavyBomberDefense(aircraft, slotCount, proficiencyLevel) {
   return basePower + internalBonus
 }
 
+// 大型飛行艇 ID：二式大艇 (138)、PBY-5A Catalina (178)
 const FLYING_BOAT_IDS = new Set([138, 178])
 
 function getSortieReconMultiplier(slots, aircraftData) {
@@ -82,6 +83,7 @@ function getDefenseReconMultiplier(slots, aircraftData) {
     } else if (categoryKey === 'recon_flying_boats') {
       // 艦偵（彩雲、二式艦偵、試製景雲等）
       if (los >= 9) multiplier = Math.max(multiplier, 1.30)
+      else if (los <= 7) multiplier = Math.max(multiplier, 1.20)
     } else if (categoryKey === 'land_recon') {
       // 陸偵
       if (los >= 9) multiplier = Math.max(multiplier, 1.23)
@@ -96,8 +98,6 @@ export function calcSortieAirPower(slots, aircraftData) {
   for (const slot of slots) {
     if (!slot.aircraftId) continue
     const { aircraft, categoryKey } = aircraftData.lookup(slot.aircraftId)
-    // 侦察机本身不贡献制空值，仅提供倍率
-    if (isReconType(categoryKey)) continue
     const slotCount = getSlotCount(aircraft, categoryKey)
     const level = slot.proficiency ?? 0
     const stars = slot.stars ?? 0
@@ -111,8 +111,6 @@ export function calcDefenseAirPower(slots, aircraftData) {
   for (const slot of slots) {
     if (!slot.aircraftId) continue
     const { aircraft, categoryKey } = aircraftData.lookup(slot.aircraftId)
-    // 侦察机 / 水偵本身不贡献制空值，仅提供倍率
-    if (isReconType(categoryKey) || categoryKey === 'seaplanes') continue
     const slotCount = getSlotCount(aircraft, categoryKey)
     const level = slot.proficiency ?? 0
     const stars = slot.stars ?? 0

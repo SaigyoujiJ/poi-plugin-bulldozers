@@ -94,27 +94,55 @@ describe('defense air power', () => {
 })
 
 describe('recon multipliers', () => {
-  test('二式陸偵 gives sortie multiplier 1.15', () => {
+  test('二式陸偵 contributes its own AA and gives sortie multiplier 1.15', () => {
+    // 二式陸偵 aa=3, slot=4, prof=0 => base = floor(3 * sqrt(4)) = 6, internal = sqrt(9/10)
+    // slot power = floor(6 + 0.948...) = 6
+    // total = floor((75 + 6) * 1.15) = floor(81 * 1.15) = 93
     const slots = [
       { aircraftId: 175, proficiency: 7, stars: 0 }, // 雷電
       { aircraftId: 311, proficiency: 0, stars: 0 }, // 二式陸偵 LOS 8
     ]
-    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(Math.floor(75 * 1.15))
+    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(93)
   })
 
-  test('二式陸偵(熟練) gives sortie multiplier 1.18', () => {
+  test('二式陸偵(熟練) contributes its own AA and gives sortie multiplier 1.18', () => {
+    // total = floor((75 + 6) * 1.18) = floor(81 * 1.18) = 95
     const slots = [
       { aircraftId: 175, proficiency: 7, stars: 0 },
       { aircraftId: 312, proficiency: 0, stars: 0 }, // 二式陸偵(熟練) LOS 9
     ]
-    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(Math.floor(75 * 1.18))
+    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(95)
   })
 
   test('大型飛行艇 gives defense multiplier 1.16 for LOS >= 9', () => {
+    // 二式大艇 aa=null, slot=4 => contributes 0
+    // total = floor((114 + 0) * 1.16) = 132
     const slots = [
       { aircraftId: 175, proficiency: 7, stars: 0 },
       { aircraftId: 138, proficiency: 0, stars: 0 }, // 二式大艇 LOS 12
     ]
-    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(Math.floor(114 * 1.16))
+    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(132)
+  })
+
+  test('multiple recon planes use the highest multiplier', () => {
+    // 二式陸偵 LOS 8 => 1.15, 二式陸偵(熟練) LOS 9 => 1.18, highest = 1.18
+    // each contributes 6, total = floor((75 + 6 + 6) * 1.18) = floor(87 * 1.18) = 102
+    const slots = [
+      { aircraftId: 175, proficiency: 7, stars: 0 },
+      { aircraftId: 311, proficiency: 0, stars: 0 },
+      { aircraftId: 312, proficiency: 0, stars: 0 },
+    ]
+    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(102)
+  })
+
+  test('carrier recon LOS <= 7 gives defense multiplier 1.20', () => {
+    // 二式艦上偵察機 id 61: aa=1, los=7, slot=4, prof=0
+    // base = floor(1 * sqrt(4)) = 2, internal = sqrt(9/10), slot power = floor(2 + 0.948...) = 2
+    // total = floor((114 + 2) * 1.20) = floor(116 * 1.20) = 139
+    const slots = [
+      { aircraftId: 175, proficiency: 7, stars: 0 },
+      { aircraftId: 61, proficiency: 0, stars: 0 },
+    ]
+    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(139)
   })
 })
