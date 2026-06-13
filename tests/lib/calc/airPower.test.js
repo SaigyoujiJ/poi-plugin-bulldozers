@@ -92,3 +92,29 @@ describe('defense air power', () => {
     expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(4)
   })
 })
+
+describe('recon multipliers', () => {
+  test('二式陸偵 gives sortie multiplier 1.15', () => {
+    const slots = [
+      { aircraftId: 175, proficiency: 7, stars: 0 }, // 雷電
+      { aircraftId: 311, proficiency: 0, stars: 0 }, // 二式陸偵 LOS 8
+    ]
+    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(Math.floor(75 * 1.15))
+  })
+
+  test('二式陸偵(熟練) gives sortie multiplier 1.18', () => {
+    const slots = [
+      { aircraftId: 175, proficiency: 7, stars: 0 },
+      { aircraftId: 312, proficiency: 0, stars: 0 }, // 二式陸偵(熟練) LOS 9
+    ]
+    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(Math.floor(75 * 1.18))
+  })
+
+  test('大型飛行艇 gives defense multiplier 1.16 for LOS >= 9', () => {
+    const slots = [
+      { aircraftId: 175, proficiency: 7, stars: 0 },
+      { aircraftId: 138, proficiency: 0, stars: 0 }, // 二式大艇 LOS 12
+    ]
+    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(Math.floor(114 * 1.16))
+  })
+})
