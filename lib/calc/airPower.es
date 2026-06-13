@@ -42,6 +42,8 @@ function calcSlotDefensePower(aircraft, categoryKey, slotCount, proficiencyLevel
   return Math.floor(base + internal) + display
 }
 
+// 简化的“陆攻开幕威力”估计，仅使用 爆装 × sqrt(搭载数) + 熟练度内部加成。
+// 这不建模完整的 LBAS 开幕伤害公式（还涉及雷装、+25 基础值、侦察机倍率等）。
 function calcSlotLandAttackerStrike(aircraft, slotCount, proficiencyLevel) {
   const bombing = aircraft.bombing ?? 0
   if (bombing <= 0) return 0

@@ -1,4 +1,4 @@
-import { calcSortieAirPower, calcDefenseAirPower } from '../../../lib/calc/airPower'
+import { calcSortieAirPower, calcDefenseAirPower, calcLandAttackerStrikePower } from '../../../lib/calc/airPower'
 import { aircraftLookup } from '../../../lib/calc/aircraftData'
 
 describe('sortie air power', () => {
@@ -193,5 +193,39 @@ describe('improvement bonus', () => {
     expect(calcSortieAirPower(slots, aircraftLookup)).toBe(
       Math.floor(Math.floor((1 + 1.5) * Math.sqrt(18) + Math.sqrt(9 / 10)))
     )
+  })
+})
+
+describe('land attacker strike power', () => {
+  test('九六式陸攻 18機 熟練度0 陆攻开幕 = 43', () => {
+    // floor(10 * sqrt(18) + sqrt(9/10)) = floor(42.426 + 0.948) = 43
+    const slots = [{ aircraftId: 168, proficiency: 0 }]
+    expect(calcLandAttackerStrikePower(slots, aircraftLookup)).toBe(43)
+  })
+
+  test('九六式陸攻 18機 熟練度>> 陆攻开幕 = 45', () => {
+    // floor(10 * sqrt(18) + sqrt(120/10)) = floor(42.426 + 3.464) = 45
+    const slots = [{ aircraftId: 168, proficiency: 7 }]
+    expect(calcLandAttackerStrikePower(slots, aircraftLookup)).toBe(45)
+  })
+
+  test('九六式陸攻 with no bombing returns 0', () => {
+    const noBombingLookup = {
+      lookup: () => ({
+        aircraft: { id: 168, name: '九六式陸攻', bombing: 0 },
+        categoryKey: 'land_attackers',
+      }),
+    }
+    const slots = [{ aircraftId: 168 }]
+    expect(calcLandAttackerStrikePower(slots, noBombingLookup)).toBe(0)
+  })
+
+  test('Empty slot is skipped', () => {
+    const slots = [
+      {},
+      { aircraftId: 168, proficiency: 0 },
+      { aircraftId: null },
+    ]
+    expect(calcLandAttackerStrikePower(slots, aircraftLookup)).toBe(43)
   })
 })
