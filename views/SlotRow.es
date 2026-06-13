@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { PROFICIENCY } from '../lib/calc/proficiency'
 import { lookupAircraft } from '../lib/calc/aircraftData'
 import { setSlotProficiency, setSlotStars, clearSlot } from '../redux/actions'
+import { getModeColor } from '../lib/ui/themeColors'
 
 class SlotRow extends Component {
   handleProficiencyChange = (e) => {
@@ -20,36 +21,38 @@ class SlotRow extends Component {
   }
 
   render() {
-    const { slot, selected, onSelect, dispatch } = this.props
+    const { slot, selected, onSelect, mode } = this.props
     const planeInfo = slot.aircraftId ? lookupAircraft(slot.aircraftId) : null
     const planeName = planeInfo ? planeInfo.aircraft.name : '未配置'
+    const isConfigured = !!slot.aircraftId
+    const colors = getModeColor(mode)
 
     return (
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-        <button
-          onClick={onSelect}
-          style={{
-            background: selected
-              ? 'var(--bulldozer-bg-selected, #ffe082)'
-              : 'var(--poi-background-color)',
-            border: selected
-              ? '2px solid var(--bulldozer-border-active, #ff9800)'
-              : '1px solid var(--bulldozer-border, #d3d8de)',
-            color: 'var(--bulldozer-text-primary, #1c2127)',
-            padding: '2px 8px',
-            cursor: 'pointer',
-          }}
-        >
+      <div
+        onClick={onSelect}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 8,
+          padding: '8px 10px',
+          background: 'var(--bulldozer-card-bg, #f5f5f5)',
+          borderRadius: 'var(--bulldozer-radius-md, 8px)',
+          borderLeft: isConfigured ? '3px solid ' + colors.accent : '3px solid transparent',
+          opacity: isConfigured ? 1 : 0.55,
+          cursor: 'pointer',
+          transition: 'all 0.15s ease',
+          marginBottom: 6,
+          boxShadow: selected ? '0 0 0 1px ' + colors.accent : 'none',
+        }}
+      >
+        <div style={{ flex: 1, fontWeight: isConfigured ? 500 : 400, color: 'var(--bulldozer-text-primary, #1c2127)' }}>
           {planeName}
-        </button>
+        </div>
         <select
           value={slot.proficiency}
           onChange={this.handleProficiencyChange}
-          style={{
-            background: 'var(--poi-background-color)',
-            color: 'var(--bulldozer-text-primary, #1c2127)',
-            border: '1px solid var(--bulldozer-border, #d3d8de)',
-          }}
+          onClick={(e) => e.stopPropagation()}
+          style={tagStyle}
         >
           {PROFICIENCY.map((p) => (
             <option key={p.level} value={p.level}>{p.label}</option>
@@ -58,30 +61,45 @@ class SlotRow extends Component {
         <select
           value={slot.stars}
           onChange={this.handleStarsChange}
+          onClick={(e) => e.stopPropagation()}
           style={{
-            background: 'var(--poi-background-color)',
-            color: 'var(--bulldozer-text-primary, #1c2127)',
-            border: '1px solid var(--bulldozer-border, #d3d8de)',
+            ...tagStyle,
+            background: isConfigured ? colors.badgeBg : 'var(--poi-background-color)',
+            color: isConfigured ? colors.badgeText : 'var(--bulldozer-text-primary, #1c2127)',
+            borderColor: isConfigured ? colors.accent : 'var(--bulldozer-border, #d3d8de)',
+            fontWeight: 600,
           }}
         >
           {Array.from({ length: 11 }, (_, i) => (
             <option key={i} value={i}>★{i}</option>
           ))}
         </select>
-        {slot.aircraftId && (
+        {isConfigured && (
           <button
-            onClick={this.handleClear}
+            onClick={(e) => { e.stopPropagation(); this.handleClear() }}
             style={{
-              background: 'var(--poi-background-color)',
-              color: 'var(--bulldozer-text-primary, #1c2127)',
-              border: '1px solid var(--bulldozer-border, #d3d8de)',
+              background: 'transparent',
+              border: 'none',
+              color: colors.accent,
               cursor: 'pointer',
+              padding: '0 4px',
+              fontSize: 14,
             }}
           >×</button>
         )}
       </div>
     )
   }
+}
+
+const tagStyle = {
+  background: 'var(--poi-background-color)',
+  color: 'var(--bulldozer-text-primary, #1c2127)',
+  border: '1px solid var(--bulldozer-border, #d3d8de)',
+  borderRadius: 'var(--bulldozer-radius-sm, 4px)',
+  padding: '2px 6px',
+  fontSize: 11,
+  cursor: 'pointer',
 }
 
 export default SlotRow
