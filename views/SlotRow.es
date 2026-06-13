@@ -51,14 +51,14 @@ class SlotRow extends Component {
           background: 'var(--bulldozer-card-bg, #f5f5f5)',
           borderRadius: 'var(--bulldozer-radius-md, 8px)',
           borderLeft: isConfigured ? '3px solid ' + colors.accent : '3px solid transparent',
-          opacity: isConfigured ? 1 : 0.55,
+          opacity: 1,
           cursor: 'pointer',
           transition: 'all 0.15s ease',
           marginBottom: 6,
           boxShadow: selected ? '0 0 0 1px ' + colors.accent : 'none',
         }}
       >
-        <div style={{ flex: 1, fontWeight: isConfigured ? 500 : 400, color: 'var(--bulldozer-text-primary, #1c2127)' }}>
+        <div style={{ flex: 1, fontWeight: isConfigured ? 500 : 400, color: isConfigured ? 'var(--bulldozer-text-primary, #1c2127)' : 'var(--bulldozer-text-secondary, #5f6b7a)' }}>
           {planeName}
         </div>
         <select
