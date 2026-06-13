@@ -42,12 +42,13 @@ function calcSlotDefensePower(aircraft, categoryKey, slotCount, proficiencyLevel
   return Math.floor(base + internal) + display
 }
 
-function calcSlotHeavyBomberDefense(aircraft, slotCount, proficiencyLevel) {
+function calcSlotLandAttackerStrike(aircraft, slotCount, proficiencyLevel) {
   const bombing = aircraft.bombing ?? 0
   if (bombing <= 0) return 0
-  const basePower = Math.floor(bombing * Math.sqrt(slotCount))
-  const internalBonus = Math.floor(Math.sqrt(getProficiencyData(proficiencyLevel).internalMax / 10))
-  return basePower + internalBonus
+  const data = getProficiencyData(proficiencyLevel)
+  const internal = data ? Math.sqrt(data.internalMax / 10) : 0
+  const base = bombing * Math.sqrt(slotCount)
+  return Math.floor(base + internal)
 }
 
 // 大型飛行艇 ID：二式大艇 (138)、PBY-5A Catalina (178)
@@ -124,7 +125,7 @@ export function calcDefenseAirPower(slots, aircraftData) {
   return Math.floor(total * getDefenseReconMultiplier(slots, aircraftData))
 }
 
-export function calcHeavyBomberDefensePower(slots, aircraftData) {
+export function calcLandAttackerStrikePower(slots, aircraftData) {
   let total = 0
   for (const slot of slots) {
     if (!slot.aircraftId) continue
@@ -133,7 +134,7 @@ export function calcHeavyBomberDefensePower(slots, aircraftData) {
     if ((aircraft.bombing ?? 0) <= 0) continue
     const slotCount = getSlotCount(aircraft, categoryKey)
     const level = slot.proficiency ?? 0
-    total += calcSlotHeavyBomberDefense(aircraft, slotCount, level)
+    total += calcSlotLandAttackerStrike(aircraft, slotCount, level)
   }
   return total
 }

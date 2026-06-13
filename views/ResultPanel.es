@@ -16,7 +16,7 @@ class ResultPanel extends Component {
           <div style={{ textAlign: 'center' }}>
             <div style={{ fontWeight: 'bold', marginBottom: 4 }}>防空</div>
             <div>防空値: {results.defense}</div>
-            <div>重爆防空値: {results.heavyBomberDefense}</div>
+            <div>陆攻开幕威力: {results.landAttackerStrike}</div>
           </div>
         </div>
       </div>
