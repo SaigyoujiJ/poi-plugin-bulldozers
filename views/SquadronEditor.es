@@ -7,37 +7,6 @@ import { getModeColor } from '../lib/ui/themeColors'
 const { __ } = window.i18n['poi-plugin-bulldozers']
 
 class SquadronEditor extends Component {
-  constructor(props) {
-    super(props)
-    this.pickerRefs = {}
-    this.state = {
-      pickerHeights: {},
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { selectedSlotIndex } = this.props
-    if (selectedSlotIndex !== prevProps.selectedSlotIndex) {
-      this.measureHeights()
-    }
-  }
-
-  measureHeights = () => {
-    const { selectedSlotIndex } = this.props
-    const pickerHeights = {}
-    Object.keys(this.pickerRefs).forEach((key) => {
-      const node = this.pickerRefs[key]
-      if (node) {
-        pickerHeights[key] = node.scrollHeight
-      }
-    })
-    this.setState({ pickerHeights })
-  }
-
-  setPickerRef = (i) => (node) => {
-    this.pickerRefs[i] = node
-  }
-
   handleModeChange = (e) => {
     const { dispatch, presetId, squadronIndex } = this.props
     dispatch(setSquadronMode(presetId, squadronIndex, e.target.value))
@@ -91,7 +60,6 @@ class SquadronEditor extends Component {
 
   render() {
     const { squadron, presetId, squadronIndex, selectedSlotIndex, activeCategoryKey, onSlotSelect, onPlaneSelect, onCategoryChange, dispatch } = this.props
-    const { pickerHeights } = this.state
 
     if (!squadron) return null
     const mode = squadron.mode || 'sortie'
@@ -103,7 +71,6 @@ class SquadronEditor extends Component {
         <div>
           {squadron.slots.map((slot, i) => {
             const active = selectedSlotIndex === i
-            const measuredHeight = pickerHeights[i] || 0
             return (
               <React.Fragment key={i}>
                 <SlotRow
@@ -117,7 +84,6 @@ class SquadronEditor extends Component {
                   dispatch={dispatch}
                 />
                 {<div
-                  ref={this.setPickerRef(i)}
                   style={{
                     marginLeft: 12,
                     marginBottom: active ? 8 : 0,
@@ -125,11 +91,12 @@ class SquadronEditor extends Component {
                     borderRadius: 'var(--bulldozer-radius-md, 8px)',
                     padding: active ? 10 : 0,
                     background: 'var(--bulldozer-bg-surface, transparent)',
-                    maxHeight: active ? Math.max(measuredHeight, 1) : 0,
                     opacity: active ? 1 : 0,
                     overflow: 'hidden',
-                    transform: active ? 'translateY(0)' : 'translateY(-8px)',
-                    transition: 'max-height 0.5s ease, opacity 0.4s ease, transform 0.5s ease, padding 0.5s ease, margin-bottom 0.5s ease, border-color 0.3s ease',
+                    transform: active ? 'scaleY(1)' : 'scaleY(0)',
+                    transformOrigin: 'top',
+                    pointerEvents: active ? 'auto' : 'none',
+                    transition: 'transform 0.45s ease, opacity 0.35s ease, padding 0.45s ease, margin-bottom 0.45s ease, border-color 0.3s ease',
                   }}
                 >
                   {active && (
