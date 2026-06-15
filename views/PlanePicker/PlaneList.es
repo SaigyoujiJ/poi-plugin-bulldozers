@@ -17,6 +17,7 @@ class PlaneList extends Component {
               cursor: 'pointer',
               borderRadius: 'var(--bulldozer-radius-sm, 4px)',
               marginBottom: 3,
+              color: 'var(--bulldozer-text-primary, #1c2127)',
             }}
           >
             {ac.name}
