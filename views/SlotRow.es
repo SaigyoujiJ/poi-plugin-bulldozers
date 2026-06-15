@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { PROFICIENCY } from '../lib/calc/proficiency'
 import { lookupAircraft } from '../lib/calc/aircraftData'
-import { setSlotProficiency, setSlotStars, clearSlot } from '../redux/actions'
+import { setSlotProficiency, setSlotStars, setSlotCount, clearSlot } from '../redux/actions'
+import { getSlotCount } from '../lib/calc/planeType'
 import { getModeColor } from '../lib/ui/themeColors'
 
 const { __ } = window.i18n['poi-plugin-bulldozers']
@@ -28,6 +29,11 @@ class SlotRow extends Component {
     dispatch(setSlotStars(presetId, squadronIndex, slotIndex, Number(e.target.value)))
   }
 
+  handleCountChange = (e) => {
+    const { dispatch, presetId, squadronIndex, slotIndex } = this.props
+    dispatch(setSlotCount(presetId, squadronIndex, slotIndex, Number(e.target.value)))
+  }
+
   handleClear = () => {
     const { dispatch, presetId, squadronIndex, slotIndex } = this.props
     dispatch(clearSlot(presetId, squadronIndex, slotIndex))
@@ -39,6 +45,8 @@ class SlotRow extends Component {
     const planeName = planeInfo ? planeInfo.aircraft.name : __('SlotRow.Empty')
     const isConfigured = !!slot.aircraftId
     const colors = getModeColor(mode)
+    const maxCount = planeInfo ? getSlotCount(planeInfo.aircraft, planeInfo.categoryKey) : 0
+    const currentCount = isConfigured ? (slot.count || maxCount) : 0
 
     return (
       <div
@@ -58,6 +66,25 @@ class SlotRow extends Component {
           boxShadow: selected ? '0 0 0 1px ' + colors.accent : 'none',
         }}
       >
+        {isConfigured && (
+          <select
+            value={currentCount}
+            onChange={this.handleCountChange}
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              ...tagStyle,
+              background: colors.badgeBg,
+              color: colors.badgeText,
+              borderColor: colors.accent,
+              fontWeight: 600,
+              minWidth: 48,
+            }}
+          >
+            {Array.from({ length: maxCount + 1 }, (_, i) => (
+              <option key={i} value={i} style={{ color: 'var(--bulldozer-text-primary, #1c2127)' }}>{i}架</option>
+            ))}
+          </select>
+        )}
         <div style={{ flex: 1, fontWeight: isConfigured ? 500 : 400, color: isConfigured ? 'var(--bulldozer-text-primary, #1c2127)' : 'var(--bulldozer-text-secondary, #5f6b7a)' }}>
           {planeName}
         </div>

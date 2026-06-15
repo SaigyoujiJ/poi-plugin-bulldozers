@@ -7,8 +7,11 @@ import {
   SET_SLOT_AIRCRAFT,
   SET_SLOT_PROFICIENCY,
   SET_SLOT_STARS,
+  SET_SLOT_COUNT,
   CLEAR_SLOT,
 } from './actions'
+import { getSlotCount } from '../lib/calc/planeType'
+import { lookupAircraft } from '../lib/calc/aircraftData'
 
 const { __ } = window.i18n['poi-plugin-bulldozers']
 
@@ -24,10 +27,10 @@ export function createDefaultPreset(id = DEFAULT_PRESET_ID, name = __('Preset.De
         name: __('Squadron.First'),
         mode: 'sortie',
         slots: [
-          { aircraftId: null, proficiency: 0, stars: 0 },
-          { aircraftId: null, proficiency: 0, stars: 0 },
-          { aircraftId: null, proficiency: 0, stars: 0 },
-          { aircraftId: null, proficiency: 0, stars: 0 },
+          { aircraftId: null, proficiency: 0, stars: 0, count: 0 },
+          { aircraftId: null, proficiency: 0, stars: 0, count: 0 },
+          { aircraftId: null, proficiency: 0, stars: 0, count: 0 },
+          { aircraftId: null, proficiency: 0, stars: 0, count: 0 },
         ],
       },
       {
@@ -35,10 +38,10 @@ export function createDefaultPreset(id = DEFAULT_PRESET_ID, name = __('Preset.De
         name: __('Squadron.Second'),
         mode: 'sortie',
         slots: [
-          { aircraftId: null, proficiency: 0, stars: 0 },
-          { aircraftId: null, proficiency: 0, stars: 0 },
-          { aircraftId: null, proficiency: 0, stars: 0 },
-          { aircraftId: null, proficiency: 0, stars: 0 },
+          { aircraftId: null, proficiency: 0, stars: 0, count: 0 },
+          { aircraftId: null, proficiency: 0, stars: 0, count: 0 },
+          { aircraftId: null, proficiency: 0, stars: 0, count: 0 },
+          { aircraftId: null, proficiency: 0, stars: 0, count: 0 },
         ],
       },
       {
@@ -46,10 +49,10 @@ export function createDefaultPreset(id = DEFAULT_PRESET_ID, name = __('Preset.De
         name: __('Squadron.Third'),
         mode: 'sortie',
         slots: [
-          { aircraftId: null, proficiency: 0, stars: 0 },
-          { aircraftId: null, proficiency: 0, stars: 0 },
-          { aircraftId: null, proficiency: 0, stars: 0 },
-          { aircraftId: null, proficiency: 0, stars: 0 },
+          { aircraftId: null, proficiency: 0, stars: 0, count: 0 },
+          { aircraftId: null, proficiency: 0, stars: 0, count: 0 },
+          { aircraftId: null, proficiency: 0, stars: 0, count: 0 },
+          { aircraftId: null, proficiency: 0, stars: 0, count: 0 },
         ],
       },
     ],
@@ -58,14 +61,23 @@ export function createDefaultPreset(id = DEFAULT_PRESET_ID, name = __('Preset.De
 
 function slotReducer(state, action) {
   switch (action.type) {
-    case SET_SLOT_AIRCRAFT:
-      return { ...state, aircraftId: action.aircraftId }
+    case SET_SLOT_AIRCRAFT: {
+      const { aircraftId } = action
+      if (!aircraftId) {
+        return { ...state, aircraftId: null }
+      }
+      const planeInfo = lookupAircraft(aircraftId)
+      const maxCount = planeInfo ? getSlotCount(planeInfo.aircraft, planeInfo.categoryKey) : 18
+      return { ...state, aircraftId, count: maxCount }
+    }
     case SET_SLOT_PROFICIENCY:
       return { ...state, proficiency: action.proficiency }
     case SET_SLOT_STARS:
       return { ...state, stars: action.stars }
+    case SET_SLOT_COUNT:
+      return { ...state, count: action.count }
     case CLEAR_SLOT:
-      return { aircraftId: null, proficiency: 0, stars: 0 }
+      return { aircraftId: null, proficiency: 0, stars: 0, count: 0 }
     default:
       return state
   }
@@ -78,6 +90,7 @@ function squadronReducer(state, action) {
     case SET_SLOT_AIRCRAFT:
     case SET_SLOT_PROFICIENCY:
     case SET_SLOT_STARS:
+    case SET_SLOT_COUNT:
     case CLEAR_SLOT: {
       const { slotIndex } = action
       const newSlots = [...state.slots]
@@ -143,6 +156,7 @@ export default function presetsReducer(state = initialState, action) {
     case SET_SLOT_AIRCRAFT:
     case SET_SLOT_PROFICIENCY:
     case SET_SLOT_STARS:
+    case SET_SLOT_COUNT:
     case CLEAR_SLOT: {
       const { presetId, squadronIndex } = action
       const preset = state.presets[presetId]

@@ -8,6 +8,7 @@ export const SET_SQUADRON_MODE = `${NAMESPACE}SET_SQUADRON_MODE`
 export const SET_SLOT_AIRCRAFT = `${NAMESPACE}SET_SLOT_AIRCRAFT`
 export const SET_SLOT_PROFICIENCY = `${NAMESPACE}SET_SLOT_PROFICIENCY`
 export const SET_SLOT_STARS = `${NAMESPACE}SET_SLOT_STARS`
+export const SET_SLOT_COUNT = `${NAMESPACE}SET_SLOT_COUNT`
 export const CLEAR_SLOT = `${NAMESPACE}CLEAR_SLOT`
 
 export const switchPreset = (presetId) => ({
@@ -61,6 +62,14 @@ export const setSlotStars = (presetId, squadronIndex, slotIndex, stars) => ({
   squadronIndex,
   slotIndex,
   stars,
+})
+
+export const setSlotCount = (presetId, squadronIndex, slotIndex, count) => ({
+  type: SET_SLOT_COUNT,
+  presetId,
+  squadronIndex,
+  slotIndex,
+  count,
 })
 
 export const clearSlot = (presetId, squadronIndex, slotIndex) => ({

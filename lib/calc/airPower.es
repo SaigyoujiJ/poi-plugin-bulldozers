@@ -106,7 +106,7 @@ export function calcSortieAirPower(slots, aircraftData) {
   for (const slot of slots) {
     if (!slot.aircraftId) continue
     const { aircraft, categoryKey } = aircraftData.lookup(slot.aircraftId)
-    const slotCount = getSlotCount(aircraft, categoryKey)
+    const slotCount = slot.count ?? getSlotCount(aircraft, categoryKey)
     const level = slot.proficiency ?? 0
     const stars = slot.stars ?? 0
     total += calcSlotSortiePower(aircraft, categoryKey, slotCount, level, stars)
@@ -119,7 +119,7 @@ export function calcDefenseAirPower(slots, aircraftData) {
   for (const slot of slots) {
     if (!slot.aircraftId) continue
     const { aircraft, categoryKey } = aircraftData.lookup(slot.aircraftId)
-    const slotCount = getSlotCount(aircraft, categoryKey)
+    const slotCount = slot.count ?? getSlotCount(aircraft, categoryKey)
     const level = slot.proficiency ?? 0
     const stars = slot.stars ?? 0
     total += calcSlotDefensePower(aircraft, categoryKey, slotCount, level, stars)
@@ -156,7 +156,7 @@ export function calcLandAttackerStrikePower(slots, aircraftData) {
     const { aircraft, categoryKey } = aircraftData.lookup(slot.aircraftId)
     if (categoryKey !== 'land_attackers') continue
     if ((aircraft.bombing ?? 0) <= 0) continue
-    const slotCount = getSlotCount(aircraft, categoryKey)
+    const slotCount = slot.count ?? getSlotCount(aircraft, categoryKey)
     const level = slot.proficiency ?? 0
     total += calcSlotLandAttackerStrike(aircraft, slotCount, level)
   }
