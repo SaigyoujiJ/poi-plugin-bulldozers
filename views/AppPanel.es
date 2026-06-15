@@ -133,7 +133,7 @@ class AppPanel extends Component {
           squadronIndex={activeSquadronIndex}
           selectedSlotIndex={selectedSlotIndex}
           activeCategoryKey={activeCategoryKey}
-          onSlotSelect={(i) => this.setState({ selectedSlotIndex: i })}
+          onSlotSelect={(i) => this.setState({ selectedSlotIndex: selectedSlotIndex === i ? null : i })}
           onPlaneSelect={(aircraftId) => {
             if (selectedSlotIndex != null) {
               dispatch(setSlotAircraft(activePresetId, activeSquadronIndex, selectedSlotIndex, aircraftId))
