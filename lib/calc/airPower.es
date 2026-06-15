@@ -2,44 +2,28 @@ import { getSlotCount, isFighterType, isSeaplaneBomber, getImprovementBonus } fr
 import { getProficiencyData, getProficiencyAirBonus } from './proficiency'
 
 function calcSlotSortieBasePower(aircraft, categoryKey, slotCount, stars) {
-  // LBAS 出击制空公式使用原始对空值 `aa`，配合 `interception`/`anti_bomb` 计算，
-  // 而不是使用 wiki 上预计算好的 `aa_sortie` / `aa_air_defense` 列。
-  const aa = aircraft.aa ?? 0
-  const intercept = aircraft.interception ?? 0
+  // LBAS 出击制空公式：使用 wiki 预计算的 `aa_sortie`（已包含迎击/改修加成）。
+  // 若不存在则回退到原始 `aa`，并补上迎击加成。
+  let aaSortie = aircraft.aa_sortie
+  if (aaSortie == null) {
+    const aa = aircraft.aa ?? 0
+    const intercept = aircraft.interception ?? 0
+    aaSortie = aa + 1.5 * intercept
+  }
   const improvement = getImprovementBonus(aircraft, categoryKey, stars)
-  const base = aa + improvement + 1.5 * intercept
-  return base * Math.sqrt(slotCount)
-}
-
-function calcSlotProficiencyBonus(aircraft, categoryKey, proficiencyLevel) {
-  const data = getProficiencyData(proficiencyLevel)
-  if (!data) return { internal: 0, display: 0 }
-  const internal = Math.sqrt(data.internalMax / 10)
-  const fighter = isFighterType(aircraft, categoryKey)
-  const seaplaneBomber = isSeaplaneBomber(aircraft, categoryKey)
-  const display = getProficiencyAirBonus(proficiencyLevel, fighter, seaplaneBomber)
-  return { internal, display }
-}
-
-function calcSlotSortiePower(aircraft, categoryKey, slotCount, proficiencyLevel, stars) {
-  const base = calcSlotSortieBasePower(aircraft, categoryKey, slotCount, stars)
-  const { internal, display } = calcSlotProficiencyBonus(aircraft, categoryKey, proficiencyLevel)
-  return Math.floor(base + internal) + display
+  return (aaSortie + improvement) * Math.sqrt(slotCount)
 }
 
 function calcSlotDefenseBasePower(aircraft, categoryKey, slotCount, stars) {
-  const aa = aircraft.aa ?? 0
-  const intercept = aircraft.interception ?? 0
-  const antiBomb = aircraft.anti_bomb ?? 0
+  let aaDefense = aircraft.aa_air_defense
+  if (aaDefense == null) {
+    const aa = aircraft.aa ?? 0
+    const intercept = aircraft.interception ?? 0
+    const antiBomb = aircraft.anti_bomb ?? 0
+    aaDefense = aa + intercept + 2 * antiBomb
+  }
   const improvement = getImprovementBonus(aircraft, categoryKey, stars)
-  const base = aa + improvement + intercept + 2 * antiBomb
-  return base * Math.sqrt(slotCount)
-}
-
-function calcSlotDefensePower(aircraft, categoryKey, slotCount, proficiencyLevel, stars) {
-  const base = calcSlotDefenseBasePower(aircraft, categoryKey, slotCount, stars)
-  const { internal, display } = calcSlotProficiencyBonus(aircraft, categoryKey, proficiencyLevel)
-  return Math.floor(base + internal) + display
+  return (aaDefense + improvement) * Math.sqrt(slotCount)
 }
 
 // 简化的“陆攻开幕威力”估计，仅使用 爆装 × sqrt(搭载数) + 熟练度内部加成。
