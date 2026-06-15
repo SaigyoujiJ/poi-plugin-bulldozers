@@ -97,9 +97,7 @@ class SquadronEditor extends Component {
                     transform: active ? 'scaleY(1)' : 'scaleY(0)',
                     transformOrigin: 'top',
                     pointerEvents: active ? 'auto' : 'none',
-                    transition: active
-                      ? 'transform 0.25s ease, opacity 0.2s ease, padding 0.25s ease, margin-bottom 0.25s ease, border-color 0.2s ease, max-height 0.25s ease'
-                      : 'transform 1s ease, opacity 0.8s ease, padding 1s ease, margin-bottom 1s ease, border-color 0.5s ease, max-height 1s ease',
+                    transition: 'transform 0.5s ease, opacity 0.4s ease, padding 0.5s ease, margin-bottom 0.5s ease, border-color 0.3s ease, max-height 0.5s ease',
                   }}
                 >
                   <PlanePicker
