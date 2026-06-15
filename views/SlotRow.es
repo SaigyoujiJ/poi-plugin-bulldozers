@@ -68,7 +68,7 @@ class SlotRow extends Component {
           style={tagStyle}
         >
           {PROFICIENCY.map((p) => (
-            <option key={p.level} value={p.level}>{__(PROFICIENCY_LABELS[p.level])}</option>
+            <option key={p.level} value={p.level} style={{ color: 'var(--bulldozer-text-primary, #1c2127)' }}>{__(PROFICIENCY_LABELS[p.level])}</option>
           ))}
         </select>
         <select
@@ -84,7 +84,7 @@ class SlotRow extends Component {
           }}
         >
           {Array.from({ length: 11 }, (_, i) => (
-            <option key={i} value={i}>★{i}</option>
+            <option key={i} value={i} style={{ color: 'var(--bulldozer-text-primary, #1c2127)' }}>★{i}</option>
           ))}
         </select>
         {isConfigured && (
