@@ -96,7 +96,7 @@ class SquadronEditor extends Component {
                     transform: active ? 'scaleY(1)' : 'scaleY(0)',
                     transformOrigin: 'top',
                     pointerEvents: active ? 'auto' : 'none',
-                    transition: 'transform 0.45s ease, opacity 0.35s ease, padding 0.45s ease, margin-bottom 0.45s ease, border-color 0.3s ease',
+                    transition: 'transform 1s ease, opacity 0.8s ease, padding 1s ease, margin-bottom 1s ease, border-color 0.5s ease',
                   }}
                 >
                   {active && (
