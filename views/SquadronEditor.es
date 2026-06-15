@@ -101,13 +101,11 @@ class SquadronEditor extends Component {
                       : 'transform 1s ease, opacity 0.8s ease, padding 1s ease, margin-bottom 1s ease, border-color 0.5s ease',
                   }}
                 >
-                  {active && (
-                    <PlanePicker
-                      activeCategoryKey={activeCategoryKey}
-                      onCategoryChange={onCategoryChange}
-                      onPlaneSelect={onPlaneSelect}
-                    />
-                  )}
+                  <PlanePicker
+                    activeCategoryKey={activeCategoryKey}
+                    onCategoryChange={onCategoryChange}
+                    onPlaneSelect={onPlaneSelect}
+                  />
                 </div>
                 }
               </React.Fragment>
