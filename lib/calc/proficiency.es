@@ -14,7 +14,7 @@ export function getProficiencyData(level) {
 }
 
 export function getInternalProficiencyBonus(internalMax) {
-  return Math.floor(Math.sqrt(internalMax / 10))
+  return Math.sqrt(internalMax / 10)
 }
 
 export function getProficiencyAirBonus(level, isFighter, isSeaplaneBomber) {
