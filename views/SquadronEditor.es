@@ -81,15 +81,30 @@ class SquadronEditor extends Component {
                 onSelect={() => onSlotSelect(i)}
                 dispatch={dispatch}
               />
-              {selectedSlotIndex === i && (
-                <div style={{ marginLeft: 12, marginBottom: 8, border: '1px solid ' + colors.accent, borderRadius: 'var(--bulldozer-radius-md, 8px)', padding: 10, background: 'var(--bulldozer-bg-surface, transparent)' }}>
+              {<div
+                style={{
+                  marginLeft: 12,
+                  marginBottom: 8,
+                  border: '1px solid ' + colors.accent,
+                  borderRadius: 'var(--bulldozer-radius-md, 8px)',
+                  padding: selectedSlotIndex === i ? 10 : 0,
+                  background: 'var(--bulldozer-bg-surface, transparent)',
+                  maxHeight: selectedSlotIndex === i ? 320 : 0,
+                  opacity: selectedSlotIndex === i ? 1 : 0,
+                  overflow: 'hidden',
+                  transform: selectedSlotIndex === i ? 'translateY(0)' : 'translateY(-8px)',
+                  transition: 'max-height 0.25s ease, opacity 0.2s ease, transform 0.25s ease, padding 0.25s ease',
+                }}
+              >
+                {selectedSlotIndex === i && (
                   <PlanePicker
                     activeCategoryKey={activeCategoryKey}
                     onCategoryChange={onCategoryChange}
                     onPlaneSelect={onPlaneSelect}
                   />
-                </div>
-              )}
+                )}
+              </div>
+              }
             </React.Fragment>
           ))}
         </div>
