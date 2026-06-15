@@ -78,10 +78,12 @@ class SlotRow extends Component {
               borderColor: colors.accent,
               fontWeight: 600,
               minWidth: 48,
+              textAlign: 'center',
+              textAlignLast: 'center',
             }}
           >
             {Array.from({ length: maxCount + 1 }, (_, i) => (
-              <option key={i} value={i} style={{ color: 'var(--bulldozer-text-primary, #1c2127)' }}>{i}架</option>
+              <option key={i} value={i} style={{ color: 'var(--bulldozer-text-primary, #1c2127)', textAlign: 'center' }}>{i}</option>
             ))}
           </select>
         )}
