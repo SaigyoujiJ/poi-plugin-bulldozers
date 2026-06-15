@@ -46,7 +46,7 @@ class SlotRow extends Component {
     const isConfigured = !!slot.aircraftId
     const colors = getModeColor(mode)
     const maxCount = planeInfo ? getSlotCount(planeInfo.aircraft, planeInfo.categoryKey) : 0
-    const currentCount = isConfigured ? (slot.count || maxCount) : 0
+    const currentCount = isConfigured ? (slot.count != null ? slot.count : maxCount) : 0
 
     return (
       <div
