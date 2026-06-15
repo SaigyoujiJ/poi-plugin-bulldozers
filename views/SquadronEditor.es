@@ -93,7 +93,7 @@ class SquadronEditor extends Component {
                   opacity: selectedSlotIndex === i ? 1 : 0,
                   overflow: 'hidden',
                   transform: selectedSlotIndex === i ? 'translateY(0)' : 'translateY(-8px)',
-                  transition: 'max-height 0.25s ease, opacity 0.2s ease, transform 0.25s ease, padding 0.25s ease',
+                  transition: 'max-height 0.4s ease, opacity 0.35s ease, transform 0.4s ease, padding 0.4s ease',
                 }}
               >
                 {selectedSlotIndex === i && (
