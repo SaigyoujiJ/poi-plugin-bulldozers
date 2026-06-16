@@ -1,6 +1,6 @@
 {
   "name": "poi-plugin-bulldozers",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "陆航速配 - 舰娘陆航快速配装插件",
   "main": "index.es",
   "scripts": {
