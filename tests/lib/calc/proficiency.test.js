@@ -10,7 +10,7 @@ describe('proficiency', () => {
   })
 
   test('internal bonus at max proficiency', () => {
-    expect(getInternalProficiencyBonus(120)).toBe(3)
+    expect(getInternalProficiencyBonus(120)).toBe(Math.sqrt(120 / 10))
   })
 
   test('max proficiency data lookup', () => {

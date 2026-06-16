@@ -26,6 +26,28 @@ function calcSlotDefenseBasePower(aircraft, categoryKey, slotCount, stars) {
   return (aaDefense + improvement) * Math.sqrt(slotCount)
 }
 
+function calcSlotProficiencyBonus(aircraft, categoryKey, proficiencyLevel) {
+  const data = getProficiencyData(proficiencyLevel)
+  if (!data) return { internal: 0, display: 0 }
+  const internal = Math.sqrt(data.internalMax / 10)
+  const fighter = isFighterType(aircraft, categoryKey)
+  const seaplaneBomber = isSeaplaneBomber(aircraft, categoryKey)
+  const display = getProficiencyAirBonus(proficiencyLevel, fighter, seaplaneBomber)
+  return { internal, display }
+}
+
+function calcSlotSortiePower(aircraft, categoryKey, slotCount, proficiencyLevel, stars) {
+  const base = calcSlotSortieBasePower(aircraft, categoryKey, slotCount, stars)
+  const { internal, display } = calcSlotProficiencyBonus(aircraft, categoryKey, proficiencyLevel)
+  return Math.floor(base + internal) + display
+}
+
+function calcSlotDefensePower(aircraft, categoryKey, slotCount, proficiencyLevel, stars) {
+  const base = calcSlotDefenseBasePower(aircraft, categoryKey, slotCount, stars)
+  const { internal, display } = calcSlotProficiencyBonus(aircraft, categoryKey, proficiencyLevel)
+  return Math.floor(base + internal) + display
+}
+
 // 简化的“陆攻开幕威力”估计，仅使用 爆装 × sqrt(搭载数) + 熟练度内部加成。
 // 这不建模完整的 LBAS 开幕伤害公式（还涉及雷装、+25 基础值、侦察机倍率等）。
 function calcSlotLandAttackerStrike(aircraft, slotCount, proficiencyLevel) {
