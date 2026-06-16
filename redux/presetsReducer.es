@@ -17,7 +17,7 @@ const { __ } = window.i18n['poi-plugin-bulldozers']
 
 export const DEFAULT_PRESET_ID = 'default'
 
-export function createDefaultPreset(id = DEFAULT_PRESET_ID, name = __('Preset.DefaultName', { number: 1 })) {
+export function createDefaultPreset(id = DEFAULT_PRESET_ID, name = __('Preset.DefaultName').replace('{{number}}', 1)) {
   return {
     id,
     name,
