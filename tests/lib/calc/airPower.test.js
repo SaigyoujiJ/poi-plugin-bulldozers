@@ -23,9 +23,9 @@ describe('sortie air power', () => {
   })
 
   test('九六式陸攻 18機 出击制空（aa_sortie = 1）', () => {
-    // slot power = floor(1 * sqrt(18) + sqrt(9/10)) + 0(display) = 5
+    // slot power = floor(1 * sqrt(18)) + floor(sqrt(9/10)) + 0(display) = 4
     const slots = [{ aircraftId: 168 }]
-    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(5)
+    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(4)
   })
 
   test('多槽位求和', () => {
@@ -60,11 +60,11 @@ describe('defense air power', () => {
     expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(80)
   })
 
-  test('雷電 18機 熟練度>> ★10 防空制空 applies improvement bonus = 110', () => {
+  test('雷電 18機 熟練度>> ★10 防空制空 applies improvement bonus = 109', () => {
     // improvement = 0.2 * 10 = 2
-    // slot power = floor((18 + 2) * sqrt(18) + sqrt(12)) + 22 = 110
+    // slot power = floor((18 + 2) * sqrt(18)) + floor(sqrt(12)) + 22 = 109
     const slots = [{ aircraftId: 175, proficiency: 7, stars: 10 }]
-    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(110)
+    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(109)
   })
 
   test('空槽位 / 无 aircraftId 在防空计算中被跳过', () => {
@@ -77,9 +77,9 @@ describe('defense air power', () => {
   })
 
   test('九六式陸攻 18機 防空制空（aa_air_defense = 1）', () => {
-    // slot power = floor(1 * sqrt(18) + sqrt(9/10)) + 0 = 5
+    // slot power = floor(1 * sqrt(18)) + floor(sqrt(9/10)) + 0 = 4
     const slots = [{ aircraftId: 168 }]
-    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(5)
+    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(4)
   })
 })
 
@@ -137,14 +137,14 @@ describe('recon multipliers', () => {
 
   test('seaplane bomber from seaplanes category does not get defense recon multiplier', () => {
     // 瑞雲 id 26: aa_air_defense=2, los=6, category seaplanes, slot=18, prof=0
-    // slot power = floor(2 * sqrt(18) + sqrt(9/10)) = 9
+    // slot power = floor(2 * sqrt(18)) + floor(sqrt(9/10)) = 8
     // seaplanes are not recon, so multiplier stays 1
-    // total = floor((101 + 9) * 1) = 110
+    // total = floor((101 + 8) * 1) = 109
     const slots = [
       { aircraftId: 175, proficiency: 7, stars: 0 },
       { aircraftId: 26, proficiency: 0, stars: 0 },
     ]
-    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(110)
+    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(109)
   })
 
   test('seaplane recon from recon_flying_boats gets water recon defense multiplier 1.10', () => {
@@ -170,14 +170,29 @@ describe('improvement bonus', () => {
 
   test('fighter-bomber improvement 0.25 per star', () => {
     // 橘花改 aa_sortie=12, stars=10 -> +2.5 fighter-bomber improvement
+    // floor((12 + 2.5) * sqrt(18)) + floor(sqrt(9/10)) + 0 = 61
     const slots = [{ aircraftId: 200, proficiency: 0, stars: 10 }]
-    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(62)
+    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(61)
   })
 
   test('land attacker improvement 0.5 * sqrt(stars)', () => {
     // 九六式陸攻 aa_sortie=1, stars=9 -> +1.5 land attacker improvement
+    // floor((1 + 1.5) * sqrt(18)) + floor(sqrt(9/10)) + 0 = 10
     const slots = [{ aircraftId: 168, proficiency: 0, stars: 9 }]
-    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(11)
+    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(10)
+  })
+})
+
+describe('kc-web alignment', () => {
+  test('一式戦 隼II型(64戦隊) + 3x 秋水 满熟练出击制空 = 214', () => {
+    // kc-web: 103 | 37 | 37 | 37
+    const slots = [
+      { aircraftId: 225, proficiency: 7, stars: 0 },
+      { aircraftId: 352, proficiency: 7, stars: 0 },
+      { aircraftId: 352, proficiency: 7, stars: 0 },
+      { aircraftId: 352, proficiency: 7, stars: 0 },
+    ]
+    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(214)
   })
 })
 

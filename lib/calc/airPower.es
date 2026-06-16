@@ -39,13 +39,13 @@ function calcSlotProficiencyBonus(aircraft, categoryKey, proficiencyLevel) {
 function calcSlotSortiePower(aircraft, categoryKey, slotCount, proficiencyLevel, stars) {
   const base = calcSlotSortieBasePower(aircraft, categoryKey, slotCount, stars)
   const { internal, display } = calcSlotProficiencyBonus(aircraft, categoryKey, proficiencyLevel)
-  return Math.floor(base + internal) + display
+  return Math.floor(base) + Math.floor(internal) + display
 }
 
 function calcSlotDefensePower(aircraft, categoryKey, slotCount, proficiencyLevel, stars) {
   const base = calcSlotDefenseBasePower(aircraft, categoryKey, slotCount, stars)
   const { internal, display } = calcSlotProficiencyBonus(aircraft, categoryKey, proficiencyLevel)
-  return Math.floor(base + internal) + display
+  return Math.floor(base) + Math.floor(internal) + display
 }
 
 // 简化的“陆攻开幕威力”估计，仅使用 爆装 × sqrt(搭载数) + 熟练度内部加成。
