@@ -29,9 +29,23 @@ class SlotRow extends Component {
     dispatch(setSlotStars(presetId, squadronIndex, slotIndex, Number(e.target.value)))
   }
 
-  handleCountChange = (e) => {
+  handleCountChange = (nextCount) => {
     const { dispatch, presetId, squadronIndex, slotIndex } = this.props
-    dispatch(setSlotCount(presetId, squadronIndex, slotIndex, Number(e.target.value)))
+    dispatch(setSlotCount(presetId, squadronIndex, slotIndex, nextCount))
+  }
+
+  handleCountDecrement = () => {
+    const { slot } = this.props
+    const next = Math.max(0, (slot.count ?? 0) - 1)
+    this.handleCountChange(next)
+  }
+
+  handleCountIncrement = () => {
+    const { slot } = this.props
+    const planeInfo = slot.aircraftId ? lookupAircraft(slot.aircraftId) : null
+    const maxCount = planeInfo ? getSlotCount(planeInfo.aircraft, planeInfo.categoryKey) : 0
+    const next = Math.min(maxCount, (slot.count ?? 0) + 1)
+    this.handleCountChange(next)
   }
 
   handleClear = () => {
@@ -67,25 +81,59 @@ class SlotRow extends Component {
         }}
       >
         {isConfigured && (
-          <select
-            value={currentCount}
-            onChange={this.handleCountChange}
+          <div
             onClick={(e) => e.stopPropagation()}
             style={{
-              ...tagStyle,
-              background: colors.badgeBg,
-              color: colors.badgeText,
-              borderColor: colors.accent,
-              fontWeight: 600,
-              minWidth: 48,
-              textAlign: 'center',
-              textAlignLast: 'center',
+              display: 'flex',
+              alignItems: 'center',
+              border: '1px solid ' + colors.accent,
+              borderRadius: 'var(--bulldozer-radius-sm, 4px)',
+              overflow: 'hidden',
+              flexShrink: 0,
             }}
           >
-            {Array.from({ length: maxCount + 1 }, (_, i) => (
-              <option key={i} value={i} style={{ color: 'var(--bulldozer-text-primary, #1c2127)', textAlign: 'center' }}>{i}</option>
-            ))}
-          </select>
+            <button
+              onClick={this.handleCountDecrement}
+              style={{
+                background: colors.badgeBg,
+                color: colors.badgeText,
+                border: 'none',
+                borderRight: '1px solid ' + colors.accent,
+                padding: '2px 8px',
+                fontSize: 11,
+                fontWeight: 600,
+                cursor: 'pointer',
+                lineHeight: 1,
+              }}
+            >−</button>
+            <div
+              style={{
+                background: colors.badgeBg,
+                color: colors.badgeText,
+                minWidth: 28,
+                padding: '2px 4px',
+                fontSize: 11,
+                fontWeight: 600,
+                textAlign: 'center',
+              }}
+            >
+              {currentCount}
+            </div>
+            <button
+              onClick={this.handleCountIncrement}
+              style={{
+                background: colors.badgeBg,
+                color: colors.badgeText,
+                border: 'none',
+                borderLeft: '1px solid ' + colors.accent,
+                padding: '2px 8px',
+                fontSize: 11,
+                fontWeight: 600,
+                cursor: 'pointer',
+                lineHeight: 1,
+              }}
+            >+</button>
+          </div>
         )}
         <div style={{ flex: 1, fontWeight: isConfigured ? 500 : 400, color: isConfigured ? 'var(--bulldozer-text-primary, #1c2127)' : 'var(--bulldozer-text-secondary, #5f6b7a)' }}>
           {planeName}
