@@ -53,6 +53,12 @@ class AppPanel extends Component {
     this.observer = null
   }
 
+  handleClickOutside = () => {
+    if (this.rootRef.current) {
+      this.rootRef.current.dispatchEvent(new CustomEvent('bulldozers-close-popups', { bubbles: true }))
+    }
+  }
+
   updateDarkMode = () => {
     const node = this.rootRef.current
     if (!node) return
@@ -120,12 +126,13 @@ class AppPanel extends Component {
           minHeight: '100%',
         }}
       >
-        <PresetBar />
-        <ResultPanel squadron={squadron} />
+        <PresetBar onClickOutside={this.handleClickOutside} />
+        <ResultPanel squadron={squadron} onClickOutside={this.handleClickOutside} />
         <SquadronTabs
           activeIndex={activeSquadronIndex}
           squadrons={squadrons}
           onTabChange={(i) => this.setState({ activeSquadronIndex: i, selectedSlotIndex: null })}
+          onClickOutside={this.handleClickOutside}
         />
         <SquadronEditor
           squadron={squadron}
@@ -142,6 +149,7 @@ class AppPanel extends Component {
           }}
           onCategoryChange={(key) => this.setState({ activeCategoryKey: key })}
           dispatch={dispatch}
+          onClickOutside={this.handleClickOutside}
         />
       </div>
     )

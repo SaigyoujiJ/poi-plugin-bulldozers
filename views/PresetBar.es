@@ -49,12 +49,12 @@ class PresetBar extends Component {
   }
 
   render() {
-    const { activePresetId, presets } = this.props
+    const { activePresetId, presets, onClickOutside } = this.props
     const { showSaveDialog, newPresetName } = this.state
     const presetIds = Object.keys(presets)
 
     return (
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+      <div onClick={onClickOutside} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
         <div style={{ fontWeight: 600, color: 'var(--bulldozer-text-primary, #1c2127)', fontSize: 14 }}>
           {presets[activePresetId] ? presets[activePresetId].name : '预设'}
         </div>

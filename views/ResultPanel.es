@@ -7,10 +7,10 @@ const MUTED_STYLE = { opacity: 'var(--bulldozer-muted-opacity, 0.35)' }
 const { __ } = window.i18n['poi-plugin-bulldozers']
 
 class ResultPanel extends Component {
-  renderMetric(label, value, active, mode) {
+  renderMetric(label, value, active, mode, onClick) {
     const color = active ? getModeColor(mode).accent : 'var(--bulldozer-text-primary, #1c2127)'
     return (
-      <div style={{ ...metricCardStyle, ...(active ? {} : MUTED_STYLE) }}>
+      <div onClick={onClick} style={{ ...metricCardStyle, ...(active ? {} : MUTED_STYLE) }}>
         <div style={{ fontSize: 10, color: 'var(--bulldozer-text-secondary, #888)', marginBottom: 4 }}>{label}</div>
         <div style={{ fontSize: 24, fontWeight: 700, color }}>{active ? value : '—'}</div>
       </div>
@@ -18,7 +18,7 @@ class ResultPanel extends Component {
   }
 
   render() {
-    const { squadron } = this.props
+    const { squadron, onClickOutside } = this.props
     const results = selectSquadronResults(squadron)
     const mode = squadron && squadron.mode ? squadron.mode : 'sortie'
     const isSortie = mode === 'sortie'
@@ -27,13 +27,13 @@ class ResultPanel extends Component {
       <div style={gridStyle}>
         {isSortie ? (
           [
-            this.renderMetric(__('ResultPanel.AirPower'), results.sortie, true, mode),
-            this.renderMetric(__('ResultPanel.Radius'), results.radius, true, mode),
+            this.renderMetric(__('ResultPanel.AirPower'), results.sortie, true, mode, onClickOutside),
+            this.renderMetric(__('ResultPanel.Radius'), results.radius, true, mode, onClickOutside),
           ]
         ) : (
           [
-            this.renderMetric(__('ResultPanel.HeavyBomberDefense'), results.heavyBomberDefense, true, mode),
-            this.renderMetric(__('ResultPanel.DefenseAirPower'), results.defense, true, mode),
+            this.renderMetric(__('ResultPanel.HeavyBomberDefense'), results.heavyBomberDefense, true, mode, onClickOutside),
+            this.renderMetric(__('ResultPanel.DefenseAirPower'), results.defense, true, mode, onClickOutside),
           ]
         )}
       </div>

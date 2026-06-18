@@ -59,14 +59,14 @@ class SquadronEditor extends Component {
   }
 
   render() {
-    const { squadron, presetId, squadronIndex, selectedSlotIndex, activeCategoryKey, onSlotSelect, onPlaneSelect, onCategoryChange, dispatch } = this.props
+    const { squadron, presetId, squadronIndex, selectedSlotIndex, activeCategoryKey, onSlotSelect, onPlaneSelect, onCategoryChange, dispatch, onClickOutside } = this.props
 
     if (!squadron) return null
     const mode = squadron.mode || 'sortie'
     const colors = getModeColor(mode)
 
     return (
-      <div style={{ marginBottom: 12 }}>
+      <div style={{ marginBottom: 12 }} onClick={onClickOutside}>
         {this.renderModeToggle(mode)}
         <div>
           {squadron.slots.map((slot, i) => {

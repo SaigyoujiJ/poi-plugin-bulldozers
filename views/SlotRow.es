@@ -19,6 +19,53 @@ const PROFICIENCY_LABELS = [
 ]
 
 class SlotRow extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      countPickerOpen: false,
+    }
+  }
+
+  componentDidMount() {
+    if (this.rootRef && this.rootRef.current) {
+      this.rootRef.current.addEventListener('bulldozers-close-popups', this.closeCountPicker)
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.rootRef && this.rootRef.current) {
+      this.rootRef.current.removeEventListener('bulldozers-close-popups', this.closeCountPicker)
+    }
+  }
+
+  toggleCountPicker = (e) => {
+    e.stopPropagation()
+    this.setState((prev) => ({ countPickerOpen: !prev.countPickerOpen }))
+  }
+
+  closeCountPicker = () => {
+    this.setState({ countPickerOpen: false })
+  }
+
+  handleCountSliderChange = (e) => {
+    const { dispatch, presetId, squadronIndex, slotIndex } = this.props
+    dispatch(setSlotCount(presetId, squadronIndex, slotIndex, Number(e.target.value)))
+  }
+
+  handleCountWheel = (e) => {
+    const { slot, dispatch, presetId, squadronIndex, slotIndex } = this.props
+    const planeInfo = slot.aircraftId ? lookupAircraft(slot.aircraftId) : null
+    if (!planeInfo) return
+    const maxCount = getSlotCount(planeInfo.aircraft, planeInfo.categoryKey)
+    const currentCount = slot.count != null ? slot.count : maxCount
+    e.preventDefault()
+    const delta = e.deltaY > 0 ? -1 : 1
+    const next = Math.max(0, Math.min(maxCount, currentCount + delta))
+    if (next !== currentCount) {
+      dispatch(setSlotCount(presetId, squadronIndex, slotIndex, next))
+    }
+  }
+
   handleProficiencyChange = (e) => {
     const { dispatch, presetId, squadronIndex, slotIndex } = this.props
     dispatch(setSlotProficiency(presetId, squadronIndex, slotIndex, Number(e.target.value)))
@@ -29,28 +76,90 @@ class SlotRow extends Component {
     dispatch(setSlotStars(presetId, squadronIndex, slotIndex, Number(e.target.value)))
   }
 
-  handleCountChange = (nextCount) => {
-    const { dispatch, presetId, squadronIndex, slotIndex } = this.props
-    dispatch(setSlotCount(presetId, squadronIndex, slotIndex, nextCount))
-  }
-
-  handleCountDecrement = () => {
-    const { slot } = this.props
-    const next = Math.max(0, (slot.count ?? 0) - 1)
-    this.handleCountChange(next)
-  }
-
-  handleCountIncrement = () => {
-    const { slot } = this.props
-    const planeInfo = slot.aircraftId ? lookupAircraft(slot.aircraftId) : null
-    const maxCount = planeInfo ? getSlotCount(planeInfo.aircraft, planeInfo.categoryKey) : 0
-    const next = Math.min(maxCount, (slot.count ?? 0) + 1)
-    this.handleCountChange(next)
-  }
-
   handleClear = () => {
     const { dispatch, presetId, squadronIndex, slotIndex } = this.props
     dispatch(clearSlot(presetId, squadronIndex, slotIndex))
+  }
+
+  renderCountPicker(currentCount, maxCount, colors) {
+    return (
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          position: 'absolute',
+          top: '100%',
+          left: 0,
+          marginTop: 4,
+          background: '#2a2d34',
+          border: '2px solid ' + colors.accent,
+          borderRadius: 'var(--bulldozer-radius-sm, 4px)',
+          padding: 12,
+          minWidth: 180,
+          zIndex: 10,
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
+          animation: 'bulldozer-popup-in 0.2s ease',
+        }}
+      >
+        <div style={{ textAlign: 'center', marginBottom: 10, fontWeight: 700, fontSize: 16, color: '#ffffff' }}>
+          {currentCount}
+        </div>
+        <input
+          type="range"
+          min={0}
+          max={maxCount}
+          value={currentCount}
+          onChange={this.handleCountSliderChange}
+          onWheel={this.handleCountWheel}
+          className="bulldozer-count-slider"
+          style={{
+            width: '100%',
+            WebkitAppearance: 'none',
+            appearance: 'none',
+            height: 8,
+            borderRadius: 4,
+            background: '#5f6b7a',
+            outline: 'none',
+          }}
+        />
+        <style>{`
+          .bulldozer-count-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            border: 3px solid ${colors.accent};
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            margin-top: -6px;
+          }
+          .bulldozer-count-slider::-webkit-slider-runnable-track {
+            height: 8px;
+            border-radius: 4px;
+            background: #5f6b7a;
+          }
+          .bulldozer-count-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            border: 3px solid ${colors.accent};
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+          }
+          .bulldozer-count-slider::-moz-range-track {
+            height: 8px;
+            border-radius: 4px;
+            background: #5f6b7a;
+          }
+        `}</style>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 6, fontSize: 12, fontWeight: 600, color: '#b0b5bd' }}>
+          <span>0</span>
+          <span>{maxCount}</span>
+        </div>
+      </div>
+    )
   }
 
   render() {
@@ -64,6 +173,7 @@ class SlotRow extends Component {
 
     return (
       <div
+        ref={(el) => { this.rootRef = el }}
         onClick={onSelect}
         style={{
           display: 'flex',
@@ -81,59 +191,27 @@ class SlotRow extends Component {
         }}
       >
         {isConfigured && (
-          <div
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              border: '1px solid ' + colors.accent,
-              borderRadius: 'var(--bulldozer-radius-sm, 4px)',
-              overflow: 'hidden',
-              flexShrink: 0,
-            }}
-          >
-            <button
-              onClick={this.handleCountDecrement}
-              style={{
-                background: colors.badgeBg,
-                color: colors.badgeText,
-                border: 'none',
-                borderRight: '1px solid ' + colors.accent,
-                padding: '2px 8px',
-                fontSize: 11,
-                fontWeight: 600,
-                cursor: 'pointer',
-                lineHeight: 1,
-              }}
-            >−</button>
+          <React.Fragment>
             <div
+              ref={(el) => { this.countBadgeRef = el }}
+              onClick={this.toggleCountPicker}
               style={{
+                position: 'relative',
+                ...tagStyle,
                 background: colors.badgeBg,
                 color: colors.badgeText,
-                minWidth: 28,
-                padding: '2px 4px',
-                fontSize: 11,
+                borderColor: colors.accent,
                 fontWeight: 600,
+                minWidth: 32,
                 textAlign: 'center',
+                cursor: 'pointer',
+                flexShrink: 0,
               }}
             >
               {currentCount}
+              {this.state.countPickerOpen && this.renderCountPicker(currentCount, maxCount, colors)}
             </div>
-            <button
-              onClick={this.handleCountIncrement}
-              style={{
-                background: colors.badgeBg,
-                color: colors.badgeText,
-                border: 'none',
-                borderLeft: '1px solid ' + colors.accent,
-                padding: '2px 8px',
-                fontSize: 11,
-                fontWeight: 600,
-                cursor: 'pointer',
-                lineHeight: 1,
-              }}
-            >+</button>
-          </div>
+          </React.Fragment>
         )}
         <div style={{ flex: 1, fontWeight: isConfigured ? 500 : 400, color: isConfigured ? 'var(--bulldozer-text-primary, #1c2127)' : 'var(--bulldozer-text-secondary, #5f6b7a)' }}>
           {planeName}

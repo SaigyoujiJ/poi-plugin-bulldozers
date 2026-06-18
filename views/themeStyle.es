@@ -36,4 +36,15 @@ export const themeCss = `
 .bulldozer-plane-item:hover {
   background: var(--bulldozer-bg-hover, rgba(0, 0, 0, 0.05));
 }
+
+@keyframes bulldozer-popup-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 `

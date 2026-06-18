@@ -3,10 +3,10 @@ import { getModeColor } from '../lib/ui/themeColors'
 
 class SquadronTabs extends Component {
   render() {
-    const { activeIndex, squadrons, onTabChange } = this.props
+    const { activeIndex, squadrons, onTabChange, onClickOutside } = this.props
 
     return (
-      <div style={{ marginBottom: 16 }}>
+      <div style={{ marginBottom: 16 }} onClick={onClickOutside}>
         <div style={{ display: 'flex', position: 'relative' }}>
           {squadrons.map((sq, i) => {
             const isActive = i === activeIndex
@@ -14,7 +14,7 @@ class SquadronTabs extends Component {
             return (
               <button
                 key={sq.id}
-                onClick={() => onTabChange(i)}
+                onClick={(e) => { e.stopPropagation(); onTabChange(i) }}
                 style={{
                   flex: 1,
                   padding: '8px 14px',
