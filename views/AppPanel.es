@@ -6,7 +6,7 @@ import SquadronTabs from './SquadronTabs'
 import SquadronEditor from './SquadronEditor'
 import ResultPanel from './ResultPanel'
 import { selectActivePreset, selectSquadrons, selectPlayerEquipCategories } from '../redux/selectors'
-import { setSlotAircraft } from '../redux/actions'
+import { setSlotAircraft, setSlotStars, setSlotProficiency } from '../redux/actions'
 import { themeCss } from './themeStyle'
 
 const LIGHT_VARS = {
@@ -144,9 +144,15 @@ class AppPanel extends Component {
           pickerMode={pickerMode}
           playerEquips={this.props.playerEquips}
           onSlotSelect={(i) => this.setState({ selectedSlotIndex: selectedSlotIndex === i ? null : i })}
-          onPlaneSelect={(aircraftId) => {
+          onPlaneSelect={(arg) => {
             if (selectedSlotIndex != null) {
-              dispatch(setSlotAircraft(activePresetId, activeSquadronIndex, selectedSlotIndex, aircraftId))
+              if (typeof arg === 'object' && arg !== null) {
+                dispatch(setSlotAircraft(activePresetId, activeSquadronIndex, selectedSlotIndex, arg.aircraftId))
+                dispatch(setSlotStars(activePresetId, activeSquadronIndex, selectedSlotIndex, arg.stars ?? 0))
+                dispatch(setSlotProficiency(activePresetId, activeSquadronIndex, selectedSlotIndex, arg.proficiency ?? 0))
+              } else {
+                dispatch(setSlotAircraft(activePresetId, activeSquadronIndex, selectedSlotIndex, arg))
+              }
               this.setState({ selectedSlotIndex: null })
             }
           }}

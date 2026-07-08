@@ -19,19 +19,25 @@ export function aggregatePlayerEquips(equips) {
     if (!planeInfo) continue
 
     const { aircraft, categoryKey } = planeInfo
+    const stars = equip.api_level ?? 0
+    const prof = equip.api_alv ?? 0
+    const key = `${aircraft.id}|${stars}|${prof}`
+
     let acMap = catData.get(categoryKey)
     if (!acMap) {
       acMap = new Map()
       catData.set(categoryKey, acMap)
     }
 
-    const existing = acMap.get(aircraft.id)
+    const existing = acMap.get(key)
     if (existing) {
       existing.count += 1
     } else {
-      acMap.set(aircraft.id, {
+      acMap.set(key, {
         aircraftId: aircraft.id,
         name: aircraft.name,
+        stars,
+        proficiency: prof,
         count: 1,
       })
     }
