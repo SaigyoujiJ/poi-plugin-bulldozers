@@ -58,6 +58,55 @@ class SquadronEditor extends Component {
     )
   }
 
+  renderPickerModeToggle(pickerMode, colors) {
+    const { onPickerModeChange } = this.props
+    return (
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
+        {[
+          { key: 'catalog', label: __('PlanePicker.Catalog') },
+          { key: 'inventory', label: __('PlanePicker.Inventory') },
+        ].map(({ key, label }) => {
+          const active = pickerMode === key
+          return (
+            <label
+              key={key}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 6,
+                cursor: 'pointer',
+                opacity: active ? 1 : 0.75,
+                color: active ? 'var(--bulldozer-text-primary, #1c2127)' : 'var(--bulldozer-text-secondary, #5f6b7a)',
+              }}
+            >
+              <input
+                type="radio"
+                name={'picker-mode-' + this.props.squadronIndex}
+                value={key}
+                checked={active}
+                onChange={() => onPickerModeChange && onPickerModeChange(key)}
+                style={{ position: 'absolute', opacity: 0, width: 0, height: 0 }}
+              />
+              <span
+                style={{
+                  display: 'inline-block',
+                  width: 14,
+                  height: 14,
+                  borderRadius: '50%',
+                  border: '2px solid ' + colors.accent,
+                  background: active ? colors.accent : 'transparent',
+                  boxSizing: 'border-box',
+                  flexShrink: 0,
+                }}
+              />
+              {label}
+            </label>
+          )
+        })}
+      </div>
+    )
+  }
+
   render() {
     const { squadron, presetId, squadronIndex, selectedSlotIndex, activeCategoryKey, pickerMode, playerEquips, onSlotSelect, onPlaneSelect, onCategoryChange, onPickerModeChange, dispatch, onClickOutside } = this.props
 
@@ -68,6 +117,7 @@ class SquadronEditor extends Component {
     return (
       <div style={{ marginBottom: 12 }} onClick={onClickOutside}>
         {this.renderModeToggle(mode)}
+        {this.renderPickerModeToggle(pickerMode || 'catalog', colors)}
         <div>
           {squadron.slots.map((slot, i) => {
             const active = selectedSlotIndex === i

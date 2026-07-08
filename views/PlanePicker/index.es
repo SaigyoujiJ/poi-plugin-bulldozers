@@ -39,61 +39,20 @@ class PlanePicker extends Component {
   }
 
   render() {
-    const { activeCategoryKey, onCategoryChange, onPlaneSelect, pickerMode, onPickerModeChange } = this.props
+    const { activeCategoryKey, onCategoryChange, onPlaneSelect, pickerMode } = this.props
     const mode = pickerMode || 'catalog'
+
+    if (mode === 'inventory') {
+      return this.renderInventory()
+    }
 
     return (
       <div>
-        <div style={{ display: 'flex', gap: 6, marginBottom: 8 }}>
-          <button
-            onClick={() => onPickerModeChange && onPickerModeChange('catalog')}
-            style={{
-              ...modeTabStyle,
-              background: mode === 'catalog'
-                ? 'var(--bulldozer-accent, #2d72d2)'
-                : 'var(--bulldozer-bg-input, var(--poi-background-color))',
-              color: mode === 'catalog'
-                ? 'var(--bulldozer-accent-text, #ffffff)'
-                : 'var(--bulldozer-text-primary, #1c2127)',
-            }}
-          >
-            {__('PlanePicker.Catalog')}
-          </button>
-          <button
-            onClick={() => onPickerModeChange && onPickerModeChange('inventory')}
-            style={{
-              ...modeTabStyle,
-              background: mode === 'inventory'
-                ? 'var(--bulldozer-accent, #2d72d2)'
-                : 'var(--bulldozer-bg-input, var(--poi-background-color))',
-              color: mode === 'inventory'
-                ? 'var(--bulldozer-accent-text, #ffffff)'
-                : 'var(--bulldozer-text-primary, #1c2127)',
-            }}
-          >
-            {__('PlanePicker.Inventory')}
-          </button>
-        </div>
-        {mode === 'catalog' ? (
-          <React.Fragment>
-            <CategoryTabs activeCategoryKey={activeCategoryKey} onCategoryChange={onCategoryChange} />
-            <PlaneList categoryKey={activeCategoryKey} onSelect={onPlaneSelect} />
-          </React.Fragment>
-        ) : (
-          this.renderInventory()
-        )}
+        <CategoryTabs activeCategoryKey={activeCategoryKey} onCategoryChange={onCategoryChange} />
+        <PlaneList categoryKey={activeCategoryKey} onSelect={onPlaneSelect} />
       </div>
     )
   }
-}
-
-const modeTabStyle = {
-  padding: '2px 10px',
-  border: '1px solid var(--bulldozer-border, #d3d8de)',
-  borderRadius: 'var(--bulldozer-radius-sm, 4px)',
-  cursor: 'pointer',
-  fontSize: 12,
-  fontWeight: 600,
 }
 
 export default PlanePicker
