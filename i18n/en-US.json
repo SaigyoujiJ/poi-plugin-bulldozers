@@ -36,8 +36,8 @@
     "Third": "3rd Air Squadron"
   },
   "PlanePicker": {
-    "Catalog": "All aircraft",
-    "Inventory": "My equipment",
+    "Catalog": "All LBAS",
+    "Inventory": "My LBAS",
     "InventoryEmpty": "No owned aircraft available"
   },
   "Proficiency": {

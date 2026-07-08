@@ -36,8 +36,8 @@
     "Third": "第三航空队"
   },
   "PlanePicker": {
-    "Catalog": "全部机种",
-    "Inventory": "我的装备",
+    "Catalog": "全部陆航",
+    "Inventory": "我的陆航",
     "InventoryEmpty": "没有可用的装备"
   },
   "Proficiency": {

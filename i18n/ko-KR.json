@@ -36,8 +36,8 @@
     "Third": "제3항공대"
   },
   "PlanePicker": {
-    "Catalog": "전 기종",
-    "Inventory": "내 장비",
+    "Catalog": "전 육항기",
+    "Inventory": "내 육항기",
     "InventoryEmpty": "사용 가능한 장비가 없습니다"
   },
   "Proficiency": {

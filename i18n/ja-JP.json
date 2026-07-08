@@ -36,8 +36,8 @@
     "Third": "第三航空隊"
   },
   "PlanePicker": {
-    "Catalog": "全機種",
-    "Inventory": "所持装備",
+    "Catalog": "全陸航",
+    "Inventory": "所持陸航",
     "InventoryEmpty": "利用可能な装備がありません"
   },
   "Proficiency": {
