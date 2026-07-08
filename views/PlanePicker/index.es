@@ -7,7 +7,7 @@ const { __ } = window.i18n['poi-plugin-bulldozers']
 
 class PlanePicker extends Component {
   renderInventory() {
-    const { playerEquips, onPlaneSelect } = this.props
+    const { playerEquips, activeCategoryKey, onCategoryChange, onPlaneSelect } = this.props
     const equips = playerEquips || []
 
     if (equips.length === 0) {
@@ -18,22 +18,17 @@ class PlanePicker extends Component {
       )
     }
 
+    const ownedKeys = equips.map((c) => c.categoryKey)
+    const activeCat = equips.find((c) => c.categoryKey === activeCategoryKey) || equips[0]
+
     return (
-      <div style={{ maxHeight: 240, overflowY: 'auto' }}>
-        {equips.map((cat) => (
-          <React.Fragment key={cat.categoryKey}>
-            <div style={{
-              fontSize: 11,
-              fontWeight: 600,
-              color: 'var(--bulldozer-text-secondary, #5f6b7a)',
-              padding: '4px 8px 2px',
-              marginTop: 6,
-            }}>
-              {__(cat.display)} ({cat.aircraft.length})
-            </div>
-            <PlaneList aircraftList={cat.aircraft} onSelect={onPlaneSelect} />
-          </React.Fragment>
-        ))}
+      <div>
+        <CategoryTabs
+          activeCategoryKey={activeCat.categoryKey}
+          categoryKeys={ownedKeys}
+          onCategoryChange={onCategoryChange}
+        />
+        <PlaneList aircraftList={activeCat.aircraft} onSelect={onPlaneSelect} />
       </div>
     )
   }

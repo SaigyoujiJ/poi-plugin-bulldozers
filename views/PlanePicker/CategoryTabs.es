@@ -5,8 +5,12 @@ const { __ } = window.i18n['poi-plugin-bulldozers']
 
 class CategoryTabs extends Component {
   render() {
-    const { activeCategoryKey, onCategoryChange } = this.props
-    const categories = getCategoryList()
+    const { activeCategoryKey, categoryKeys, onCategoryChange } = this.props
+    let categories = getCategoryList()
+    if (categoryKeys) {
+      const keySet = new Set(categoryKeys)
+      categories = categories.filter((cat) => keySet.has(cat.key))
+    }
     return (
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginBottom: 8 }}>
         {categories.map((cat) => (
