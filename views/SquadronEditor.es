@@ -59,7 +59,7 @@ class SquadronEditor extends Component {
   }
 
   render() {
-    const { squadron, presetId, squadronIndex, selectedSlotIndex, activeCategoryKey, onSlotSelect, onPlaneSelect, onCategoryChange, dispatch, onClickOutside } = this.props
+    const { squadron, presetId, squadronIndex, selectedSlotIndex, activeCategoryKey, pickerMode, playerEquips, onSlotSelect, onPlaneSelect, onCategoryChange, onPickerModeChange, dispatch, onClickOutside } = this.props
 
     if (!squadron) return null
     const mode = squadron.mode || 'sortie'
@@ -104,6 +104,9 @@ class SquadronEditor extends Component {
                     activeCategoryKey={activeCategoryKey}
                     onCategoryChange={onCategoryChange}
                     onPlaneSelect={onPlaneSelect}
+                    pickerMode={pickerMode}
+                    onPickerModeChange={onPickerModeChange}
+                    playerEquips={playerEquips}
                   />
                 </div>
                 }

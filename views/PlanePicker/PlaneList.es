@@ -3,16 +3,19 @@ import { CATEGORY_DATA } from '../../lib/calc/aircraftData'
 
 class PlaneList extends Component {
   render() {
-    const { categoryKey, onSelect } = this.props
-    const aircraftList = CATEGORY_DATA[categoryKey] || []
+    const { categoryKey, aircraftList, onSelect } = this.props
+    const list = aircraftList || CATEGORY_DATA[categoryKey] || []
     return (
       <div style={{ maxHeight: 200, overflowY: 'auto' }}>
-        {aircraftList.map((ac) => (
+        {list.map((ac) => (
           <div
-            key={ac.id}
+            key={ac.id ?? ac.aircraftId}
             className="bulldozer-plane-item"
-            onClick={() => onSelect(ac.id)}
+            onClick={() => onSelect(ac.id ?? ac.aircraftId)}
             style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
               padding: '4px 8px',
               cursor: 'pointer',
               borderRadius: 'var(--bulldozer-radius-sm, 4px)',
@@ -20,7 +23,16 @@ class PlaneList extends Component {
               color: 'var(--bulldozer-text-primary, #1c2127)',
             }}
           >
-            {ac.name}
+            <span>{ac.name}</span>
+            {ac.count != null && (
+              <span style={{
+                fontSize: 11,
+                fontWeight: 600,
+                color: 'var(--bulldozer-text-secondary, #5f6b7a)',
+              }}>
+                ×{ac.count}
+              </span>
+            )}
           </div>
         ))}
       </div>

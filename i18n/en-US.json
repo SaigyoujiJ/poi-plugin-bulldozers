@@ -35,6 +35,11 @@
     "Second": "2nd Air Squadron",
     "Third": "3rd Air Squadron"
   },
+  "PlanePicker": {
+    "Catalog": "All aircraft",
+    "Inventory": "My equipment",
+    "InventoryEmpty": "No owned aircraft available"
+  },
   "Proficiency": {
     "None": "None",
     "Level1": "|",

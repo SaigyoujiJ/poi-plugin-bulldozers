@@ -35,6 +35,11 @@
     "Second": "第二航空隊",
     "Third": "第三航空隊"
   },
+  "PlanePicker": {
+    "Catalog": "全部機種",
+    "Inventory": "我的裝備",
+    "InventoryEmpty": "沒有可用的裝備"
+  },
   "Proficiency": {
     "None": "無",
     "Level1": "|",

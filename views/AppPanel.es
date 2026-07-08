@@ -5,7 +5,7 @@ import PresetBar from './PresetBar'
 import SquadronTabs from './SquadronTabs'
 import SquadronEditor from './SquadronEditor'
 import ResultPanel from './ResultPanel'
-import { selectActivePreset, selectSquadrons } from '../redux/selectors'
+import { selectActivePreset, selectSquadrons, selectPlayerEquipCategories } from '../redux/selectors'
 import { setSlotAircraft } from '../redux/actions'
 import { themeCss } from './themeStyle'
 
@@ -46,6 +46,7 @@ class AppPanel extends Component {
       activeSquadronIndex: 0,
       selectedSlotIndex: null,
       activeCategoryKey: 'land_attackers',
+      pickerMode: 'catalog',
       isDark: false,
     }
     this.rootRef = React.createRef()
@@ -105,7 +106,7 @@ class AppPanel extends Component {
   }
 
   render() {
-    const { activeSquadronIndex, selectedSlotIndex, activeCategoryKey, isDark } = this.state
+    const { activeSquadronIndex, selectedSlotIndex, activeCategoryKey, pickerMode, isDark } = this.state
     const { pluginState, dispatch } = this.props
     if (!pluginState || !pluginState.presets) return null
 
@@ -140,6 +141,8 @@ class AppPanel extends Component {
           squadronIndex={activeSquadronIndex}
           selectedSlotIndex={selectedSlotIndex}
           activeCategoryKey={activeCategoryKey}
+          pickerMode={pickerMode}
+          playerEquips={this.props.playerEquips}
           onSlotSelect={(i) => this.setState({ selectedSlotIndex: selectedSlotIndex === i ? null : i })}
           onPlaneSelect={(aircraftId) => {
             if (selectedSlotIndex != null) {
@@ -148,6 +151,7 @@ class AppPanel extends Component {
             }
           }}
           onCategoryChange={(key) => this.setState({ activeCategoryKey: key })}
+          onPickerModeChange={(mode) => this.setState({ pickerMode: mode })}
           dispatch={dispatch}
           onClickOutside={this.handleClickOutside}
         />
@@ -158,7 +162,10 @@ class AppPanel extends Component {
 
 const mapStateToProps = (state) => {
   const pluginState = selector(state)
-  return { pluginState: pluginState || {} }
+  return {
+    pluginState: pluginState || {},
+    playerEquips: selectPlayerEquipCategories(state),
+  }
 }
 
 export default connect(mapStateToProps)(AppPanel)

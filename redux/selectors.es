@@ -1,6 +1,7 @@
 import { calcSortieAirPower, calcDefenseAirPower, calcLandAttackerStrikePower, calcHeavyBomberDefensePower } from '../lib/calc/airPower'
 import { calcCombatRadius } from '../lib/calc/radius'
 import { aircraftLookup } from '../lib/calc/aircraftData'
+import { aggregatePlayerEquips } from '../lib/playerEquips'
 
 export function selectActivePreset(state) {
   const preset = state.presets[state.activePresetId]
@@ -10,6 +11,10 @@ export function selectActivePreset(state) {
 export function selectSquadrons(state) {
   const preset = selectActivePreset(state)
   return preset ? preset.squadrons : []
+}
+
+export function selectPlayerEquipCategories(state) {
+  return aggregatePlayerEquips(state.info?.equips)
 }
 
 export function selectSquadronResults(squadron) {
