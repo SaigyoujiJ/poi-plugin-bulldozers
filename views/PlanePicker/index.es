@@ -12,7 +12,7 @@ class PlanePicker extends Component {
 
     if (equips.length === 0) {
       return (
-        <div style={{ color: 'var(--bulldozer-text-secondary, #5f6b7a)', fontSize: 14, padding: '8px 0' }}>
+        <div style={{ color: 'var(--bulldozer-text-secondary, #5f6b7a)', fontSize: 14, padding: '8px 0', cursor: 'default' }}>
           {__('PlanePicker.InventoryEmpty')}
         </div>
       )
@@ -22,7 +22,7 @@ class PlanePicker extends Component {
     const activeCat = equips.find((c) => c.categoryKey === activeCategoryKey) || equips[0]
 
     return (
-      <div>
+      <div style={{ cursor: 'default' }}>
         <CategoryTabs
           activeCategoryKey={activeCat.categoryKey}
           categoryKeys={ownedKeys}
@@ -42,7 +42,7 @@ class PlanePicker extends Component {
     }
 
     return (
-      <div>
+      <div style={{ cursor: 'default' }}>
         <CategoryTabs activeCategoryKey={activeCategoryKey} onCategoryChange={onCategoryChange} />
         <PlaneList categoryKey={activeCategoryKey} onSelect={onPlaneSelect} />
       </div>

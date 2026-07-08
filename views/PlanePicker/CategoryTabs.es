@@ -12,7 +12,7 @@ class CategoryTabs extends Component {
       categories = categories.filter((cat) => keySet.has(cat.key))
     }
     return (
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginBottom: 8 }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginBottom: 8, cursor: 'default' }}>
         {categories.map((cat) => (
           <button
             key={cat.key}

@@ -21,7 +21,7 @@ class PlaneList extends Component {
     const isInventory = aircraftList && list.length > 0 && list[0].stars != null
 
     return (
-      <div style={{ maxHeight: 200, overflowY: 'auto' }}>
+      <div style={{ maxHeight: 200, overflowY: 'auto', cursor: 'default' }}>
         {list.map((ac) => {
           const key = isInventory
             ? `${ac.aircraftId}-${ac.stars}-${ac.proficiency}`
@@ -30,11 +30,14 @@ class PlaneList extends Component {
             <div
               key={key}
               className="bulldozer-plane-item"
-              onClick={() => onSelect(
-                isInventory
-                  ? { aircraftId: ac.aircraftId, stars: ac.stars, proficiency: ac.proficiency }
-                  : (ac.id ?? ac.aircraftId)
-              )}
+              onClick={(e) => {
+                e.stopPropagation()
+                onSelect(
+                  isInventory
+                    ? { aircraftId: ac.aircraftId, stars: ac.stars, proficiency: ac.proficiency }
+                    : (ac.id ?? ac.aircraftId)
+                )
+              }}
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -46,7 +49,7 @@ class PlaneList extends Component {
                 color: 'var(--bulldozer-text-primary, #1c2127)',
               }}
             >
-              <span style={{ flex: 1 }}>{ac.name}</span>
+              <span style={{ flex: 1, cursor: 'pointer' }}>{ac.name}</span>
               {isInventory && (
                 <span style={{
                   display: 'flex',
@@ -55,6 +58,7 @@ class PlaneList extends Component {
                   fontSize: 13,
                   fontWeight: 600,
                   flexShrink: 0,
+                  cursor: 'pointer',
                 }}>
                   {ac.stars > 0 && (
                     <span style={{ color: '#f5a623' }}>★{ac.stars}</span>
