@@ -8,44 +8,93 @@ import ProficiencyIcon from './components/ProficiencyIcon'
 
 const { __ } = window.i18n['poi-plugin-bulldozers']
 
-const PROFICIENCY_LABELS = [
-  'Proficiency.None',
-  'Proficiency.Level1',
-  'Proficiency.Level2',
-  'Proficiency.Level3',
-  'Proficiency.Level4',
-  'Proficiency.Level5',
-  'Proficiency.Level6',
-  'Proficiency.Level7',
-]
-
 class SlotRow extends Component {
   constructor(props) {
     super(props)
     this.state = {
       countPickerOpen: false,
+      proficiencyPickerOpen: false,
+      proficiencyPickerUpward: false,
     }
   }
 
   componentDidMount() {
-    if (this.rootRef && this.rootRef.current) {
-      this.rootRef.current.addEventListener('bulldozers-close-popups', this.closeCountPicker)
+    document.addEventListener('bulldozers-close-popups', this.closeAllPickers)
+    document.addEventListener('mousedown', this.handleDocumentClick)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.selected && !this.props.selected) {
+      this.setState({ countPickerOpen: false, proficiencyPickerOpen: false })
     }
   }
 
   componentWillUnmount() {
-    if (this.rootRef && this.rootRef.current) {
-      this.rootRef.current.removeEventListener('bulldozers-close-popups', this.closeCountPicker)
+    document.removeEventListener('bulldozers-close-popups', this.closeAllPickers)
+    document.removeEventListener('mousedown', this.handleDocumentClick)
+  }
+
+  isClickInsidePicker = (target) => {
+    const countNode = this.countBadgeRef
+    const profNode = this.proficiencyBadgeRef
+    return (countNode && countNode.contains(target)) || (profNode && profNode.contains(target))
+  }
+
+  handleDocumentClick = (e) => {
+    if (this.state.countPickerOpen || this.state.proficiencyPickerOpen) {
+      if (!this.isClickInsidePicker(e.target)) {
+        this.setState({ countPickerOpen: false, proficiencyPickerOpen: false })
+      }
     }
   }
 
   toggleCountPicker = (e) => {
     e.stopPropagation()
-    this.setState((prev) => ({ countPickerOpen: !prev.countPickerOpen }))
+    this.setState((prev) => ({ countPickerOpen: !prev.countPickerOpen, proficiencyPickerOpen: false }))
   }
 
   closeCountPicker = () => {
     this.setState({ countPickerOpen: false })
+  }
+
+  getPluginRootRect() {
+    const root = this.rootRef?.current?.closest('.bulldozers-app')
+    return root ? root.getBoundingClientRect() : null
+  }
+
+  toggleProficiencyPicker = (e) => {
+    e.stopPropagation()
+    const badge = this.proficiencyBadgeRef
+    let upward = false
+    if (badge) {
+      const badgeRect = badge.getBoundingClientRect()
+      const rootRect = this.getPluginRootRect()
+      const pickerHeight = 8 * 28
+      const bottomLimit = rootRect ? rootRect.bottom : window.innerHeight
+      const topLimit = rootRect ? rootRect.top : 0
+      const spaceBelow = bottomLimit - badgeRect.bottom
+      const spaceAbove = badgeRect.top - topLimit
+      upward = spaceBelow < pickerHeight && spaceAbove > spaceBelow
+    }
+    this.setState((prev) => ({
+      proficiencyPickerOpen: !prev.proficiencyPickerOpen,
+      countPickerOpen: false,
+      proficiencyPickerUpward: upward,
+    }))
+  }
+
+  closeProficiencyPicker = () => {
+    this.setState({ proficiencyPickerOpen: false })
+  }
+
+  closeAllPickers = () => {
+    this.setState({ countPickerOpen: false, proficiencyPickerOpen: false })
+  }
+
+  handleProficiencySelect = (level) => {
+    const { dispatch, presetId, squadronIndex, slotIndex } = this.props
+    dispatch(setSlotProficiency(presetId, squadronIndex, slotIndex, level))
+    this.setState({ proficiencyPickerOpen: false })
   }
 
   handleCountSliderChange = (e) => {
@@ -67,9 +116,55 @@ class SlotRow extends Component {
     }
   }
 
-  handleProficiencyChange = (e) => {
-    const { dispatch, presetId, squadronIndex, slotIndex } = this.props
-    dispatch(setSlotProficiency(presetId, squadronIndex, slotIndex, Number(e.target.value)))
+  renderProficiencyPicker() {
+    const { slot } = this.props
+    const upward = this.state.proficiencyPickerUpward
+    return (
+      <div
+        ref={(el) => { this.proficiencyPickerRef = el }}
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          position: 'absolute',
+          [upward ? 'bottom' : 'top']: '100%',
+          [upward ? 'marginBottom' : 'marginTop']: 4,
+          left: 0,
+          background: '#2a2d34',
+          border: '2px solid var(--bulldozer-border, #d3d8de)',
+          borderRadius: 'var(--bulldozer-radius-sm, 4px)',
+          padding: 6,
+          zIndex: 10,
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
+          animation: 'bulldozer-popup-in 0.2s ease',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 2,
+          minWidth: 36,
+        }}
+      >
+        {PROFICIENCY.map((p) => (
+          <button
+            key={p.level}
+            onClick={() => this.handleProficiencySelect(p.level)}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '4px 6px',
+              background: slot.proficiency === p.level ? 'rgba(255,255,255,0.15)' : 'transparent',
+              border: 'none',
+              borderRadius: 'var(--bulldozer-radius-sm, 4px)',
+              cursor: 'pointer',
+            }}
+          >
+            {p.level === 0 ? (
+              <span style={{ color: '#b0b5bd', fontSize: 13, fontWeight: 600 }}>-</span>
+            ) : (
+              <ProficiencyIcon level={p.level} height={16} />
+            )}
+          </button>
+        ))}
+      </div>
+    )
   }
 
   handleStarsChange = (e) => {
@@ -217,19 +312,18 @@ class SlotRow extends Component {
         <div style={{ flex: 1, fontWeight: isConfigured ? 500 : 400, color: isConfigured ? 'var(--bulldozer-text-primary, #1c2127)' : 'var(--bulldozer-text-secondary, #5f6b7a)' }}>
           {planeName}
         </div>
-        {isConfigured && slot.proficiency > 0 && (
-          <ProficiencyIcon level={slot.proficiency} />
-        )}
-        <select
-          value={slot.proficiency}
-          onChange={this.handleProficiencyChange}
-          onClick={(e) => e.stopPropagation()}
-          style={tagStyle}
+        <div
+          ref={(el) => { this.proficiencyBadgeRef = el }}
+          onClick={this.toggleProficiencyPicker}
+          style={{ position: 'relative', ...tagStyle, cursor: 'pointer', flexShrink: 0 }}
         >
-          {PROFICIENCY.map((p) => (
-            <option key={p.level} value={p.level} style={{ color: 'var(--bulldozer-text-primary, #1c2127)' }}>{__(PROFICIENCY_LABELS[p.level])}</option>
-          ))}
-        </select>
+          {slot.proficiency === 0 ? (
+            <span style={{ color: 'var(--bulldozer-text-secondary, #888)', fontSize: 13, fontWeight: 600 }}>-</span>
+          ) : (
+            <ProficiencyIcon level={slot.proficiency} height={14} />
+          )}
+          {this.state.proficiencyPickerOpen && this.renderProficiencyPicker()}
+        </div>
         <select
           value={slot.stars}
           onChange={this.handleStarsChange}

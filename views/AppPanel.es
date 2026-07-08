@@ -58,6 +58,9 @@ class AppPanel extends Component {
     if (this.rootRef.current) {
       this.rootRef.current.dispatchEvent(new CustomEvent('bulldozers-close-popups', { bubbles: true }))
     }
+    if (typeof document !== 'undefined') {
+      document.dispatchEvent(new CustomEvent('bulldozers-close-popups', { bubbles: true }))
+    }
   }
 
   updateDarkMode = () => {
@@ -120,6 +123,7 @@ class AppPanel extends Component {
     return (
       <div
         ref={this.rootRef}
+        onClick={this.handleClickOutside}
         className={'bulldozers-app' + (isDark ? ' bp6-dark' : '')}
         style={{
           padding: 12,
