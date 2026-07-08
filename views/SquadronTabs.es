@@ -23,7 +23,7 @@ class SquadronTabs extends Component {
                   borderBottom: isActive ? '2px solid ' + modeColor : '2px solid transparent',
                   color: isActive ? 'var(--bulldozer-text-primary, #1c2127)' : 'var(--bulldozer-text-secondary, #888)',
                   cursor: 'pointer',
-                  fontSize: 14,
+                  fontSize: 16,
                   fontWeight: isActive ? 600 : 400,
                   position: 'relative',
                   zIndex: 1,

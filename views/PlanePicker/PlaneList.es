@@ -52,7 +52,7 @@ class PlaneList extends Component {
                   display: 'flex',
                   alignItems: 'center',
                   gap: 6,
-                  fontSize: 11,
+                  fontSize: 13,
                   fontWeight: 600,
                   flexShrink: 0,
                 }}>

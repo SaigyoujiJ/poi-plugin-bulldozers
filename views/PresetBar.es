@@ -55,7 +55,7 @@ class PresetBar extends Component {
 
     return (
       <div onClick={onClickOutside} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-        <div style={{ fontWeight: 600, color: 'var(--bulldozer-text-primary, #1c2127)', fontSize: 14 }}>
+        <div style={{ fontWeight: 600, color: 'var(--bulldozer-text-primary, #1c2127)', fontSize: 16 }}>
           {presets[activePresetId] ? presets[activePresetId].name : '预设'}
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -90,7 +90,7 @@ const outlineButtonStyle = {
   borderRadius: 'var(--bulldozer-radius-sm, 4px)',
   padding: '4px 10px',
   cursor: 'pointer',
-  fontSize: 12,
+  fontSize: 14,
 }
 
 const selectStyle = {
@@ -99,7 +99,7 @@ const selectStyle = {
   border: '1px solid var(--bulldozer-border, #d3d8de)',
   borderRadius: 'var(--bulldozer-radius-sm, 4px)',
   padding: '4px 8px',
-  fontSize: 12,
+  fontSize: 14,
 }
 
 const inputStyle = {
@@ -108,7 +108,7 @@ const inputStyle = {
   border: '1px solid var(--bulldozer-border, #d3d8de)',
   borderRadius: 'var(--bulldozer-radius-sm, 4px)',
   padding: '4px 8px',
-  fontSize: 12,
+  fontSize: 14,
 }
 
 const mapStateToProps = (state) => {

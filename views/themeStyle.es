@@ -1,4 +1,8 @@
 export const themeCss = `
+.bulldozers-app {
+  font-size: 14px;
+}
+
 :root {
   --bulldozer-bg-hover: rgba(0, 0, 0, 0.05);
   --bulldozer-border: var(--bp-surface-border-color-default, #d3d8de);

@@ -43,3 +43,4 @@ desktop.ini
 # yarn.lock
 # pnpm-lock.yaml
 .worktrees/
+.superpowers/

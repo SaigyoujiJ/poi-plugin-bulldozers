@@ -28,7 +28,7 @@ class CategoryTabs extends Component {
               border: '1px solid var(--bulldozer-border, #d3d8de)',
               borderRadius: 'var(--bulldozer-radius-sm, 4px)',
               cursor: 'pointer',
-              fontSize: 11,
+              fontSize: 13,
             }}
           >
             {__(cat.display)}

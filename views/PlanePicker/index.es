@@ -12,7 +12,7 @@ class PlanePicker extends Component {
 
     if (equips.length === 0) {
       return (
-        <div style={{ color: 'var(--bulldozer-text-secondary, #5f6b7a)', fontSize: 12, padding: '8px 0' }}>
+        <div style={{ color: 'var(--bulldozer-text-secondary, #5f6b7a)', fontSize: 14, padding: '8px 0' }}>
           {__('PlanePicker.InventoryEmpty')}
         </div>
       )

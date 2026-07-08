@@ -11,8 +11,8 @@ class ResultPanel extends Component {
     const color = active ? getModeColor(mode).accent : 'var(--bulldozer-text-primary, #1c2127)'
     return (
       <div onClick={onClick} style={{ ...metricCardStyle, ...(active ? {} : MUTED_STYLE) }}>
-        <div style={{ fontSize: 10, color: 'var(--bulldozer-text-secondary, #888)', marginBottom: 4 }}>{label}</div>
-        <div style={{ fontSize: 24, fontWeight: 700, color }}>{active ? value : '—'}</div>
+        <div style={{ fontSize: 12, color: 'var(--bulldozer-text-secondary, #888)', marginBottom: 4 }}>{label}</div>
+        <div style={{ fontSize: 28, fontWeight: 700, color }}>{active ? value : '—'}</div>
       </div>
     )
   }

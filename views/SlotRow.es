@@ -100,7 +100,7 @@ class SlotRow extends Component {
           animation: 'bulldozer-popup-in 0.2s ease',
         }}
       >
-        <div style={{ textAlign: 'center', marginBottom: 10, fontWeight: 700, fontSize: 16, color: '#ffffff' }}>
+        <div style={{ textAlign: 'center', marginBottom: 10, fontWeight: 700, fontSize: 18, color: '#ffffff' }}>
           {currentCount}
         </div>
         <input
@@ -154,7 +154,7 @@ class SlotRow extends Component {
             background: #5f6b7a;
           }
         `}</style>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 6, fontSize: 12, fontWeight: 600, color: '#b0b5bd' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 6, fontSize: 14, fontWeight: 600, color: '#b0b5bd' }}>
           <span>0</span>
           <span>{maxCount}</span>
         </div>
@@ -251,7 +251,7 @@ class SlotRow extends Component {
               color: colors.accent,
               cursor: 'pointer',
               padding: '0 4px',
-              fontSize: 14,
+              fontSize: 16,
             }}
           >×</button>
         )}
@@ -266,7 +266,7 @@ const tagStyle = {
   border: '1px solid var(--bulldozer-border, #d3d8de)',
   borderRadius: 'var(--bulldozer-radius-sm, 4px)',
   padding: '2px 6px',
-  fontSize: 11,
+  fontSize: 13,
   cursor: 'pointer',
 }
 
