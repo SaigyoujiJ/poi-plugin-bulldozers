@@ -1,6 +1,19 @@
 import React, { Component } from 'react'
 import { CATEGORY_DATA } from '../../lib/calc/aircraftData'
 
+const { __ } = window.i18n['poi-plugin-bulldozers']
+
+const PROFICIENCY_LABELS = [
+  'Proficiency.None',
+  'Proficiency.Level1',
+  'Proficiency.Level2',
+  'Proficiency.Level3',
+  'Proficiency.Level4',
+  'Proficiency.Level5',
+  'Proficiency.Level6',
+  'Proficiency.Level7',
+]
+
 class PlaneList extends Component {
   render() {
     const { categoryKey, aircraftList, onSelect } = this.props
@@ -10,16 +23,22 @@ class PlaneList extends Component {
     return (
       <div style={{ maxHeight: 200, overflowY: 'auto' }}>
         {list.map((ac) => {
-          const key = isInventory ? `${ac.aircraftId}-${ac.stars}-${ac.proficiency}` : (ac.id ?? ac.aircraftId)
+          const key = isInventory
+            ? `${ac.aircraftId}-${ac.stars}-${ac.proficiency}`
+            : (ac.id ?? ac.aircraftId)
           return (
             <div
               key={key}
               className="bulldozer-plane-item"
-              onClick={() => onSelect(isInventory ? { aircraftId: ac.aircraftId, stars: ac.stars, proficiency: ac.proficiency } : (ac.id ?? ac.aircraftId))}
+              onClick={() => onSelect(
+                isInventory
+                  ? { aircraftId: ac.aircraftId, stars: ac.stars, proficiency: ac.proficiency }
+                  : (ac.id ?? ac.aircraftId)
+              )}
               style={{
                 display: 'flex',
-                justifyContent: 'space-between',
                 alignItems: 'center',
+                gap: 8,
                 padding: '4px 8px',
                 cursor: 'pointer',
                 borderRadius: 'var(--bulldozer-radius-sm, 4px)',
@@ -27,19 +46,24 @@ class PlaneList extends Component {
                 color: 'var(--bulldozer-text-primary, #1c2127)',
               }}
             >
-              <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                {ac.name}
-                {isInventory && ac.stars > 0 && (
-                  <span style={{ fontSize: 10, fontWeight: 600, color: '#f5a623' }}>★{ac.stars}</span>
-                )}
-              </span>
-              <span style={{
-                fontSize: 11,
-                fontWeight: 600,
-                color: 'var(--bulldozer-text-secondary, #5f6b7a)',
-              }}>
-                ×{ac.count}
-              </span>
+              <span style={{ flex: 1 }}>{ac.name}</span>
+              {isInventory && (
+                <span style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  fontSize: 11,
+                  fontWeight: 600,
+                  flexShrink: 0,
+                }}>
+                  {ac.stars > 0 && (
+                    <span style={{ color: '#f5a623' }}>★{ac.stars}</span>
+                  )}
+                  <span style={{ color: 'var(--bulldozer-text-secondary, #888)' }}>
+                    {__(PROFICIENCY_LABELS[ac.proficiency ?? 0])}
+                  </span>
+                </span>
+              )}
             </div>
           )
         })}
