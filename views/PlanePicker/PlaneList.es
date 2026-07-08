@@ -1,18 +1,8 @@
 import React, { Component } from 'react'
 import { CATEGORY_DATA } from '../../lib/calc/aircraftData'
+import ProficiencyIcon from '../components/ProficiencyIcon'
 
 const { __ } = window.i18n['poi-plugin-bulldozers']
-
-const PROFICIENCY_LABELS = [
-  'Proficiency.None',
-  'Proficiency.Level1',
-  'Proficiency.Level2',
-  'Proficiency.Level3',
-  'Proficiency.Level4',
-  'Proficiency.Level5',
-  'Proficiency.Level6',
-  'Proficiency.Level7',
-]
 
 class PlaneList extends Component {
   render() {
@@ -63,9 +53,7 @@ class PlaneList extends Component {
                   {ac.stars > 0 && (
                     <span style={{ color: '#f5a623' }}>★{ac.stars}</span>
                   )}
-                  <span style={{ color: 'var(--bulldozer-text-secondary, #888)' }}>
-                    {__(PROFICIENCY_LABELS[ac.proficiency ?? 0])}
-                  </span>
+                  <ProficiencyIcon level={ac.proficiency} />
                 </span>
               )}
             </div>

@@ -4,6 +4,7 @@ import { lookupAircraft } from '../lib/calc/aircraftData'
 import { setSlotProficiency, setSlotStars, setSlotCount, clearSlot } from '../redux/actions'
 import { getSlotCount } from '../lib/calc/planeType'
 import { getModeColor } from '../lib/ui/themeColors'
+import ProficiencyIcon from './components/ProficiencyIcon'
 
 const { __ } = window.i18n['poi-plugin-bulldozers']
 
@@ -216,6 +217,9 @@ class SlotRow extends Component {
         <div style={{ flex: 1, fontWeight: isConfigured ? 500 : 400, color: isConfigured ? 'var(--bulldozer-text-primary, #1c2127)' : 'var(--bulldozer-text-secondary, #5f6b7a)' }}>
           {planeName}
         </div>
+        {isConfigured && slot.proficiency > 0 && (
+          <ProficiencyIcon level={slot.proficiency} />
+        )}
         <select
           value={slot.proficiency}
           onChange={this.handleProficiencyChange}
