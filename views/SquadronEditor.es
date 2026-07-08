@@ -14,7 +14,7 @@ class SquadronEditor extends Component {
 
   renderModeToggle(mode) {
     return (
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
         {['sortie', 'defense'].map((m) => {
           const active = mode === m
           const mColors = getModeColor(m)
@@ -61,7 +61,7 @@ class SquadronEditor extends Component {
   renderPickerModeToggle(pickerMode, colors) {
     const { onPickerModeChange } = this.props
     return (
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
         {[
           { key: 'catalog', label: __('PlanePicker.Catalog') },
           { key: 'inventory', label: __('PlanePicker.Inventory') },
@@ -116,8 +116,16 @@ class SquadronEditor extends Component {
 
     return (
       <div style={{ marginBottom: 12 }} onClick={onClickOutside}>
-        {this.renderModeToggle(mode)}
-        {this.renderPickerModeToggle(pickerMode || 'catalog', colors)}
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          gap: 16,
+          marginBottom: 12,
+        }}>
+          {this.renderPickerModeToggle(pickerMode || 'catalog', colors)}
+          {this.renderModeToggle(mode)}
+        </div>
         <div>
           {squadron.slots.map((slot, i) => {
             const active = selectedSlotIndex === i
