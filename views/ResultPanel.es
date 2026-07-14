@@ -12,7 +12,7 @@ class ResultPanel extends Component {
     return (
       <div onClick={onClick} style={{ ...metricCardStyle, ...(active ? {} : MUTED_STYLE) }}>
         <div style={{ fontSize: 12, color: 'var(--bulldozer-text-secondary, #888)', marginBottom: 4 }}>{label}</div>
-        <div style={{ fontSize: 28, fontWeight: 700, color, textShadow: '0 0 10px ' + color + '44' }}>{active ? value : '—'}</div>
+        <div style={{ fontSize: 28, fontWeight: 700, color }}>{active ? value : '—'}</div>
       </div>
     )
   }
