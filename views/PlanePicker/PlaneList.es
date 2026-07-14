@@ -1,8 +1,19 @@
 import React, { Component } from 'react'
 import { CATEGORY_DATA } from '../../lib/calc/aircraftData'
 import ProficiencyIcon from '../components/ProficiencyIcon'
+import SlotitemIcon from '../components/SlotitemIcon'
 
 const { __ } = window.i18n['poi-plugin-bulldozers']
+
+function getSlotitemIconId(aircraftId) {
+  try {
+    const $equips = window.getStore('const.$equips')
+    const equip = $equips?.[aircraftId]
+    return equip?.api_type?.[3]
+  } catch {
+    return null
+  }
+}
 
 class PlaneList extends Component {
   render() {
@@ -39,6 +50,7 @@ class PlaneList extends Component {
                 color: 'var(--bulldozer-text-primary, #1c2127)',
               }}
             >
+              <SlotitemIcon iconId={getSlotitemIconId(ac.id ?? ac.aircraftId)} />
               <span style={{ flex: 1, cursor: 'pointer' }}>{ac.name}</span>
               {isInventory && (
                 <span style={{
