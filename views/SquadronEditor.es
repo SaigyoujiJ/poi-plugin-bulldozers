@@ -116,13 +116,16 @@ class SquadronEditor extends Component {
 
     return (
       <div style={{ marginBottom: 12 }} onClick={onClickOutside}>
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          gap: 16,
-          marginBottom: 12,
-        }}>
+        <div
+          onClick={(e) => e.stopPropagation()}
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            gap: 16,
+            marginBottom: 12,
+          }}
+        >
           {this.renderPickerModeToggle(pickerMode || 'catalog', colors)}
           {this.renderModeToggle(mode)}
         </div>

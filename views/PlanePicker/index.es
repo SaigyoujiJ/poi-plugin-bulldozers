@@ -27,7 +27,7 @@ class PlanePicker extends Component {
           categoryKeys={ownedKeys}
           onCategoryChange={onCategoryChange}
         />
-        <PlaneList aircraftList={activeCat.aircraft} onSelect={onPlaneSelect} />
+        <PlaneList key={`inventory-${activeCat.categoryKey}`} aircraftList={activeCat.aircraft} onSelect={onPlaneSelect} />
       </div>
     )
   }
@@ -43,7 +43,7 @@ class PlanePicker extends Component {
     return (
       <div style={{ cursor: 'default' }}>
         <CategoryTabs activeCategoryKey={activeCategoryKey} onCategoryChange={onCategoryChange} />
-        <PlaneList categoryKey={activeCategoryKey} onSelect={onPlaneSelect} />
+        <PlaneList key={`catalog-${activeCategoryKey}`} categoryKey={activeCategoryKey} onSelect={onPlaneSelect} />
       </div>
     )
   }
