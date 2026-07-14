@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { CATEGORY_DATA } from '../../lib/calc/aircraftData'
+import { getCategoryData } from '../../lib/calc/aircraftData'
 import ProficiencyIcon from '../components/ProficiencyIcon'
 import SlotitemIcon from '../components/SlotitemIcon'
 
@@ -18,7 +18,7 @@ function getSlotitemIconId(aircraftId) {
 class PlaneList extends Component {
   render() {
     const { categoryKey, aircraftList, onSelect } = this.props
-    const list = aircraftList || CATEGORY_DATA[categoryKey] || []
+    const list = aircraftList || getCategoryData()[categoryKey] || []
     const isInventory = aircraftList && list.length > 0 && list[0].stars != null
 
     return (

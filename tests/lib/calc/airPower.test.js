@@ -148,15 +148,15 @@ describe('recon multipliers', () => {
   })
 
   test('seaplane recon from recon_flying_boats gets water recon defense multiplier 1.10', () => {
-    // 零式水上偵察機 id 25: aa_air_defense=2, los=5, category recon_flying_boats, slot=4, prof=0
-    // slot power = floor(2 * sqrt(4) + sqrt(9/10)) = 4
+    // 零式水上偵察機 id 25: aa_air_defense=1, los=5, category recon_flying_boats, slot=4, prof=0
+    // slot power = floor(1 * sqrt(4)) + floor(sqrt(9/10)) = 2
     // los <= 7 gives water recon multiplier 1.10
-    // total = floor((101 + 4) * 1.10) = 115
+    // total = floor((101 + 2) * 1.10) = 113
     const slots = [
       { aircraftId: 175, proficiency: 7, stars: 0 },
       { aircraftId: 25, proficiency: 0, stars: 0 },
     ]
-    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(115)
+    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(113)
   })
 })
 

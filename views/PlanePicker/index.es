@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import CategoryTabs from './CategoryTabs'
 import PlaneList from './PlaneList'
-import { CATEGORY_DATA } from '../../lib/calc/aircraftData'
 
 const { __ } = window.i18n['poi-plugin-bulldozers']
 

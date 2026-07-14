@@ -1,37 +1,20 @@
-import carrierDiveBombers from '../../assets/data/aircraft/carrier_dive_bombers.json'
-import carrierFighters from '../../assets/data/aircraft/carrier_fighters.json'
-import carrierTorpedoBombers from '../../assets/data/aircraft/carrier_torpedo_bombers.json'
-import jetAircraft from '../../assets/data/aircraft/jet_aircraft.json'
-import landAttackers from '../../assets/data/aircraft/land_attackers.json'
-import landRecon from '../../assets/data/aircraft/land_recon.json'
-import localFighters from '../../assets/data/aircraft/local_fighters.json'
-import reconFlyingBoats from '../../assets/data/aircraft/recon_flying_boats.json'
-import rotaryAsw from '../../assets/data/aircraft/rotary_asw.json'
-import seaplanes from '../../assets/data/aircraft/seaplanes.json'
-import indexData from '../../assets/data/aircraft/index.json'
+import { buildAircraftData, CATEGORY_DISPLAY } from './poiData'
 
-const CATEGORY_DATA = {
-  land_attackers: landAttackers,
-  local_fighters: localFighters,
-  land_recon: landRecon,
-  carrier_fighters: carrierFighters,
-  carrier_torpedo_bombers: carrierTorpedoBombers,
-  carrier_dive_bombers: carrierDiveBombers,
-  jet_aircraft: jetAircraft,
-  seaplanes: seaplanes,
-  rotary_asw: rotaryAsw,
-  recon_flying_boats: reconFlyingBoats,
-}
+let cachedEquips = null
+let cachedData = null
 
-const lookupMap = new Map()
-for (const [categoryKey, aircraftList] of Object.entries(CATEGORY_DATA)) {
-  for (const aircraft of aircraftList) {
-    lookupMap.set(aircraft.id, { aircraft, categoryKey })
-  }
+function getData() {
+  const $equips = (typeof window !== 'undefined' && window.getStore)
+    ? window.getStore('const.$equips')
+    : null
+  if ($equips === cachedEquips) return cachedData
+  cachedData = buildAircraftData($equips || {})
+  cachedEquips = $equips
+  return cachedData
 }
 
 export function lookupAircraft(id) {
-  return lookupMap.get(id) ?? null
+  return getData().lookupMap.get(id) ?? null
 }
 
 export const aircraftLookup = {
@@ -39,15 +22,13 @@ export const aircraftLookup = {
 }
 
 export function getCategoryList() {
-  return Object.entries(CATEGORY_DATA).map(([key, aircraft]) => ({
-    key,
-    display: indexData[key]?.display ?? key,
-    aircraft,
-  }))
+  return getData().categoryList
+}
+
+export function getCategoryData() {
+  return getData().categoryData
 }
 
 export function getIndexData() {
-  return indexData
+  return CATEGORY_DISPLAY
 }
-
-export { CATEGORY_DATA }
