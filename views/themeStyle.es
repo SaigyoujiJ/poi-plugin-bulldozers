@@ -6,9 +6,9 @@ export const themeCss = `
 :root {
   --bulldozer-bg-hover: rgba(0, 0, 0, 0.05);
   --bulldozer-border: var(--bp-surface-border-color-default, #d3d8de);
-  --bulldozer-accent: var(--bp-intent-primary-rest, #2d72d2);
+  --bulldozer-accent: #2d72d2;
   --bulldozer-text-primary: var(--bp-typography-color-default-rest, #1c2127);
-  --bulldozer-accent-text: var(--bp-intent-primary-foreground, #ffffff);
+  --bulldozer-accent-text: #ffffff;
   --bulldozer-bg-selected: #ffe082;
   --bulldozer-border-active: #ff9800;
   --bulldozer-defense-accent: #ff9800;

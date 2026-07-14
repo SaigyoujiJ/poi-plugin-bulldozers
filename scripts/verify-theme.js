@@ -7,9 +7,9 @@ const read = (p) => fs.readFileSync(path.join(root, p), 'utf-8')
 const requiredTokens = [
   '--bulldozer-bg-hover: rgba',
   '--bulldozer-border: var(--bp-surface-border-color-default',
-  '--bulldozer-accent: var(--bp-intent-primary-rest',
+  '--bulldozer-accent: #2d72d2',
   '--bulldozer-text-primary: var(--bp-typography-color-default-rest',
-  '--bulldozer-accent-text: var(--bp-intent-primary-foreground',
+  '--bulldozer-accent-text: #ffffff',
   '--bulldozer-defense-accent',
   '--bulldozer-text-secondary',
   '--bulldozer-card-bg',
