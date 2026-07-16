@@ -11,7 +11,7 @@ class SlotitemIcon extends Component {
   }
 
   render() {
-    const { iconId, height = 18 } = this.props
+    const { iconId, height = 24 } = this.props
     const root = typeof window !== 'undefined' && window.ROOT ? window.ROOT : ''
     const fileName = iconId != null ? `${iconId + 100}.png` : '-1.png'
     const src = 'file://' + path.join(root, 'assets', 'img', 'slotitem', fileName)

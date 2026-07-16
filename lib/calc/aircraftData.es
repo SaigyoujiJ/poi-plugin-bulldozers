@@ -32,3 +32,15 @@ export function getCategoryData() {
 export function getIndexData() {
   return CATEGORY_DISPLAY
 }
+
+// Equipment type-icon id (api_type[3]) for SlotitemIcon, straight from master data
+export function getSlotitemIconId(aircraftId) {
+  try {
+    const $equips = (typeof window !== 'undefined' && window.getStore)
+      ? window.getStore('const.$equips')
+      : null
+    return $equips?.[aircraftId]?.api_type?.[3] ?? null
+  } catch {
+    return null
+  }
+}

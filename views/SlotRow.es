@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { PROFICIENCY } from '../lib/calc/proficiency'
-import { lookupAircraft } from '../lib/calc/aircraftData'
+import { lookupAircraft, getSlotitemIconId } from '../lib/calc/aircraftData'
 import { setSlotProficiency, setSlotStars, setSlotCount, clearSlot } from '../redux/actions'
 import { getSlotCount } from '../lib/calc/planeType'
 import { getModeColor } from '../lib/ui/themeColors'
 import ProficiencyIcon from './components/ProficiencyIcon'
+import SlotitemIcon from './components/SlotitemIcon'
 
 const { __ } = window.i18n['poi-plugin-bulldozers']
 
@@ -308,6 +309,9 @@ class SlotRow extends Component {
               {this.state.countPickerOpen && this.renderCountPicker(currentCount, maxCount, colors)}
             </div>
           </React.Fragment>
+        )}
+        {isConfigured && (
+          <SlotitemIcon iconId={getSlotitemIconId(slot.aircraftId)} />
         )}
         <div style={{ flex: 1, fontWeight: isConfigured ? 500 : 400, color: isConfigured ? 'var(--bulldozer-text-primary, #1c2127)' : 'var(--bulldozer-text-secondary, #5f6b7a)' }}>
           {planeName}
