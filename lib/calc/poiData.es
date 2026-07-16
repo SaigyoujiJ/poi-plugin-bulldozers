@@ -7,16 +7,16 @@ const TYPE2_TO_CATEGORY = {
   6: 'carrier_fighters',
   8: 'carrier_torpedo_bombers',
   7: 'carrier_dive_bombers',
+  9: 'carrier_recon',
   56: 'jet_aircraft',
   57: 'jet_aircraft',
   58: 'jet_aircraft',
-  11: 'seaplanes',
-  45: 'seaplanes',
+  10: 'seaplane_recon',
+  11: 'seaplane_bombers',
+  45: 'seaplane_fighters',
   25: 'rotary_asw',
   26: 'rotary_asw',
-  9: 'recon_flying_boats',
-  10: 'recon_flying_boats',
-  41: 'recon_flying_boats',
+  41: 'flying_boats',
 }
 
 const CATEGORY_ORDER = [
@@ -26,10 +26,13 @@ const CATEGORY_ORDER = [
   'carrier_fighters',
   'carrier_torpedo_bombers',
   'carrier_dive_bombers',
+  'carrier_recon',
   'jet_aircraft',
-  'seaplanes',
+  'seaplane_recon',
+  'seaplane_bombers',
+  'seaplane_fighters',
   'rotary_asw',
-  'recon_flying_boats',
+  'flying_boats',
 ]
 
 const CATEGORY_DISPLAY = {
@@ -39,11 +42,22 @@ const CATEGORY_DISPLAY = {
   carrier_fighters: 'AircraftCategory.CarrierFighters',
   carrier_torpedo_bombers: 'AircraftCategory.CarrierTorpedoBombers',
   carrier_dive_bombers: 'AircraftCategory.CarrierDiveBombers',
+  carrier_recon: 'AircraftCategory.CarrierRecon',
   jet_aircraft: 'AircraftCategory.JetAircraft',
-  seaplanes: 'AircraftCategory.Seaplanes',
+  seaplane_recon: 'AircraftCategory.SeaplaneRecon',
+  seaplane_bombers: 'AircraftCategory.SeaplaneBombers',
+  seaplane_fighters: 'AircraftCategory.SeaplaneFighters',
   rotary_asw: 'AircraftCategory.RotaryASW',
-  recon_flying_boats: 'AircraftCategory.ReconFlyingBoats',
+  flying_boats: 'AircraftCategory.FlyingBoats',
 }
+
+// 一级分组：组内分类按 tab 显示顺序排列；喷气式只有一类，不显示二级菜单
+const CATEGORY_GROUPS = [
+  { key: 'land', display: 'AircraftGroup.Land', categories: ['land_attackers', 'local_fighters', 'land_recon', 'rotary_asw', 'flying_boats'] },
+  { key: 'carrier', display: 'AircraftGroup.Carrier', categories: ['carrier_fighters', 'carrier_torpedo_bombers', 'carrier_dive_bombers', 'carrier_recon'] },
+  { key: 'seaplane', display: 'AircraftGroup.Seaplane', categories: ['seaplane_recon', 'seaplane_bombers', 'seaplane_fighters'] },
+  { key: 'jet', display: 'AircraftGroup.Jet', categories: ['jet_aircraft'] },
+]
 
 const LOCAL_FIGHTER_TYPE = 48
 
@@ -123,4 +137,4 @@ export function buildAircraftData($equips) {
   return { lookupMap, categoryData, categoryList }
 }
 
-export { CATEGORY_ORDER, CATEGORY_DISPLAY }
+export { CATEGORY_ORDER, CATEGORY_DISPLAY, CATEGORY_GROUPS }

@@ -51,15 +51,24 @@
     "Level7": ">>"
   },
   "AircraftCategory": {
-    "LandAttackers": "육상공격기, 대형육상기",
-    "LocalFighters": "국지전투기, 육전",
+    "LandAttackers": "육상공격기",
+    "LocalFighters": "국지전투기",
     "LandRecon": "육상정찰기",
     "CarrierFighters": "함상전투기",
-    "CarrierTorpedoBombers": "함상어뢰폭격기",
-    "CarrierDiveBombers": "함상급강폭격기",
+    "CarrierTorpedoBombers": "함상공격기",
+    "CarrierDiveBombers": "함상폭격기",
+    "CarrierRecon": "함상정찰기",
     "JetAircraft": "제트기",
-    "Seaplanes": "수상폭격기, 수상전투기",
-    "RotaryASW": "회전익기, 대잠초계기",
-    "ReconFlyingBoats": "수상정찰기, 함상정찰기, 대형비행정"
+    "SeaplaneRecon": "수상정찰기",
+    "SeaplaneBombers": "수상폭격기",
+    "SeaplaneFighters": "수상전투기",
+    "RotaryASW": "대잠초계기",
+    "FlyingBoats": "비행정"
+  },
+  "AircraftGroup": {
+    "Land": "육상기",
+    "Carrier": "함재기",
+    "Seaplane": "수상기",
+    "Jet": "제트기"
   }
 }

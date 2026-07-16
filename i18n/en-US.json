@@ -57,9 +57,18 @@
     "CarrierFighters": "Carrier Fighters",
     "CarrierTorpedoBombers": "Torpedo Bombers",
     "CarrierDiveBombers": "Dive Bombers",
+    "CarrierRecon": "Carrier Recons",
     "JetAircraft": "Jets",
-    "Seaplanes": "Seaplanes",
-    "RotaryASW": "Rotary / ASW",
-    "ReconFlyingBoats": "Recons / Flying Boats"
+    "SeaplaneRecon": "Seaplane Recons",
+    "SeaplaneBombers": "Seaplane Bombers",
+    "SeaplaneFighters": "Seaplane Fighters",
+    "RotaryASW": "ASW Patrol",
+    "FlyingBoats": "Flying Boats"
+  },
+  "AircraftGroup": {
+    "Land": "Land-Based",
+    "Carrier": "Carrier-Based",
+    "Seaplane": "Seaplanes",
+    "Jet": "Jets"
   }
 }

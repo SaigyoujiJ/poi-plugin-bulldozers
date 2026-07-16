@@ -10,12 +10,12 @@ import {
 describe('planeType', () => {
   test('seaplane bomber slot count is 18 in LBAS', () => {
     const aircraft = { id: 1, torpedo: 2, bombing: 3 }
-    expect(getSlotCount(aircraft, 'seaplanes')).toBe(18)
+    expect(getSlotCount(aircraft, 'seaplane_bombers')).toBe(18)
   })
 
   test('seaplane fighter slot count is 18', () => {
     const aircraft = { id: 2, torpedo: null, bombing: null }
-    expect(getSlotCount(aircraft, 'seaplanes')).toBe(18)
+    expect(getSlotCount(aircraft, 'seaplane_fighters')).toBe(18)
   })
 
   test('land recon slot count is 4', () => {

@@ -51,15 +51,24 @@
     "Level7": ">>"
   },
   "AircraftCategory": {
-    "LandAttackers": "陆攻、大型陆基机",
-    "LocalFighters": "局战、陆战",
-    "LandRecon": "陆侦",
-    "CarrierFighters": "舰战",
-    "CarrierTorpedoBombers": "舰攻",
-    "CarrierDiveBombers": "舰爆",
-    "JetAircraft": "喷气式机",
-    "Seaplanes": "水爆、水战",
-    "RotaryASW": "旋翼机、反潜巡逻机",
-    "ReconFlyingBoats": "水侦、舰侦、大型飞行艇"
+    "LandAttackers": "陆上攻击机",
+    "LocalFighters": "局地战斗机",
+    "LandRecon": "陆上侦察机",
+    "CarrierFighters": "舰上战斗机",
+    "CarrierTorpedoBombers": "舰上攻击机",
+    "CarrierDiveBombers": "舰上轰炸机",
+    "CarrierRecon": "舰上侦察机",
+    "JetAircraft": "喷气式飞机",
+    "SeaplaneRecon": "水上侦察机",
+    "SeaplaneBombers": "水上轰炸机",
+    "SeaplaneFighters": "水上战斗机",
+    "RotaryASW": "对潜哨戒机",
+    "FlyingBoats": "飞行艇"
+  },
+  "AircraftGroup": {
+    "Land": "陆上机",
+    "Carrier": "舰载机",
+    "Seaplane": "水上机",
+    "Jet": "喷气式飞机"
   }
 }

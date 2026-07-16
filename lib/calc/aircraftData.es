@@ -1,4 +1,4 @@
-import { buildAircraftData, CATEGORY_DISPLAY } from './poiData'
+import { buildAircraftData, CATEGORY_DISPLAY, CATEGORY_GROUPS } from './poiData'
 
 let cachedEquips = null
 let cachedData = null
@@ -31,6 +31,10 @@ export function getCategoryData() {
 
 export function getIndexData() {
   return CATEGORY_DISPLAY
+}
+
+export function getCategoryGroups() {
+  return CATEGORY_GROUPS
 }
 
 // Equipment type-icon id (api_type[3]) for SlotitemIcon, straight from master data

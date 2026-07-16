@@ -6,11 +6,12 @@ function isNonHayabusaRotary(aircraft, categoryKey) {
 }
 
 // For LBAS, all equippable recon types extend range: 陸偵 (land_recon),
-// 艦偵 (carrier recon), 水偵 (seaplane recon), and 大型飛行艇 (large flying
-// boats). Carrier recon and seaplane recon are stored alongside flying boats
-// in recon_flying_boats.json, so the whole category is treated as extending.
+// 艦偵 (carrier_recon), 水偵 (seaplane_recon), and 大型飛行艇 (flying_boats).
 function isRadiusExtendingRecon(aircraft, categoryKey) {
-  return categoryKey === 'land_recon' || categoryKey === 'recon_flying_boats'
+  return categoryKey === 'land_recon' ||
+         categoryKey === 'carrier_recon' ||
+         categoryKey === 'seaplane_recon' ||
+         categoryKey === 'flying_boats'
 }
 
 export function calcCombatRadius(slots, aircraftData) {
