@@ -1,5 +1,6 @@
 # AI agent session metadata
 AGENTS.md
+.claude/
 .kimi-code/
 docs/superpowers/
 
