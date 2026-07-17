@@ -7,4 +7,8 @@ module.exports = {
     '^.+\\.(es|js)$': 'babel-jest',
   },
   moduleFileExtensions: ['js', 'es', 'json'],
+  moduleNameMapper: {
+    // poi provides react at runtime; tests only need a stub for view imports
+    '^react$': '<rootDir>/tests/stubs/react.js',
+  },
 }
