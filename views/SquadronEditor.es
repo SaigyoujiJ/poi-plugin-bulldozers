@@ -169,6 +169,7 @@ class SquadronEditor extends Component {
                     pickerMode={pickerMode}
                     onPickerModeChange={onPickerModeChange}
                     playerEquips={playerEquips}
+                    mode={mode}
                   />
                 </div>
                 }

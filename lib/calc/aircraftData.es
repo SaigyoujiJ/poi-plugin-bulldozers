@@ -1,4 +1,4 @@
-import { buildAircraftData, CATEGORY_DISPLAY, CATEGORY_GROUPS } from './poiData'
+import { buildAircraftData, CATEGORY_DISPLAY, CATEGORY_GROUPS, CATEGORY_STATS } from './poiData'
 
 let cachedEquips = null
 let cachedData = null
@@ -35,6 +35,11 @@ export function getIndexData() {
 
 export function getCategoryGroups() {
   return CATEGORY_GROUPS
+}
+
+// 选机列表参数行的字段配置（值为 null/0 的字段由视图层隐藏）
+export function getCategoryStats(categoryKey) {
+  return CATEGORY_STATS[categoryKey] ?? ['aa', 'radius']
 }
 
 // Equipment type-icon id (api_type[3]) for SlotitemIcon, straight from master data

@@ -70,5 +70,16 @@
     "Carrier": "艦載機",
     "Seaplane": "水上機",
     "Jet": "噴式機"
+  },
+  "Stat": {
+    "AA": "対空",
+    "Interception": "迎撃",
+    "AntiBomb": "対爆",
+    "Torpedo": "雷装",
+    "Bombing": "爆装",
+    "LoS": "索敵",
+    "ASW": "対潜",
+    "Radius": "航程",
+    "AirPower": "制空"
   }
 }

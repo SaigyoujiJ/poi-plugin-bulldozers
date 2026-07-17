@@ -59,6 +59,23 @@ const CATEGORY_GROUPS = [
   { key: 'jet', display: 'AircraftGroup.Jet', categories: ['jet_aircraft'] },
 ]
 
+// 选机列表参数行：每类展示的原始参数（值为 null/0 的不显示）
+const CATEGORY_STATS = {
+  land_attackers: ['aa', 'torpedo', 'bombing', 'radius'],
+  local_fighters: ['aa', 'interception', 'anti_bomb'],
+  land_recon: ['aa', 'los', 'radius'],
+  carrier_fighters: ['aa', 'interception', 'anti_bomb'],
+  carrier_torpedo_bombers: ['aa', 'torpedo', 'bombing', 'radius'],
+  carrier_dive_bombers: ['aa', 'torpedo', 'bombing', 'radius'],
+  carrier_recon: ['aa', 'los', 'radius'],
+  jet_aircraft: ['aa', 'bombing', 'radius'],
+  seaplane_recon: ['aa', 'los', 'radius'],
+  seaplane_bombers: ['aa', 'torpedo', 'bombing', 'radius'],
+  seaplane_fighters: ['aa', 'interception', 'anti_bomb'],
+  rotary_asw: ['aa', 'asw', 'radius'],
+  flying_boats: ['aa', 'los', 'asw', 'radius'],
+}
+
 const LOCAL_FIGHTER_TYPE = 48
 
 function numOrNil(v) {
@@ -137,4 +154,4 @@ export function buildAircraftData($equips) {
   return { lookupMap, categoryData, categoryList }
 }
 
-export { CATEGORY_ORDER, CATEGORY_DISPLAY, CATEGORY_GROUPS }
+export { CATEGORY_ORDER, CATEGORY_DISPLAY, CATEGORY_GROUPS, CATEGORY_STATS }

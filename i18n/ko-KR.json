@@ -70,5 +70,16 @@
     "Carrier": "함재기",
     "Seaplane": "수상기",
     "Jet": "제트기"
+  },
+  "Stat": {
+    "AA": "대공",
+    "Interception": "요격",
+    "AntiBomb": "대폭",
+    "Torpedo": "뇌장",
+    "Bombing": "폭장",
+    "LoS": "색적",
+    "ASW": "대잠",
+    "Radius": "반경",
+    "AirPower": "제공"
   }
 }

@@ -6,7 +6,7 @@ const { __ } = window.i18n['poi-plugin-bulldozers']
 
 class PlanePicker extends Component {
   renderInventory() {
-    const { playerEquips, activeCategoryKey, onCategoryChange, onPlaneSelect } = this.props
+    const { playerEquips, activeCategoryKey, onCategoryChange, onPlaneSelect, mode } = this.props
     const equips = playerEquips || []
 
     if (equips.length === 0) {
@@ -27,23 +27,23 @@ class PlanePicker extends Component {
           categoryKeys={ownedKeys}
           onCategoryChange={onCategoryChange}
         />
-        <PlaneList key={`inventory-${activeCat.categoryKey}`} aircraftList={activeCat.aircraft} onSelect={onPlaneSelect} />
+        <PlaneList key={`inventory-${activeCat.categoryKey}`} aircraftList={activeCat.aircraft} onSelect={onPlaneSelect} mode={mode} />
       </div>
     )
   }
 
   render() {
-    const { activeCategoryKey, onCategoryChange, onPlaneSelect, pickerMode } = this.props
-    const mode = pickerMode || 'catalog'
+    const { activeCategoryKey, onCategoryChange, onPlaneSelect, pickerMode, mode } = this.props
+    const currentPickerMode = pickerMode || 'catalog'
 
-    if (mode === 'inventory') {
+    if (currentPickerMode === 'inventory') {
       return this.renderInventory()
     }
 
     return (
       <div style={{ cursor: 'default' }}>
         <CategoryTabs activeCategoryKey={activeCategoryKey} onCategoryChange={onCategoryChange} />
-        <PlaneList key={`catalog-${activeCategoryKey}`} categoryKey={activeCategoryKey} onSelect={onPlaneSelect} />
+        <PlaneList key={`catalog-${activeCategoryKey}`} categoryKey={activeCategoryKey} onSelect={onPlaneSelect} mode={mode} />
       </div>
     )
   }

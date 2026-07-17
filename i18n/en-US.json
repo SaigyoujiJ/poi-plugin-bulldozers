@@ -70,5 +70,16 @@
     "Carrier": "Carrier-Based",
     "Seaplane": "Seaplanes",
     "Jet": "Jets"
+  },
+  "Stat": {
+    "AA": "AA",
+    "Interception": "INT",
+    "AntiBomb": "AB",
+    "Torpedo": "Torp",
+    "Bombing": "Bomb",
+    "LoS": "LoS",
+    "ASW": "ASW",
+    "Radius": "Radius",
+    "AirPower": "Air"
   }
 }
