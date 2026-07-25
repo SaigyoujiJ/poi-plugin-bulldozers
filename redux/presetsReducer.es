@@ -10,9 +10,6 @@ import {
   SET_SLOT_COUNT,
   CLEAR_SLOT,
 } from './actions'
-import { getSlotCount } from '../lib/calc/planeType'
-import { lookupAircraft } from '../lib/calc/aircraftData'
-
 const { __ } = window.i18n['poi-plugin-bulldozers']
 
 export const DEFAULT_PRESET_ID = 'default'
@@ -66,12 +63,12 @@ function slotReducer(state, action) {
       if (!aircraftId) {
         return { ...state, aircraftId: null, equipId: null }
       }
-      const planeInfo = lookupAircraft(aircraftId)
-      const maxCount = planeInfo ? getSlotCount(planeInfo.aircraft, planeInfo.categoryKey) : 18
+      // count = null 表示默认搭载数。reducer 运行在 poi 主进程侧的 store 上下文，
+      // 那里没有 window.getStore，查不到游戏数据——默认搭载数由视图/计算层按分类推导。
       return {
         ...state,
         aircraftId,
-        count: maxCount,
+        count: null,
         stars: action.stars ?? state.stars,
         proficiency: action.proficiency ?? state.proficiency,
         equipId: action.equipId ?? null,

@@ -44,7 +44,7 @@ describe('slot equipId tracking', () => {
   test('inventory pick stores stars, proficiency and equipId in one action', () => {
     const state = presetsReducer(baseState(), setSlotAircraft('default', 0, 0, 175, { stars: 4, proficiency: 6, equipId: 123 }))
     expect(state.presets.default.squadrons[0].slots[0]).toEqual({
-      aircraftId: 175, proficiency: 6, stars: 4, count: 18, equipId: 123,
+      aircraftId: 175, proficiency: 6, stars: 4, count: null, equipId: 123,
     })
   })
 
@@ -52,7 +52,7 @@ describe('slot equipId tracking', () => {
     let state = presetsReducer(baseState(), setSlotAircraft('default', 0, 0, 175, { stars: 4, proficiency: 6, equipId: 123 }))
     state = presetsReducer(state, setSlotAircraft('default', 0, 0, 176))
     expect(state.presets.default.squadrons[0].slots[0]).toEqual({
-      aircraftId: 176, proficiency: 6, stars: 4, count: 18, equipId: null,
+      aircraftId: 176, proficiency: 6, stars: 4, count: null, equipId: null,
     })
   })
 
