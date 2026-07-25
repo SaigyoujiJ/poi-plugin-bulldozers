@@ -27,6 +27,7 @@ export function aggregatePlayerEquips(equips) {
     }
 
     list.push({
+      equipId: equip.api_id,
       aircraftId: aircraft.id,
       name: aircraft.name,
       stars: equip.api_level ?? 0,
@@ -41,7 +42,7 @@ export function aggregatePlayerEquips(equips) {
     const list = catData.get(cat.key)
     if (!list || list.length === 0) continue
 
-    list.sort((a, b) => a.aircraftId - b.aircraftId || a.stars - b.stars || a.proficiency - b.proficiency)
+    list.sort((a, b) => a.aircraftId - b.aircraftId || a.stars - b.stars || a.proficiency - b.proficiency || a.equipId - b.equipId)
     result.push({
       categoryKey: cat.key,
       display: cat.display,

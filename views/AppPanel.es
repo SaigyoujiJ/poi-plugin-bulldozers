@@ -5,8 +5,8 @@ import PresetBar from './PresetBar'
 import SquadronTabs from './SquadronTabs'
 import SquadronEditor from './SquadronEditor'
 import ResultPanel from './ResultPanel'
-import { selectActivePreset, selectSquadrons, selectPlayerEquipCategories } from '../redux/selectors'
-import { setSlotAircraft, setSlotStars, setSlotProficiency } from '../redux/actions'
+import { selectActivePreset, selectSquadrons, selectPlayerEquipCategories, selectUsedEquipIds } from '../redux/selectors'
+import { setSlotAircraft } from '../redux/actions'
 import { themeCss } from './themeStyle'
 
 const LIGHT_VARS = {
@@ -117,6 +117,10 @@ class AppPanel extends Component {
     const activePreset = selectActivePreset(pluginState)
     const squadrons = selectSquadrons(pluginState)
     const squadron = squadrons[activeSquadronIndex]
+    const usedEquipIds = selectUsedEquipIds(
+      activePreset,
+      selectedSlotIndex != null ? { squadronIndex: activeSquadronIndex, slotIndex: selectedSlotIndex } : null
+    )
 
     if (!activePreset) return null
 
@@ -147,13 +151,16 @@ class AppPanel extends Component {
           activeCategoryKey={activeCategoryKey}
           pickerMode={pickerMode}
           playerEquips={this.props.playerEquips}
+          usedEquipIds={usedEquipIds}
           onSlotSelect={(i) => this.setState({ selectedSlotIndex: selectedSlotIndex === i ? null : i })}
           onPlaneSelect={(arg) => {
             if (selectedSlotIndex != null) {
               if (typeof arg === 'object' && arg !== null) {
-                dispatch(setSlotAircraft(activePresetId, activeSquadronIndex, selectedSlotIndex, arg.aircraftId))
-                dispatch(setSlotStars(activePresetId, activeSquadronIndex, selectedSlotIndex, arg.stars ?? 0))
-                dispatch(setSlotProficiency(activePresetId, activeSquadronIndex, selectedSlotIndex, arg.proficiency ?? 0))
+                dispatch(setSlotAircraft(activePresetId, activeSquadronIndex, selectedSlotIndex, arg.aircraftId, {
+                  stars: arg.stars ?? 0,
+                  proficiency: arg.proficiency ?? 0,
+                  equipId: arg.equipId ?? null,
+                }))
               } else {
                 dispatch(setSlotAircraft(activePresetId, activeSquadronIndex, selectedSlotIndex, arg))
               }

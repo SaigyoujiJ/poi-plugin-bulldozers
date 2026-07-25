@@ -6,7 +6,7 @@ const { __ } = window.i18n['poi-plugin-bulldozers']
 
 class PlanePicker extends Component {
   renderInventory() {
-    const { playerEquips, activeCategoryKey, onCategoryChange, onPlaneSelect, mode } = this.props
+    const { playerEquips, activeCategoryKey, onCategoryChange, onPlaneSelect, mode, usedEquipIds } = this.props
     const equips = playerEquips || []
 
     if (equips.length === 0) {
@@ -27,7 +27,7 @@ class PlanePicker extends Component {
           categoryKeys={ownedKeys}
           onCategoryChange={onCategoryChange}
         />
-        <PlaneList key={`inventory-${activeCat.categoryKey}`} aircraftList={activeCat.aircraft} onSelect={onPlaneSelect} mode={mode} />
+        <PlaneList key={`inventory-${activeCat.categoryKey}`} aircraftList={activeCat.aircraft} onSelect={onPlaneSelect} mode={mode} usedEquipIds={usedEquipIds} />
       </div>
     )
   }

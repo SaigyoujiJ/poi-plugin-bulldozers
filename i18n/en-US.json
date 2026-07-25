@@ -38,7 +38,8 @@
   "PlanePicker": {
     "Catalog": "All LBAS",
     "Inventory": "My LBAS",
-    "InventoryEmpty": "No owned aircraft available"
+    "InventoryEmpty": "No owned aircraft available",
+    "Assigned": "Assigned"
   },
   "Proficiency": {
     "None": "None",

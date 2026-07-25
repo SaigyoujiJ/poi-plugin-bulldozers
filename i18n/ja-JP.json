@@ -38,7 +38,8 @@
   "PlanePicker": {
     "Catalog": "全陸航",
     "Inventory": "所持陸航",
-    "InventoryEmpty": "利用可能な装備がありません"
+    "InventoryEmpty": "利用可能な装備がありません",
+    "Assigned": "配置済"
   },
   "Proficiency": {
     "None": "無",

@@ -27,10 +27,10 @@ export function createDefaultPreset(id = DEFAULT_PRESET_ID, name = __('Preset.De
         name: __('Squadron.First'),
         mode: 'sortie',
         slots: [
-          { aircraftId: null, proficiency: 0, stars: 0, count: 0 },
-          { aircraftId: null, proficiency: 0, stars: 0, count: 0 },
-          { aircraftId: null, proficiency: 0, stars: 0, count: 0 },
-          { aircraftId: null, proficiency: 0, stars: 0, count: 0 },
+          { aircraftId: null, proficiency: 0, stars: 0, count: 0, equipId: null },
+          { aircraftId: null, proficiency: 0, stars: 0, count: 0, equipId: null },
+          { aircraftId: null, proficiency: 0, stars: 0, count: 0, equipId: null },
+          { aircraftId: null, proficiency: 0, stars: 0, count: 0, equipId: null },
         ],
       },
       {
@@ -38,10 +38,10 @@ export function createDefaultPreset(id = DEFAULT_PRESET_ID, name = __('Preset.De
         name: __('Squadron.Second'),
         mode: 'sortie',
         slots: [
-          { aircraftId: null, proficiency: 0, stars: 0, count: 0 },
-          { aircraftId: null, proficiency: 0, stars: 0, count: 0 },
-          { aircraftId: null, proficiency: 0, stars: 0, count: 0 },
-          { aircraftId: null, proficiency: 0, stars: 0, count: 0 },
+          { aircraftId: null, proficiency: 0, stars: 0, count: 0, equipId: null },
+          { aircraftId: null, proficiency: 0, stars: 0, count: 0, equipId: null },
+          { aircraftId: null, proficiency: 0, stars: 0, count: 0, equipId: null },
+          { aircraftId: null, proficiency: 0, stars: 0, count: 0, equipId: null },
         ],
       },
       {
@@ -49,10 +49,10 @@ export function createDefaultPreset(id = DEFAULT_PRESET_ID, name = __('Preset.De
         name: __('Squadron.Third'),
         mode: 'sortie',
         slots: [
-          { aircraftId: null, proficiency: 0, stars: 0, count: 0 },
-          { aircraftId: null, proficiency: 0, stars: 0, count: 0 },
-          { aircraftId: null, proficiency: 0, stars: 0, count: 0 },
-          { aircraftId: null, proficiency: 0, stars: 0, count: 0 },
+          { aircraftId: null, proficiency: 0, stars: 0, count: 0, equipId: null },
+          { aircraftId: null, proficiency: 0, stars: 0, count: 0, equipId: null },
+          { aircraftId: null, proficiency: 0, stars: 0, count: 0, equipId: null },
+          { aircraftId: null, proficiency: 0, stars: 0, count: 0, equipId: null },
         ],
       },
     ],
@@ -64,20 +64,28 @@ function slotReducer(state, action) {
     case SET_SLOT_AIRCRAFT: {
       const { aircraftId } = action
       if (!aircraftId) {
-        return { ...state, aircraftId: null }
+        return { ...state, aircraftId: null, equipId: null }
       }
       const planeInfo = lookupAircraft(aircraftId)
       const maxCount = planeInfo ? getSlotCount(planeInfo.aircraft, planeInfo.categoryKey) : 18
-      return { ...state, aircraftId, count: maxCount }
+      return {
+        ...state,
+        aircraftId,
+        count: maxCount,
+        stars: action.stars ?? state.stars,
+        proficiency: action.proficiency ?? state.proficiency,
+        equipId: action.equipId ?? null,
+      }
     }
+    // 手动改 ★/熟练度后，格子不再等于原实例，解除实例绑定
     case SET_SLOT_PROFICIENCY:
-      return { ...state, proficiency: action.proficiency }
+      return { ...state, proficiency: action.proficiency, equipId: null }
     case SET_SLOT_STARS:
-      return { ...state, stars: action.stars }
+      return { ...state, stars: action.stars, equipId: null }
     case SET_SLOT_COUNT:
       return { ...state, count: action.count }
     case CLEAR_SLOT:
-      return { aircraftId: null, proficiency: 0, stars: 0, count: 0 }
+      return { aircraftId: null, proficiency: 0, stars: 0, count: 0, equipId: null }
     default:
       return state
   }

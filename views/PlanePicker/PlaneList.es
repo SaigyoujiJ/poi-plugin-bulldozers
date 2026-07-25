@@ -50,7 +50,7 @@ class PlaneList extends Component {
   }
 
   render() {
-    const { categoryKey, aircraftList, onSelect, mode } = this.props
+    const { categoryKey, aircraftList, onSelect, mode, usedEquipIds } = this.props
     const list = aircraftList || getCategoryData()[categoryKey] || []
     const isInventory = aircraftList && list.length > 0 && list[0].stars != null
 
@@ -58,13 +58,14 @@ class PlaneList extends Component {
       <div style={{ maxHeight: 200, overflowY: 'auto', cursor: 'default' }}>
         {list.map((ac) => {
           const key = isInventory
-            ? `${ac.aircraftId}-${ac.stars}-${ac.proficiency}`
+            ? (ac.equipId ?? `${ac.aircraftId}-${ac.stars}-${ac.proficiency}`)
             : (ac.id ?? ac.aircraftId)
           const planeInfo = isInventory ? lookupAircraft(ac.aircraftId) : null
           const aircraft = isInventory ? planeInfo?.aircraft : ac
           const catKey = isInventory ? planeInfo?.categoryKey : categoryKey
           const statText = aircraft && catKey ? formatAircraftStats(aircraft, catKey) : ''
           const equivNode = isInventory ? this.equivalentAirPowerNode(ac, planeInfo, mode) : null
+          const used = isInventory && ac.equipId != null && !!usedEquipIds && usedEquipIds.has(ac.equipId)
 
           return (
             <div
@@ -72,9 +73,10 @@ class PlaneList extends Component {
               className="bulldozer-plane-item"
               onClick={(e) => {
                 e.stopPropagation()
+                if (used) return
                 onSelect(
                   isInventory
-                    ? { aircraftId: ac.aircraftId, stars: ac.stars, proficiency: ac.proficiency }
+                    ? { aircraftId: ac.aircraftId, stars: ac.stars, proficiency: ac.proficiency, equipId: ac.equipId }
                     : (ac.id ?? ac.aircraftId)
                 )
               }}
@@ -83,10 +85,11 @@ class PlaneList extends Component {
                 alignItems: 'center',
                 gap: 8,
                 padding: '4px 8px',
-                cursor: 'pointer',
+                cursor: used ? 'default' : 'pointer',
                 borderRadius: 'var(--bulldozer-radius-sm, 4px)',
                 marginBottom: 3,
                 color: 'var(--bulldozer-text-primary, #1c2127)',
+                opacity: used ? 0.5 : 1,
               }}
             >
               <SlotitemIcon iconId={getSlotitemIconId(ac.id ?? ac.aircraftId)} />
@@ -109,10 +112,18 @@ class PlaneList extends Component {
                   flexShrink: 0,
                   cursor: 'pointer',
                 }}>
-                  {ac.stars > 0 && (
-                    <span style={{ color: '#f5a623' }}>★{ac.stars}</span>
+                  {used ? (
+                    <span style={{ color: 'var(--bulldozer-text-secondary, #5f6b7a)', fontWeight: 400 }}>
+                      {__('PlanePicker.Assigned')}
+                    </span>
+                  ) : (
+                    <React.Fragment>
+                      {ac.stars > 0 && (
+                        <span style={{ color: '#f5a623' }}>★{ac.stars}</span>
+                      )}
+                      <ProficiencyIcon level={ac.proficiency} />
+                    </React.Fragment>
                   )}
-                  <ProficiencyIcon level={ac.proficiency} />
                 </span>
               )}
             </div>

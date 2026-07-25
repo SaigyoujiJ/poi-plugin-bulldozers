@@ -38,7 +38,8 @@
   "PlanePicker": {
     "Catalog": "全部陸航",
     "Inventory": "我的陸航",
-    "InventoryEmpty": "沒有可用的裝備"
+    "InventoryEmpty": "沒有可用的裝備",
+    "Assigned": "已配置"
   },
   "Proficiency": {
     "None": "無",

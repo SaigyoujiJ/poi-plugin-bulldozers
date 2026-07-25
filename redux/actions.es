@@ -40,12 +40,16 @@ export const setSquadronMode = (presetId, squadronIndex, mode) => ({
   mode,
 })
 
-export const setSlotAircraft = (presetId, squadronIndex, slotIndex, aircraftId) => ({
+// extras（可选）：从我的陆航选机时传入实例信息 { stars, proficiency, equipId }
+export const setSlotAircraft = (presetId, squadronIndex, slotIndex, aircraftId, extras) => ({
   type: SET_SLOT_AIRCRAFT,
   presetId,
   squadronIndex,
   slotIndex,
   aircraftId,
+  stars: extras?.stars,
+  proficiency: extras?.proficiency,
+  equipId: extras?.equipId,
 })
 
 export const setSlotProficiency = (presetId, squadronIndex, slotIndex, proficiency) => ({
