@@ -45,3 +45,6 @@ desktop.ini
 # pnpm-lock.yaml
 .worktrees/
 .superpowers/
+
+# Local session handoff
+HANDOFF.md
