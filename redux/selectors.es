@@ -1,4 +1,4 @@
-import { calcSortieAirPower, calcDefenseAirPower, calcLandAttackerStrikePower, calcHeavyBomberDefensePower } from '../lib/calc/airPower'
+import { calcSortieAirPower, calcDefenseAirPower, calcLandAttackerStrikePower, calcHighAltitudeDefensePower } from '../lib/calc/airPower'
 import { calcCombatRadius } from '../lib/calc/radius'
 import { aircraftLookup } from '../lib/calc/aircraftData'
 import { aggregatePlayerEquips } from '../lib/playerEquips'
@@ -32,14 +32,14 @@ export function selectUsedEquipIds(preset, excludeSlot) {
   return used
 }
 
-export function selectSquadronResults(squadron) {
+export function selectSquadronResults(squadron, squadrons = [squadron]) {
   if (!squadron) return { sortie: 0, defense: 0, landAttackerStrike: 0, heavyBomberDefense: 0, radius: 0 }
   const { slots } = squadron
   return {
     sortie: calcSortieAirPower(slots, aircraftLookup),
     defense: calcDefenseAirPower(slots, aircraftLookup),
     landAttackerStrike: calcLandAttackerStrikePower(slots, aircraftLookup),
-    heavyBomberDefense: calcHeavyBomberDefensePower(slots, aircraftLookup),
+    heavyBomberDefense: calcHighAltitudeDefensePower(squadrons, aircraftLookup),
     radius: calcCombatRadius(slots, aircraftLookup),
   }
 }

@@ -1,4 +1,4 @@
-import { selectUsedEquipIds } from '../../redux/selectors'
+import { selectSquadronResults, selectUsedEquipIds } from '../../redux/selectors'
 
 const preset = {
   squadrons: [
@@ -34,5 +34,17 @@ describe('selectUsedEquipIds', () => {
   test('returns an empty set for missing preset', () => {
     expect(selectUsedEquipIds(null).size).toBe(0)
     expect(selectUsedEquipIds(undefined).size).toBe(0)
+  })
+})
+
+describe('selectSquadronResults', () => {
+  test('重爆防空值合计当前预设中的防空航空队', () => {
+    const slots = [
+      { aircraftId: 175, proficiency: 7, count: 18 },
+      { aircraftId: 352, proficiency: 0, count: 18 },
+    ]
+    const squadron = { mode: 'defense', slots }
+    const results = selectSquadronResults(squadron, [squadron, squadron, squadron])
+    expect(results.heavyBomberDefense).toBeGreaterThan(results.defense)
   })
 })

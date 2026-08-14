@@ -1,4 +1,4 @@
-import { calcSortieAirPower, calcDefenseAirPower, calcLandAttackerStrikePower, calcHeavyBomberDefensePower } from '../../../lib/calc/airPower'
+import { calcSortieAirPower, calcDefenseAirPower, calcLandAttackerStrikePower, calcHeavyBomberDefensePower, calcHighAltitudeDefensePower } from '../../../lib/calc/airPower'
 import { aircraftLookup } from '../../../lib/calc/aircraftData'
 
 describe('sortie air power', () => {
@@ -96,6 +96,26 @@ describe('defense air power', () => {
       { aircraftId: 352, proficiency: 0, count: 0 },
     ]
     expect(calcHeavyBomberDefensePower(slots, aircraftLookup)).toBe(50)
+  })
+
+  test('高高度防空合计所有防空航空队的火箭机', () => {
+    const slots = [
+      { aircraftId: 175, proficiency: 7, count: 18 },
+      { aircraftId: 352, proficiency: 0, count: 18 },
+    ]
+    const squadrons = [
+      { mode: 'defense', slots },
+      { mode: 'defense', slots },
+      { mode: 'defense', slots },
+    ]
+    const totalDefense = calcDefenseAirPower(slots, aircraftLookup) * 3
+    expect(calcHighAltitudeDefensePower(squadrons, aircraftLookup)).toBe(
+      Math.floor(totalDefense * 1.2)
+    )
+    expect(calcHighAltitudeDefensePower([
+      { mode: 'sortie', slots },
+      ...squadrons,
+    ], aircraftLookup)).toBe(Math.floor(totalDefense * 1.2))
   })
 })
 

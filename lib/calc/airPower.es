@@ -151,6 +151,25 @@ export function calcHeavyBomberDefensePower(slots, aircraftData) {
   return Math.floor(baseDefense * getRocketMultiplier(rocketCount))
 }
 
+export function calcHighAltitudeDefensePower(squadrons, aircraftData) {
+  let totalDefense = 0
+  let rocketCount = 0
+
+  for (const squadron of squadrons || []) {
+    if (!squadron || squadron.mode !== 'defense') continue
+    totalDefense += calcDefenseAirPower(squadron.slots || [], aircraftData)
+    for (const slot of squadron.slots || []) {
+      if (!slot.aircraftId || !isActiveSlot(slot)) continue
+      const planeInfo = aircraftData.lookup(slot.aircraftId)
+      if (planeInfo && ROCKET_FIGHTER_IDS.has(planeInfo.aircraft.id)) {
+        rocketCount++
+      }
+    }
+  }
+
+  return Math.floor(totalDefense * getRocketMultiplier(rocketCount))
+}
+
 export function calcLandAttackerStrikePower(slots, aircraftData) {
   let total = 0
   for (const slot of slots) {

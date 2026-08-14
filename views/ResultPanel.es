@@ -18,8 +18,8 @@ class ResultPanel extends Component {
   }
 
   render() {
-    const { squadron, onClickOutside } = this.props
-    const results = selectSquadronResults(squadron)
+    const { squadron, squadrons, onClickOutside } = this.props
+    const results = selectSquadronResults(squadron, squadrons)
     const mode = squadron && squadron.mode ? squadron.mode : 'sortie'
     const isSortie = mode === 'sortie'
 

@@ -136,7 +136,7 @@ class AppPanel extends Component {
         }}
       >
         <PresetBar onClickOutside={this.handleClickOutside} />
-        <ResultPanel squadron={squadron} onClickOutside={this.handleClickOutside} />
+        <ResultPanel squadron={squadron} squadrons={squadrons} onClickOutside={this.handleClickOutside} />
         <SquadronTabs
           activeIndex={activeSquadronIndex}
           squadrons={squadrons}
