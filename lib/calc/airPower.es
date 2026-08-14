@@ -1,6 +1,10 @@
 import { getSlotCount, isFighterType, isSeaplaneBomber, getImprovementBonus } from './planeType'
 import { getProficiencyData, getProficiencyAirBonus } from './proficiency'
 
+function isActiveSlot(slot) {
+  return slot.count == null || slot.count > 0
+}
+
 function calcSlotSortieBasePower(aircraft, categoryKey, slotCount, stars) {
   // LBAS 出击制空公式：使用 wiki 预计算的 `aa_sortie`（已包含迎击/改修加成）。
   // 若不存在则回退到原始 `aa`，并补上迎击加成。
@@ -62,7 +66,7 @@ function calcSlotLandAttackerStrike(aircraft, slotCount, proficiencyLevel) {
 function getSortieReconMultiplier(slots, aircraftData) {
   let multiplier = 1
   for (const slot of slots) {
-    if (!slot.aircraftId) continue
+    if (!slot.aircraftId || !isActiveSlot(slot)) continue
     const { aircraft, categoryKey } = aircraftData.lookup(slot.aircraftId)
     if (categoryKey !== 'land_recon') continue
     const los = aircraft.los ?? 0
@@ -78,7 +82,7 @@ function getSortieReconMultiplier(slots, aircraftData) {
 function getDefenseReconMultiplier(slots, aircraftData) {
   let multiplier = 1
   for (const slot of slots) {
-    if (!slot.aircraftId) continue
+    if (!slot.aircraftId || !isActiveSlot(slot)) continue
     const { aircraft, categoryKey } = aircraftData.lookup(slot.aircraftId)
     const los = aircraft.los ?? 0
     if (categoryKey === 'seaplane_recon' || categoryKey === 'flying_boats') {
@@ -102,7 +106,7 @@ function getDefenseReconMultiplier(slots, aircraftData) {
 export function calcSortieAirPower(slots, aircraftData) {
   let total = 0
   for (const slot of slots) {
-    if (!slot.aircraftId) continue
+    if (!slot.aircraftId || !isActiveSlot(slot)) continue
     const { aircraft, categoryKey } = aircraftData.lookup(slot.aircraftId)
     const slotCount = slot.count ?? getSlotCount(aircraft, categoryKey)
     const level = slot.proficiency ?? 0
@@ -115,7 +119,7 @@ export function calcSortieAirPower(slots, aircraftData) {
 export function calcDefenseAirPower(slots, aircraftData) {
   let total = 0
   for (const slot of slots) {
-    if (!slot.aircraftId) continue
+    if (!slot.aircraftId || !isActiveSlot(slot)) continue
     const { aircraft, categoryKey } = aircraftData.lookup(slot.aircraftId)
     const slotCount = slot.count ?? getSlotCount(aircraft, categoryKey)
     const level = slot.proficiency ?? 0
@@ -138,7 +142,7 @@ export function calcHeavyBomberDefensePower(slots, aircraftData) {
   const baseDefense = calcDefenseAirPower(slots, aircraftData)
   let rocketCount = 0
   for (const slot of slots) {
-    if (!slot.aircraftId) continue
+    if (!slot.aircraftId || !isActiveSlot(slot)) continue
     const { aircraft } = aircraftData.lookup(slot.aircraftId)
     if (ROCKET_FIGHTER_IDS.has(aircraft.id)) {
       rocketCount++
@@ -150,7 +154,7 @@ export function calcHeavyBomberDefensePower(slots, aircraftData) {
 export function calcLandAttackerStrikePower(slots, aircraftData) {
   let total = 0
   for (const slot of slots) {
-    if (!slot.aircraftId) continue
+    if (!slot.aircraftId || !isActiveSlot(slot)) continue
     const { aircraft, categoryKey } = aircraftData.lookup(slot.aircraftId)
     if (categoryKey !== 'land_attackers') continue
     if ((aircraft.bombing ?? 0) <= 0) continue

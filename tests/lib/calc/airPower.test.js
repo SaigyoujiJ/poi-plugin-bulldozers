@@ -1,4 +1,4 @@
-import { calcSortieAirPower, calcDefenseAirPower, calcLandAttackerStrikePower } from '../../../lib/calc/airPower'
+import { calcSortieAirPower, calcDefenseAirPower, calcLandAttackerStrikePower, calcHeavyBomberDefensePower } from '../../../lib/calc/airPower'
 import { aircraftLookup } from '../../../lib/calc/aircraftData'
 
 describe('sortie air power', () => {
@@ -44,6 +44,14 @@ describe('sortie air power', () => {
     ]
     expect(calcSortieAirPower(slots, aircraftLookup)).toBe(63)
   })
+
+  test('0机中队不贡献制空值或侦察机倍率', () => {
+    const slots = [
+      { aircraftId: 175, proficiency: 7, count: 18 },
+      { aircraftId: 311, proficiency: 0, count: 0 },
+    ]
+    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(63)
+  })
 })
 
 describe('defense air power', () => {
@@ -80,6 +88,14 @@ describe('defense air power', () => {
     // slot power = floor(1 * sqrt(18)) + floor(sqrt(9/10)) + 0 = 4
     const slots = [{ aircraftId: 168 }]
     expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(4)
+  })
+
+  test('0机火箭机不计入重爆防空倍率', () => {
+    const slots = [
+      { aircraftId: 175, proficiency: 7, count: 18 },
+      { aircraftId: 352, proficiency: 0, count: 0 },
+    ]
+    expect(calcHeavyBomberDefensePower(slots, aircraftLookup)).toBe(50)
   })
 })
 

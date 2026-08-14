@@ -1,5 +1,10 @@
 // 一式戦 隼 series (rotary ASW fighters) do not disable range extension
 const HAYABUSA_ROTARY_IDS = new Set([489, 491])
+
+function isActiveSlot(slot) {
+  return slot.count == null || slot.count > 0
+}
+
 function isNonHayabusaRotary(aircraft, categoryKey) {
   if (categoryKey !== 'rotary_asw') return false
   return !HAYABUSA_ROTARY_IDS.has(aircraft.id)
@@ -20,7 +25,7 @@ export function calcCombatRadius(slots, aircraftData) {
   let extensionDisabled = false
 
   for (const slot of slots) {
-    if (!slot.aircraftId) continue
+    if (!slot.aircraftId || !isActiveSlot(slot)) continue
     const { aircraft, categoryKey } = aircraftData.lookup(slot.aircraftId)
     if (aircraft.radius == null) continue
 

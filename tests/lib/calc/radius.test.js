@@ -10,6 +10,14 @@ describe('radius', () => {
     expect(calcCombatRadius(slots, aircraftLookup)).toBe(2)
   })
 
+  test('0机中队不参与行动半径和延伸禁用判断', () => {
+    const slots = [
+      { aircraftId: 168, count: 18 },
+      { aircraftId: 175, count: 0 },
+    ]
+    expect(calcCombatRadius(slots, aircraftLookup)).toBe(8)
+  })
+
   test('radius extends with large flying boat', () => {
     const slots = [
       { aircraftId: 168, proficiency: 0, stars: 0 }, // radius 8
