@@ -44,7 +44,13 @@ describe('selectSquadronResults', () => {
       { aircraftId: 352, proficiency: 0, count: 18 },
     ]
     const squadron = { mode: 'defense', slots }
-    const results = selectSquadronResults(squadron, [squadron, squadron, squadron])
-    expect(results.heavyBomberDefense).toBeGreaterThan(results.defense)
+    const results = selectSquadronResults(squadron, [
+      { mode: 'sortie', slots },
+      squadron,
+      squadron,
+      squadron,
+    ])
+    expect(results.defense).toBe(190)
+    expect(results.heavyBomberDefense).toBe(684)
   })
 })

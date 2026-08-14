@@ -138,19 +138,6 @@ function getRocketMultiplier(count) {
   return 0.5
 }
 
-export function calcHeavyBomberDefensePower(slots, aircraftData) {
-  const baseDefense = calcDefenseAirPower(slots, aircraftData)
-  let rocketCount = 0
-  for (const slot of slots) {
-    if (!slot.aircraftId || !isActiveSlot(slot)) continue
-    const { aircraft } = aircraftData.lookup(slot.aircraftId)
-    if (ROCKET_FIGHTER_IDS.has(aircraft.id)) {
-      rocketCount++
-    }
-  }
-  return Math.floor(baseDefense * getRocketMultiplier(rocketCount))
-}
-
 export function calcHighAltitudeDefensePower(squadrons, aircraftData) {
   let totalDefense = 0
   let rocketCount = 0

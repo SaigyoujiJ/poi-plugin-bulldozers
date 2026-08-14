@@ -32,7 +32,7 @@ export function selectUsedEquipIds(preset, excludeSlot) {
   return used
 }
 
-export function selectSquadronResults(squadron, squadrons = [squadron]) {
+export function selectSquadronResults(squadron, squadrons) {
   if (!squadron) return { sortie: 0, defense: 0, landAttackerStrike: 0, heavyBomberDefense: 0, radius: 0 }
   const { slots } = squadron
   return {
