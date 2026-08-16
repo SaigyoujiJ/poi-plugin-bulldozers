@@ -135,7 +135,8 @@ class AppPanel extends Component {
     const squadron = squadrons[activeSquadronIndex]
     const usedEquipIds = selectUsedEquipIds(
       activePreset,
-      selectedSlotIndex != null ? { squadronIndex: activeSquadronIndex, slotIndex: selectedSlotIndex } : null
+      selectedSlotIndex != null ? { squadronIndex: activeSquadronIndex, slotIndex: selectedSlotIndex } : null,
+      this.props.playerEquips
     )
 
     if (!activePreset) return null

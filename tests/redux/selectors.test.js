@@ -35,6 +35,20 @@ describe('selectUsedEquipIds', () => {
     expect(selectUsedEquipIds(null).size).toBe(0)
     expect(selectUsedEquipIds(undefined).size).toBe(0)
   })
+
+  test('ignores missing or mismatched inventory instances', () => {
+    const available = [
+      {
+        categoryKey: 'local_fighters',
+        aircraft: [{ equipId: 10, aircraftId: 175 }],
+      },
+      {
+        categoryKey: 'land_attackers',
+        aircraft: [{ equipId: 11, aircraftId: 999 }],
+      },
+    ]
+    expect([...selectUsedEquipIds(preset, null, available)].sort((a, b) => a - b)).toEqual([10])
+  })
 })
 
 describe('selectSquadronResults', () => {
