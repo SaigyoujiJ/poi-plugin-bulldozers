@@ -69,8 +69,9 @@ function slotReducer(state, action) {
         ...state,
         aircraftId,
         count: null,
-        stars: action.stars ?? state.stars,
-        proficiency: action.proficiency ?? state.proficiency,
+        // 选择新飞机时，未提供实例属性就从默认值开始，避免继承旧飞机状态。
+        stars: action.stars ?? 0,
+        proficiency: action.proficiency ?? 0,
         equipId: action.equipId ?? null,
       }
     }
