@@ -26,7 +26,9 @@ export function calcCombatRadius(slots, aircraftData) {
 
   for (const slot of slots) {
     if (!slot.aircraftId || !isActiveSlot(slot)) continue
-    const { aircraft, categoryKey } = aircraftData.lookup(slot.aircraftId)
+    const planeInfo = aircraftData.lookup(slot.aircraftId)
+    if (!planeInfo) continue
+    const { aircraft, categoryKey } = planeInfo
     if (aircraft.radius == null) continue
 
     if (aircraft.radius < minRadius) {

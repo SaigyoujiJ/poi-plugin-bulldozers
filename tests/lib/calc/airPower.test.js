@@ -90,6 +90,12 @@ describe('defense air power', () => {
     expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(4)
   })
 
+  test('unknown aircraft is ignored by high-altitude defense aggregation', () => {
+    expect(calcHighAltitudeDefensePower([
+      { mode: 'defense', slots: [{ aircraftId: 999999 }] },
+    ], aircraftLookup)).toBe(0)
+  })
+
   test('高高度防空合计所有防空航空队的火箭机', () => {
     const slots = [
       { aircraftId: 175, proficiency: 7, count: 18 },
@@ -254,6 +260,16 @@ describe('land attacker strike power', () => {
       { aircraftId: 168, proficiency: 0 },
       { aircraftId: null },
     ]
+    expect(calcLandAttackerStrikePower(slots, aircraftLookup)).toBe(43)
+  })
+
+  test('unknown aircraft is skipped', () => {
+    const slots = [
+      { aircraftId: 999999 },
+      { aircraftId: 168, proficiency: 0 },
+    ]
+    expect(calcSortieAirPower(slots, aircraftLookup)).toBe(4)
+    expect(calcDefenseAirPower(slots, aircraftLookup)).toBe(4)
     expect(calcLandAttackerStrikePower(slots, aircraftLookup)).toBe(43)
   })
 })

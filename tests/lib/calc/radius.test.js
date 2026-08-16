@@ -78,6 +78,10 @@ describe('radius', () => {
     )).toBe(0)
   })
 
+  test('unknown aircraft is ignored', () => {
+    expect(calcCombatRadius([{ aircraftId: 999999 }], aircraftLookup)).toBe(0)
+  })
+
   test('Hayabusa rotary aircraft does not disable extension', () => {
     const slots = [
       { aircraftId: 175, proficiency: 0, stars: 0 }, // 雷電 radius 2

@@ -67,7 +67,9 @@ function getSortieReconMultiplier(slots, aircraftData) {
   let multiplier = 1
   for (const slot of slots) {
     if (!slot.aircraftId || !isActiveSlot(slot)) continue
-    const { aircraft, categoryKey } = aircraftData.lookup(slot.aircraftId)
+    const planeInfo = aircraftData.lookup(slot.aircraftId)
+    if (!planeInfo) continue
+    const { aircraft, categoryKey } = planeInfo
     if (categoryKey !== 'land_recon') continue
     const los = aircraft.los ?? 0
     if (los >= 9) {
@@ -83,7 +85,9 @@ function getDefenseReconMultiplier(slots, aircraftData) {
   let multiplier = 1
   for (const slot of slots) {
     if (!slot.aircraftId || !isActiveSlot(slot)) continue
-    const { aircraft, categoryKey } = aircraftData.lookup(slot.aircraftId)
+    const planeInfo = aircraftData.lookup(slot.aircraftId)
+    if (!planeInfo) continue
+    const { aircraft, categoryKey } = planeInfo
     const los = aircraft.los ?? 0
     if (categoryKey === 'seaplane_recon' || categoryKey === 'flying_boats') {
       // 水偵 / 飛行艇
@@ -107,7 +111,9 @@ export function calcSortieAirPower(slots, aircraftData) {
   let total = 0
   for (const slot of slots) {
     if (!slot.aircraftId || !isActiveSlot(slot)) continue
-    const { aircraft, categoryKey } = aircraftData.lookup(slot.aircraftId)
+    const planeInfo = aircraftData.lookup(slot.aircraftId)
+    if (!planeInfo) continue
+    const { aircraft, categoryKey } = planeInfo
     const slotCount = slot.count ?? getSlotCount(aircraft, categoryKey)
     const level = slot.proficiency ?? 0
     const stars = slot.stars ?? 0
@@ -120,7 +126,9 @@ export function calcDefenseAirPower(slots, aircraftData) {
   let total = 0
   for (const slot of slots) {
     if (!slot.aircraftId || !isActiveSlot(slot)) continue
-    const { aircraft, categoryKey } = aircraftData.lookup(slot.aircraftId)
+    const planeInfo = aircraftData.lookup(slot.aircraftId)
+    if (!planeInfo) continue
+    const { aircraft, categoryKey } = planeInfo
     const slotCount = slot.count ?? getSlotCount(aircraft, categoryKey)
     const level = slot.proficiency ?? 0
     const stars = slot.stars ?? 0
@@ -161,7 +169,9 @@ export function calcLandAttackerStrikePower(slots, aircraftData) {
   let total = 0
   for (const slot of slots) {
     if (!slot.aircraftId || !isActiveSlot(slot)) continue
-    const { aircraft, categoryKey } = aircraftData.lookup(slot.aircraftId)
+    const planeInfo = aircraftData.lookup(slot.aircraftId)
+    if (!planeInfo) continue
+    const { aircraft, categoryKey } = planeInfo
     if (categoryKey !== 'land_attackers') continue
     if ((aircraft.bombing ?? 0) <= 0) continue
     const slotCount = slot.count ?? getSlotCount(aircraft, categoryKey)
