@@ -90,6 +90,8 @@ function slotReducer(state, action) {
 }
 
 function squadronReducer(state, action) {
+  if (!state || !Array.isArray(state.slots)) return state
+
   switch (action.type) {
     case SET_SQUADRON_MODE:
       return { ...state, mode: action.mode }
@@ -99,6 +101,7 @@ function squadronReducer(state, action) {
     case SET_SLOT_COUNT:
     case CLEAR_SLOT: {
       const { slotIndex } = action
+      if (!Number.isInteger(slotIndex) || slotIndex < 0 || slotIndex >= state.slots.length || !state.slots[slotIndex]) return state
       const newSlots = [...state.slots]
       newSlots[slotIndex] = slotReducer(state.slots[slotIndex], action)
       return { ...state, slots: newSlots }
@@ -166,7 +169,7 @@ export default function presetsReducer(state = initialState, action) {
     case CLEAR_SLOT: {
       const { presetId, squadronIndex } = action
       const preset = state.presets[presetId]
-      if (!preset) return state
+      if (!preset || !Array.isArray(preset.squadrons) || !Number.isInteger(squadronIndex) || squadronIndex < 0 || squadronIndex >= preset.squadrons.length || !preset.squadrons[squadronIndex]) return state
       const newSquadrons = [...preset.squadrons]
       newSquadrons[squadronIndex] = squadronReducer(preset.squadrons[squadronIndex], action)
       return {

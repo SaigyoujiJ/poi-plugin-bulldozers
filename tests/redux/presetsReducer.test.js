@@ -71,4 +71,12 @@ describe('slot equipId tracking', () => {
       aircraftId: null, proficiency: 0, stars: 0, count: 0, equipId: null,
     })
   })
+
+  test('ignores invalid squadron and slot indexes', () => {
+    const state = baseState()
+    expect(presetsReducer(state, setSlotAircraft('default', 99, 0, 175))).toBe(state)
+    expect(presetsReducer(state, setSlotAircraft('default', 0, 99, 175))).toBe(state)
+    expect(presetsReducer(state, setSlotAircraft('default', -1, 0, 175))).toBe(state)
+    expect(presetsReducer(state, setSlotAircraft('default', 0, -1, 175))).toBe(state)
+  })
 })
