@@ -98,6 +98,22 @@ class AppPanel extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    const previousPresetId = prevProps.pluginState && prevProps.pluginState.activePresetId
+    const currentPluginState = this.props.pluginState
+    const currentPresetId = currentPluginState && currentPluginState.activePresetId
+    if (previousPresetId === currentPresetId || !currentPluginState || !currentPluginState.presets) return
+
+    const squadrons = selectSquadrons(currentPluginState)
+    const maxIndex = Math.max(0, squadrons.length - 1)
+    const activeSquadronIndex = Math.min(this.state.activeSquadronIndex, maxIndex)
+    if (this.state.selectedSlotIndex !== null || this.state.activeSquadronIndex !== activeSquadronIndex) {
+      // A preset switch changes the editing context; never carry an open slot
+      // picker into the newly selected preset.
+      this.setState({ activeSquadronIndex, selectedSlotIndex: null })
+    }
+  }
+
   componentWillUnmount() {
     if (this.styleEl && this.styleEl.parentNode) {
       this.styleEl.parentNode.removeChild(this.styleEl)
