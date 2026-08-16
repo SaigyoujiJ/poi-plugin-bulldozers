@@ -32,7 +32,7 @@ class ResultPanel extends Component {
           ]
         ) : (
           [
-            this.renderMetric(__('ResultPanel.HeavyBomberDefense'), results.heavyBomberDefense, true, mode, onClickOutside),
+            this.renderMetric(__('ResultPanel.HighAltitudeDefenseTotal'), results.heavyBomberDefense, true, mode, onClickOutside),
             this.renderMetric(__('ResultPanel.DefenseAirPower'), results.defense, true, mode, onClickOutside),
           ]
         )}
